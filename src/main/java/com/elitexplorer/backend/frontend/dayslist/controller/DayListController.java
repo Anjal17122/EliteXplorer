@@ -13,4 +13,5 @@ public class DayListController {
     public String getList(){
         return "dayslist";
     }
+
 }
