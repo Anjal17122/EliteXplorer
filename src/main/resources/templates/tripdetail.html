@@ -150,17 +150,29 @@
   </nav>
 
   <div id="content" class="p-4 p-md-5">
-    <h2 class="mb-4">PDF Generation</h2>
+    <h2 class="mb-4">Trip Detail</h2>
     <div class="row">
-      <div class="col-md-7">
+      <div class="col-md-9">
         <div class="card mb-4">
-          <form class="g-3 needs-validation pl-3 mt-3" th:action="@{/save/pdf1}" method="post" enctype="multipart/form-data">
+          <form class="g-3 needs-validation pl-3 mt-3" th:action="@{/save/pdf2}" method="post" enctype="multipart/form-data">
+
             <div class="row mb-4">
               <div class="col-md-11">
                 <div class="input-group">
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile04" name="file">
-                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                    <input type="file" class="custom-file-input" id="image1" name="image1">
+                    <label class="custom-file-label" for="inputGroupFile04">Image 1</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-md-11">
+                <div class="input-group">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile04" name="image2">
+                    <label class="custom-file-label" for="inputGroupFile04">Image 2</label>
                   </div>
                 </div>
               </div>
@@ -169,7 +181,7 @@
             <div class="row mb-4">
               <div class="col-md-11">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" th:value="${pdf1.title}" id = "title" name = "title" required>
+                <input type="text" class="form-control" th:value="${pdf2.title}" id = "title" name = "title" required>
                 <div class="invalid-feedback">
                   Please provide a valid title.
                 </div>
@@ -178,8 +190,8 @@
 
             <div class="row mb-4">
               <div class="col-md-11">
-                <label for="start-date" class="form-label">Trip Start Date</label>
-                <input type="date" class="form-control" id ="start-date" th:value="${pdf1.startDate}" name="startDate" required>
+                <label for="subtitle" class="form-label">Sub Title</label>
+                <input type="text" class="form-control" th:value="${pdf2.subTitle}" id = "subtitle" name = "subTitle" required>
                 <div class="invalid-feedback">
                   Please provide a valid title.
                 </div>
@@ -188,8 +200,17 @@
 
             <div class="row mb-4">
               <div class="col-md-11">
-                <label for="total-days" class="form-label">Trip Total Days</label>
-                <input type="number" class="form-control" id = "total-days" th:value="${pdf1.totalDays}" name="totalDays" required>
+                <label for="text" class="form-label">Description</label>
+                <textarea class="form-control" id="text" th:text="${pdf2.text}" name="text" rows="3"></textarea>                <div class="invalid-feedback">
+                  Please provide a valid title.
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-md-11">
+                <label for="hotel" class="form-label">Hotel</label>
+                <input type="text" class="form-control" th:value="${pdf2.hotel}" id = "hotel" name = "hotel" required>
                 <div class="invalid-feedback">
                   Please provide a valid title.
                 </div>
@@ -198,8 +219,8 @@
 
             <div class="row mb-4">
               <div class="col-md-11">
-                <label for="description" class="form-label">Description</label>
-                <input type="text" class="form-control" th:value="${pdf1.mainText}" id = "description" name="mainText" required>
+                <label for="food" class="form-label">Food</label>
+                <input type="text" class="form-control" th:value="${pdf2.food}" id = "food" name = "food" required>
                 <div class="invalid-feedback">
                   Please provide a valid title.
                 </div>
@@ -208,8 +229,8 @@
 
             <div class="row mb-4">
               <div class="col-md-11">
-                <label for="prepared-to" class="form-label">Prepared To</label>
-                <input type="text" class="form-control" th:value="${pdf1.preparedTo}" id = "prepared-to" name = "preparedTo" required>
+                <label for="room" class="form-label">Room Type</label>
+                <input type="text" class="form-control" th:value="${pdf2.room}" id = "room" name = "room" required>
                 <div class="invalid-feedback">
                   Please provide a valid title.
                 </div>
@@ -218,8 +239,8 @@
 
             <div class="row mb-4">
               <div class="col-md-11">
-                <label for="inclusion" class="form-label">Inclusion</label>
-                <input type="text" class="form-control" th:value="${pdf1.inclusion}" id = "inclusion" name="inclusion" required>
+                <label for="website" class="form-label">Website Link</label>
+                <input type="text" class="form-control" th:value="${pdf2.website}" id = "website" name = "website" required>
                 <div class="invalid-feedback">
                   Please provide a valid title.
                 </div>
@@ -228,44 +249,8 @@
 
             <div class="row mb-4">
               <div class="col-md-11">
-                <label for="exclusion" class="form-label">Exclusion</label>
-                <input type="text" class="form-control" th:value="${pdf1.exclusion}" id = "exclusion" name="exclusion" required>
-                <div class="invalid-feedback">
-                  Please provide a valid title.
-                </div>
-              </div>
-            </div>
-
-            <div class="row mb-4">
-              <div class="col-md-4">
-                <label for="adultsNo" class="form-label">No of Adults</label>
-                <input type="number" class="form-control" th:value="${pdf1.noOfAdults}" id = "adultsNo" name="noOfAdults" required>
-                <div class="invalid-feedback">
-                  Please provide a valid title.
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <label for="adultAmount" class="form-label">Amount Per Adult</label>
-                <input type="number" class="form-control" th:value="${pdf1.amountPerAdult}" id = "adultAmount" name="amountPerAdult" required>
-                <div class="invalid-feedback">
-                  Please provide a valid title.
-                </div>
-              </div>
-            </div>
-
-            <div class="row mb-4">
-              <div class="col-md-4">
-                <label for="childNo" class="form-label">No of Children</label>
-                <input type="number" class="form-control" id="childNo" th:value="${pdf1.noOfChildren}" name="noOfChildren" required>
-                <div class="invalid-feedback">
-                  Please provide a valid title.
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <label for="childAmount" class="form-label">Amount Per Child</label>
-                <input type="number" class="form-control" id = "childAmount" th:value="${pdf1.amountPerChildren}" name="amountPerChildren" required>
+                <label for="tocTitle" class="form-label">TOC Title</label>
+                <input type="text" class="form-control" th:value="${pdf2.tocTitle}" id = "tocTitle" name = "tocTitle" required>
                 <div class="invalid-feedback">
                   Please provide a valid title.
                 </div>
@@ -274,13 +259,14 @@
 
             <div class="row mb-4">
               <div class="col-md-11">
-                <label for="currency" class="form-label">Currency</label>
-                <input type="text" class="form-control" th:value="${pdf1.currency}" id = "currency" name="currency" required>
+                <label for="tocSubTitle" class="form-label">TOC Sub Title</label>
+                <input type="text" class="form-control" th:value="${pdf2.tocSubTitle}" id = "tocSubTitle" name = "tocSubTitle" required>
                 <div class="invalid-feedback">
                   Please provide a valid title.
                 </div>
               </div>
             </div>
+
             <div class="col-12 mb-4">
               <button class="btn btn-dark" type="submit">Save Detail</button>
             </div>
@@ -288,56 +274,7 @@
         </div>
 
       </div>
-      <div class="col-md-5 ">
-        <div class="container-list">
-          <div class="items">
-            <div class="items-head">
-              <p>Days</p>
-              <hr>
-            </div>
 
-            <div class="items-body">
-              <div class="items-body-content">
-                <a href="">Web Usabilty Testing</a>
-                <i class="fa fa-angle-right"></i>
-              </div>
-              <div class="items-body-content">
-                <button type="button" data-toggle="modal" data-target="#exampleModalCenter">
-                  Launch demo modal
-                </button>
-                <i class="fa fa-angle-right"></i>
-              </div>
-              <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalCenterTitle">Choose trip detail</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      ...
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="items-body-content">
-                <span>Practical Empathy: For Collaboration & Creativity in Your Work</span>
-                <i class="fa fa-angle-right"></i>
-              </div>
-              <div class="items-body-content">
-                <span>About Face: The Essentials of Interaction Design</span>
-                <i class="fa fa-angle-right"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>

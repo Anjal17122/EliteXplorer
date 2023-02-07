@@ -23,19 +23,12 @@ public class Pdf2 {
     private String text;
 
     private String image1;
-
     private String image2;
-
     private String hotel;
-
     private String food;
-
     private String room;
-
     private String website;
-
     private String tocTitle;
-
     private String tocSubTitle;
 
     @OneToMany(mappedBy = "pdf2")

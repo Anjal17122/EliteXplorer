@@ -2,6 +2,8 @@ package com.elitexplorer.backend.html2pdf.utils;
 
 import com.elitexplorer.backend.pdf1.model.Pdf1;
 import com.elitexplorer.backend.pdf1.model.dto.Pdf1Dto;
+import com.elitexplorer.backend.pdf2.model.Pdf2;
+import com.elitexplorer.backend.pdf2.model.dto.Pdf2Dto;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,5 +27,27 @@ public class DtoConvert {
         pdf1.setTitle(dto.getTitle());
         pdf1.setTotalDays(dto.getTotalDays());
         return pdf1;
+    }
+
+    public static Pdf2 convert(Pdf2Dto dto){
+        Pdf2 entity = new Pdf2();
+        entity.setId(dto.getId());
+        entity.setTitle(dto.getTitle());
+        entity.setSubTitle(dto.getSubTitle());
+        entity.setText(dto.getText());
+        entity.setHotel(dto.getHotel());
+        entity.setFood(dto.getFood());
+        entity.setRoom(dto.getRoom());
+        entity.setWebsite(dto.getWebsite());
+        entity.setTocTitle(dto.getTocTitle());
+        entity.setTocSubTitle(dto.getTocSubTitle());
+        if (dto.getTocTitle()==null)
+            entity.setTocTitle(entity.getTitle());
+        if (dto.getTocSubTitle()==null)
+            entity.setTocSubTitle(entity.getSubTitle());
+
+
+        return entity;
+
     }
 }
