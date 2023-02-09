@@ -48,4 +48,20 @@ public class DtoConvert {
         return entity;
 
     }
+
+    public static Pdf2 convert(Pdf2 dto){
+        Pdf2 entity = new Pdf2();
+        entity.setId(0);
+        entity.setTitle(dto.getTitle());
+        entity.setSubTitle(dto.getSubTitle());
+        entity.setText(dto.getText());
+        entity.setHotel(dto.getHotel());
+        entity.setFood(dto.getFood());
+        entity.setRoom(dto.getRoom());
+        entity.setWebsite(dto.getWebsite());
+        entity.setTocTitle(dto.getTocTitle());
+        entity.setTocSubTitle(dto.getTocSubTitle());
+        return entity;
+
+    }
 }

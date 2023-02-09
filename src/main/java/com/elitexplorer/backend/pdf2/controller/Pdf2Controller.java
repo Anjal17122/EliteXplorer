@@ -9,7 +9,9 @@ import com.elitexplorer.backend.pdf2.model.dto.Pdf2Dto;
 import com.elitexplorer.backend.pdf2.service.Interface.Pdf2Interface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -47,7 +49,13 @@ public class Pdf2Controller {
             pdf2.setImage2(saveUploadedFile(pdf2Dto.getImage2()));
         }
         pdf2Interface.savePdf1(pdf2);
-        return "redirect:/?id=0";
+        return "redirect:/";
+    }
+
+    @GetMapping("/pdf2/clone/{id}")
+    public String clonePdf2(@PathVariable("id") int id){
+            pdf2Interface.clonePdf2(id);
+            return "redirect:/";
     }
 
     private String saveUploadedFile(MultipartFile file) throws IOException {

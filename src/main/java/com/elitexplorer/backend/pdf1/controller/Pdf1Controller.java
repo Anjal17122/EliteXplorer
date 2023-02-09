@@ -41,7 +41,7 @@ public class Pdf1Controller {
             pdf1.setFilename(saveUploadedFile(pdf1Dto.getFile()));
         }
        Pdf1 savedPdf1= pdf1Interface.savePdf1(pdf1);
-        return "redirect:/?id="+savedPdf1.getId();
+        return "redirect:/home?id="+savedPdf1.getId();
     }
 
     private String saveUploadedFile(MultipartFile file) throws IOException {

@@ -9,4 +9,6 @@ public interface Pdf2Interface {
     public void savePdf1(Pdf2 pdf2);
 
     List<Pdf2> findAll();
+
+    Pdf2 clonePdf2(int id);
 }

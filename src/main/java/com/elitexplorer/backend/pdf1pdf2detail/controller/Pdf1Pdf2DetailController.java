@@ -19,6 +19,6 @@ public class Pdf1Pdf2DetailController {
     @GetMapping("day/detail/{id}/{pdf2}")
     public String updateDay(@PathVariable("id") int id, @PathVariable("pdf2") int pdf2Id){
         Pdf1Pdf2Detail pdf1Pdf2Detail = pdf1Pdf2Interface.updateDayDetail(id,pdf2Id);
-        return "redirect:/?id="+pdf1Pdf2Detail.getPdf1().getId();
+        return "redirect:/home?id="+pdf1Pdf2Detail.getPdf1().getId();
     }
 }
