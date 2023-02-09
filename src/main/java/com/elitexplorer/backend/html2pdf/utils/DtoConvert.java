@@ -2,11 +2,16 @@ package com.elitexplorer.backend.html2pdf.utils;
 
 import com.elitexplorer.backend.pdf1.model.Pdf1;
 import com.elitexplorer.backend.pdf1.model.dto.Pdf1Dto;
+import com.elitexplorer.backend.pdf1.model.dto.Pdf1GenerateDto;
+import com.elitexplorer.backend.pdf1pdf2detail.model.Pdf1Pdf2Detail;
+import com.elitexplorer.backend.pdf1pdf2detail.model.dto.Pdf1Pdf2Generate;
 import com.elitexplorer.backend.pdf2.model.Pdf2;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2Dto;
 
+import javax.persistence.Convert;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class DtoConvert {
 
@@ -81,4 +86,40 @@ public class DtoConvert {
         pdf1.setTotalDays(dto.getTotalDays());
         return pdf1;
     }
+    public static List<String> shortMonth = new ArrayList<>(Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"));
+    public static List<String> longMonth = new ArrayList<>(Arrays.asList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"));
+    public static Pdf1GenerateDto convertPdf1(Pdf1 pdf1){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(pdf1.getStartDate());
+
+        Pdf1GenerateDto dto = new Pdf1GenerateDto();
+        dto.setExclusion(Arrays.asList(pdf1.getExclusion().split(",,")));
+        dto.setInclusion(Arrays.asList(pdf1.getInclusion().split(",,")));
+        dto.setCurrency(pdf1.getCurrency());
+        dto.setMainText(pdf1.getMainText());
+        dto.setAmountPerAdult(pdf1.getAmountPerAdult());
+        dto.setAmountPerChildren(pdf1.getAmountPerChildren());
+        dto.setNoOfAdults(pdf1.getNoOfAdults());
+        dto.setNoOfChildren(pdf1.getNoOfChildren());
+        dto.setPreparedTo(pdf1.getPreparedTo());
+        dto.setStartDate(pdf1.getStartDate());
+        dto.setTitle(pdf1.getTitle().toUpperCase());
+        dto.setTotalDays(pdf1.getTotalDays());
+        dto.setFile(pdf1.getFilename());
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(pdf1.getStartDate());
+        cal.add(Calendar.DAY_OF_MONTH , pdf1.getTotalDays()-1);
+        dto.setFullDate( shortMonth.get(cal.get(Calendar.MONTH))+cal.get(Calendar.DAY_OF_MONTH) +", " + cal.get(Calendar.YEAR) +" - "+ cal2.get(Calendar.MONTH)+cal2.get(Calendar.DAY_OF_MONTH) +", " +cal2.get(Calendar.YEAR));
+        dto.setTotalAmount(pdf1.getNoOfAdults()* pdf1.getAmountPerAdult() + pdf1.getNoOfChildren()* pdf1.getAmountPerChildren());
+        return dto;
+    }
+
+    public static Pdf1Pdf2Generate convert(List<Pdf1Pdf2Detail> details){
+        Pdf1Pdf2Generate pdf1Pdf2Generate = new Pdf1Pdf2Generate();
+        return pdf1Pdf2Generate;
+    }
+
+
+
+
 }

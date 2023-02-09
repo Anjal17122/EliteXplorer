@@ -123,20 +123,12 @@
         <div class="p-4 pt-5">
             <a href="#" class="img logo rounded-circle mb-5"></a>
             <ul class="list-unstyled components mb-5">
+                <li>
+                    <a th:href="@{/}" target="_blank">Trip Detail</a>
+                </li>
+
                 <li class="active">
-                    <a th:href="@{/pdf}" target="_blank">Customer</a>
-                </li>
-                <li >
-                    <a th:href="@{/product}">Add Product</a>
-                </li>
-                <li >
-                    <a th:href="@{/product/expired}">Expired Items</a>
-                </li>
-                <li>
-                    <a th:href="@{/ship}">Shipping Details</a>
-                </li>
-                <li>
-                    <a th:href="@{/customer}">Customer Sales Detail</a>
+                    <a th:href="@{/manage/pdf}">Generate PDF</a>
                 </li>
             </ul>
 
