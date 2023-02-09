@@ -28,7 +28,7 @@ public class HomeController {
     @Autowired
     Pdf1Pdf2Interface pdf1Pdf2Interface;
 
-    @GetMapping("/")
+    @GetMapping
     public String homePage(Model model, @RequestParam("id") int id){
         Pdf1 pdf1 = service.getById(id);
         List<Pdf2> pdf2 = pdf2Interface.findAll();

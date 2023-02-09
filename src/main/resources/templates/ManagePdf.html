@@ -31,8 +31,12 @@
         <div class="p-4 pt-5">
             <a href="#" class="img logo rounded-circle mb-5"></a>
             <ul class="list-unstyled components mb-5">
-                <li class="active">
+                <li >
                     <a th:href="@{/}" target="_blank">Trip Detail</a>
+                </li>
+
+                <li class="active">
+                    <a th:href="@{/manage/pdf}">Generate PDF</a>
                 </li>
             </ul>
             <div class="footer">
@@ -48,9 +52,9 @@
     </nav>
 
     <div id="content" class="p-4 p-md-5">
-        <h2 class="mb-4">Manage Trip Detail</h2>
+        <h2 class="mb-4">Manage Pdf</h2>
 
-        <a th:href="@{/day/detail?id=0}" class="btn btn-primary">
+        <a th:href="@{/home?id=0}" class="btn btn-primary">
             Create
         </a>
         <table class="table mt-3">
@@ -58,16 +62,22 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Title</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">Prepared To</th>
                 <th scope="col">Clone</th>
                 <th scope="col">Update</th>
+                <th scope="col">Download</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="t:${pdf2}">
+            <tr th:each="t:${pdf1}">
                 <th scope="row" th:text="${t.id}">1</th>
                 <td th:text="${t.title}">Mark</td>
-                <td><a th:href="@{/pdf2/clone/} + ${t.id}"><i class="fa-solid fa-copy"></i></a></td>
-                <td><a th:href="@{/day/detail?id=} + ${t.id}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                <td th:text="${t.startDate}">Mark</td>
+                <td th:text="${t.preparedTo}">Mark</td>
+                <td><a th:href="@{/pdf1/clone/} + ${t.id}"><i class="fa-solid fa-copy"></i></a></td>
+                <td><a th:href="@{/home?id=} + ${t.id}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                <td><a href="#"><i class="fa-solid fa-download"></i></a></td>
             </tr>
             </tbody>
         </table>

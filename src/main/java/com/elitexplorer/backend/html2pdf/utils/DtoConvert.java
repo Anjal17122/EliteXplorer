@@ -64,4 +64,21 @@ public class DtoConvert {
         return entity;
 
     }
+
+    public static Pdf1 convert(Pdf1 dto)  {
+        Pdf1 pdf1 = new Pdf1();
+        pdf1.setExclusion(dto.getExclusion());
+        pdf1.setInclusion(dto.getInclusion());
+        pdf1.setCurrency(dto.getCurrency());
+        pdf1.setMainText(dto.getMainText());
+        pdf1.setAmountPerAdult(dto.getAmountPerAdult());
+        pdf1.setAmountPerChildren(dto.getAmountPerChildren());
+        pdf1.setNoOfAdults(dto.getNoOfAdults());
+        pdf1.setNoOfChildren(dto.getNoOfChildren());
+        pdf1.setPreparedTo(dto.getPreparedTo());
+        pdf1.setStartDate(dto.getStartDate());
+        pdf1.setTitle(dto.getTitle() + " - Duplicate");
+        pdf1.setTotalDays(dto.getTotalDays());
+        return pdf1;
+    }
 }

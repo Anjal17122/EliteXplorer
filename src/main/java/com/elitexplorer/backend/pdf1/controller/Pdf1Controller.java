@@ -8,7 +8,9 @@ import com.elitexplorer.backend.pdf1.service.Interface.Pdf1Interface;
 import com.elitexplorer.backend.pdf2.service.Interface.Pdf2Interface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,6 +44,12 @@ public class Pdf1Controller {
         }
        Pdf1 savedPdf1= pdf1Interface.savePdf1(pdf1);
         return "redirect:/home?id="+savedPdf1.getId();
+    }
+
+    @GetMapping("/pdf1/clone/{id}")
+    public String clonePdf2(@PathVariable("id") int id){
+        pdf1Interface.clonePdf(id);
+        return "redirect:/manage/pdf";
     }
 
     private String saveUploadedFile(MultipartFile file) throws IOException {

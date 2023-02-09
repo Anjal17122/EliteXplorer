@@ -18,7 +18,7 @@ public class DayDetail {
     Pdf2Interface service;
 
     @GetMapping("/day/detail")
-    public String homePage(Model model, @RequestParam("id") int id){
+    public String dayDetail(Model model, @RequestParam("id") int id){
         Pdf2 pdf1 = service.getById(id);
         model.addAttribute("pdf2", pdf1);
         return "tripdetail";
