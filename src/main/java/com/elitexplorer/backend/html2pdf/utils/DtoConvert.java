@@ -45,8 +45,6 @@ public class DtoConvert {
             entity.setTocTitle(entity.getTitle());
         if (dto.getTocSubTitle()==null)
             entity.setTocSubTitle(entity.getSubTitle());
-
-
         return entity;
 
     }

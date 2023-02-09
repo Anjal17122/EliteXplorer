@@ -16,7 +16,7 @@ public class Pdf1Impl implements Pdf1Interface {
 
     @Autowired
     Pdf1Pdf2DetailRepository detailRepository;
-    public void savePdf1(Pdf1 pdf1){
+    public Pdf1 savePdf1(Pdf1 pdf1){
         Pdf1 pdf11 = repo.save(pdf1);
         for (int i = 1; i<=pdf11.getTotalDays(); i++){
             Pdf1Pdf2Detail pdf1Pdf2Detail = new Pdf1Pdf2Detail();
@@ -24,6 +24,7 @@ public class Pdf1Impl implements Pdf1Interface {
             pdf1Pdf2Detail.setDays(i);
             detailRepository.save(pdf1Pdf2Detail);
         }
+        return pdf11;
     }
 
     @Override

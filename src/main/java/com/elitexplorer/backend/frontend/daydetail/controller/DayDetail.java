@@ -16,16 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DayDetail {
     @Autowired
     Pdf2Interface service;
+
     @GetMapping("/day/detail")
     public String homePage(Model model, @RequestParam("id") int id){
-
         Pdf2 pdf1 = service.getById(id);
         model.addAttribute("pdf2", pdf1);
         return "tripdetail";
-    }
-
-    @PostMapping("detail")
-    public String saveFrontPage(@ModelAttribute("pdf1") Pdf1 pdf1){
-        return "saved";
     }
 }

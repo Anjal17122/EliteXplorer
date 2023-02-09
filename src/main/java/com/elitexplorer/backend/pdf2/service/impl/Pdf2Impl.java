@@ -9,6 +9,8 @@ import com.elitexplorer.backend.pdf2.service.Interface.Pdf2Interface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class Pdf2Impl implements Pdf2Interface {
 
@@ -24,5 +26,10 @@ public class Pdf2Impl implements Pdf2Interface {
     public Pdf2 getById(int id) {
         Pdf2 pdf2 = new Pdf2();
         return repo.findById(id).orElse(pdf2);
+    }
+
+    @Override
+    public List<Pdf2> findAll(){
+        return repo.findAllByOrderByIdDesc();
     }
 }

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:days="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>EliteXplorer</title>
@@ -113,6 +113,8 @@
         height:100%;
         }
 
+
+
     </style>
 
 <body>
@@ -156,6 +158,7 @@
             <div class="col-md-7">
                 <div class="card mb-4">
                     <form class="g-3 needs-validation pl-3 mt-3" th:action="@{/save/pdf1}" method="post" enctype="multipart/form-data">
+                        <input type="number" hidden="hidden" th:value="${pdf1.id}" name="id">
                         <div class="row mb-4">
                             <div class="col-md-11">
                                 <div class="input-group">
@@ -296,19 +299,19 @@
                             <p>Days</p>
                             <hr>
                         </div>
-
                         <div class="items-body">
-                            <div class="items-body-content">
-                                <a href="">Web Usabilty Testing</a>
-                                <i class="fa fa-angle-right"></i>
-                            </div>
-                            <div class="items-body-content">
-                                <button type="button" data-toggle="modal" data-target="#exampleModalCenter">
-                                    Launch demo modal
-                                </button>
-                                <i class="fa fa-angle-right"></i>
-                            </div>
-                            <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div th:each="d:${days}">
+                                <div class="items-body-content" >
+                                    <button th:if="${d.pdf2}" type="button" data-toggle="modal" th:text="'Day '+ ${d.days} + ': '+ ${d.pdf2.title}" th:data-target="'#daysmodal'+${d.id}">
+                                        Launch demo modal
+                                    </button>
+
+                                    <button type="button" th:unless="${d.pdf2}" data-toggle="modal" th:text="'Day '+ ${d.days} + ' '" th:data-target="'#daysmodal'+${d.id}">
+                                        Launch demo modal
+                                    </button>
+                                    <i class="fa fa-angle-right"></i>
+                                </div>
+                                <div class="modal fade bd-example-modal-lg" th:id="'daysmodal'+${d.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -318,23 +321,31 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            ...
+                                            <table class="table modal-table">
+                                                <thead class="thead-light">
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Title</th>
+                                                    <th scope="col">Sub Title</th>
+                                                    <th scope="col">Select</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="t:${pdf2}">
+                                                    <th scope="row" th:text="${t.id}"></th>
+                                                    <td th:text="${t.title}"></td>
+                                                    <td th:text="${t.subTitle}"></td>
+                                                    <td><a th:href="@{/pdf1/pdf2/day/detail/}+${d.id} +'/' +${t.id}" class="btn btn-primary">Select</a></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="items-body-content">
-                                <span>Practical Empathy: For Collaboration & Creativity in Your Work</span>
-                                <i class="fa fa-angle-right"></i>
                             </div>
-                            <div class="items-body-content">
-                                <span>About Face: The Essentials of Interaction Design</span>
-                                <i class="fa fa-angle-right"></i>
-                            </div>
+
                         </div>
                     </div>
                 </div>
