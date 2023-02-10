@@ -14,9 +14,16 @@ public class test {
         num.add(1);
         num.add(2);
         num.add(3);
+        num.add(4);
+        num.add(5);
+        num.add(6);
+        num.add(7);
+        num.add(8);
+        num.add(9);
 
-        int partitionSize = IntMath.divide(num.size(), 2, RoundingMode.UP);
-        List<List<Integer>> partitions = Lists.partition(num, partitionSize);
+
+        int partitionSize = IntMath.divide(num.size(), 5, RoundingMode.UP);
+        List<List<Integer>> partitions = Lists.partition(num, 7);
 
         for (List<Integer> a: partitions){
             for (Integer b: a){

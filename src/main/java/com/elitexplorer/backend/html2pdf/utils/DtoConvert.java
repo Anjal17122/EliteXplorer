@@ -9,7 +9,7 @@ import com.elitexplorer.backend.pdf2.model.Pdf2;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2Dto;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2GenerateDto;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2TocDto;
-import com.sun.tools.javac.util.Convert;
+import com.google.common.collect.Lists;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,7 +18,6 @@ import java.util.*;
 public class DtoConvert {
 
     public static Pdf1 convert(Pdf1Dto dto) throws ParseException {
-
         Pdf1 pdf1 = new Pdf1();
         pdf1.setId(dto.getId());
         pdf1.setExclusion(dto.getExclusion());
@@ -93,7 +92,6 @@ public class DtoConvert {
     public static Pdf1GenerateDto convertPdf1(Pdf1 pdf1){
         Calendar cal = Calendar.getInstance();
         cal.setTime(pdf1.getStartDate());
-
         Pdf1GenerateDto dto = new Pdf1GenerateDto();
         dto.setExclusion(Arrays.asList(pdf1.getExclusion().split(",,")));
         dto.setInclusion(Arrays.asList(pdf1.getInclusion().split(",,")));
@@ -134,7 +132,6 @@ public class DtoConvert {
 
     public static Pdf1Pdf2Generate convert(List<Pdf1Pdf2Detail> details){
         Date date = details.get(0).getPdf1().getStartDate();
-
         Pdf1Pdf2Generate pdf1Pdf2Generate = new Pdf1Pdf2Generate();
         pdf1Pdf2Generate.setPdf1(convertPdf1(details.get(0).getPdf1()));
         List<Pdf2GenerateDto> pdf2 = new ArrayList<>();
@@ -162,12 +159,8 @@ public class DtoConvert {
             cal2.add(Calendar.DAY_OF_MONTH , 1);
             date = cal2.getTime();
         }
-
+        pdf1Pdf2Generate.setPdf2(pdf2);
+        pdf1Pdf2Generate.setToc(Lists.partition(pdf2Toc, 7));
         return pdf1Pdf2Generate;
     }
-
-
-
-
-
 }
