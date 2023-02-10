@@ -41,4 +41,6 @@ public class Pdf1GenerateDto {
     private long totalAmount;
 
     private String fullDate;
+
+    private String tripSummaryDate;
 }

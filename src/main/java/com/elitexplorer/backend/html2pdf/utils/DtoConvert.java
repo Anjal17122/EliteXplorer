@@ -7,8 +7,10 @@ import com.elitexplorer.backend.pdf1pdf2detail.model.Pdf1Pdf2Detail;
 import com.elitexplorer.backend.pdf1pdf2detail.model.dto.Pdf1Pdf2Generate;
 import com.elitexplorer.backend.pdf2.model.Pdf2;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2Dto;
+import com.elitexplorer.backend.pdf2.model.dto.Pdf2GenerateDto;
+import com.elitexplorer.backend.pdf2.model.dto.Pdf2TocDto;
+import com.sun.tools.javac.util.Convert;
 
-import javax.persistence.Convert;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -108,16 +110,62 @@ public class DtoConvert {
         dto.setFile(pdf1.getFilename());
         Calendar cal2 = Calendar.getInstance();
         cal2.setTime(pdf1.getStartDate());
-        cal.add(Calendar.DAY_OF_MONTH , pdf1.getTotalDays()-1);
+        cal2.add(Calendar.DAY_OF_MONTH , pdf1.getTotalDays()-1);
         dto.setFullDate( shortMonth.get(cal.get(Calendar.MONTH))+cal.get(Calendar.DAY_OF_MONTH) +", " + cal.get(Calendar.YEAR) +" - "+ cal2.get(Calendar.MONTH)+cal2.get(Calendar.DAY_OF_MONTH) +", " +cal2.get(Calendar.YEAR));
         dto.setTotalAmount(pdf1.getNoOfAdults()* pdf1.getAmountPerAdult() + pdf1.getNoOfChildren()* pdf1.getAmountPerChildren());
+        dto.setTripSummaryDate("Nepal /"+longMonth.get(cal.get(Calendar.MONTH)) +" /" +cal.get(Calendar.YEAR));
         return dto;
     }
 
+    public static Pdf2GenerateDto convertPdf2(Pdf2 dto){
+        Pdf2GenerateDto entity = new Pdf2GenerateDto();
+        entity.setTitle(dto.getTitle());
+        entity.setSubTitle(dto.getSubTitle());
+        entity.setText(dto.getText());
+        entity.setHotel(dto.getHotel());
+        entity.setFood(dto.getFood());
+        entity.setRoom(dto.getRoom());
+        entity.setWebsite(dto.getWebsite());
+        entity.setTocTitle(dto.getTocTitle());
+        entity.setTocSubTitle(dto.getTocSubTitle());
+        return entity;
+
+    }
+
     public static Pdf1Pdf2Generate convert(List<Pdf1Pdf2Detail> details){
+        Date date = details.get(0).getPdf1().getStartDate();
+
         Pdf1Pdf2Generate pdf1Pdf2Generate = new Pdf1Pdf2Generate();
+        pdf1Pdf2Generate.setPdf1(convertPdf1(details.get(0).getPdf1()));
+        List<Pdf2GenerateDto> pdf2 = new ArrayList<>();
+        List<Pdf2TocDto> pdf2Toc = new ArrayList<>();
+        for (Pdf1Pdf2Detail detail: details){
+            Pdf2GenerateDto pdf = convertPdf2(detail.getPdf2());
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(date);
+
+            String dateMonth = longMonth.get(cal2.get(Calendar.MONTH)) +" - " +cal2.get(Calendar.DAY_OF_MONTH);
+            pdf.setTitle(dateMonth +" "+ pdf.getTitle());
+            pdf2.add(pdf);
+
+            Pdf2TocDto pdfToc = new Pdf2TocDto();
+            pdfToc.setTocTitle(dateMonth +" "+ detail.getPdf2().getTocTitle());
+            pdfToc.setTocSubTitle(detail.getPdf2().getTocSubTitle());
+            String days = String.valueOf(detail.getDays());
+            if (Integer.parseInt(days)<10){
+                days = "0"+days;
+            }
+            pdfToc.setTocDays(days);
+            pdf2Toc.add(pdfToc);
+
+
+            cal2.add(Calendar.DAY_OF_MONTH , 1);
+            date = cal2.getTime();
+        }
+
         return pdf1Pdf2Generate;
     }
+
 
 
 
