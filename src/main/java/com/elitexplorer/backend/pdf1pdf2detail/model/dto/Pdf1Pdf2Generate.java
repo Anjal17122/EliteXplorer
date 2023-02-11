@@ -11,6 +11,7 @@ import java.util.List;
 @Setter
 
 public class Pdf1Pdf2Generate {
+
     private Pdf1GenerateDto pdf1;
 
     private List<Pdf2GenerateDto> pdf2;

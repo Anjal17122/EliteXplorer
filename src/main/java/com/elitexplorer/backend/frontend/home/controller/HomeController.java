@@ -35,11 +35,23 @@ public class HomeController {
         List<Pdf1Pdf2Detail> pdf1Pdf2Details = new ArrayList<>();
         if (pdf1.getId()!=0) {
             pdf1Pdf2Details = pdf1Pdf2Interface.findAll(pdf1);
+            pdf1 = addPdf2Uploaded(pdf1);
         }
+
         model.addAttribute("pdf1", pdf1);
         model.addAttribute("pdf2",pdf2);
         model.addAttribute("days",pdf1Pdf2Details);
         return "home";
+    }
+
+    private Pdf1 addPdf2Uploaded(Pdf1 pdf1){
+        List<Pdf1Pdf2Detail> allDetails = pdf1Pdf2Interface.checkPdf2Null(pdf1);
+        if (allDetails.isEmpty()){
+            pdf1.setAllPdf2Uploaded(true);
+        }else{
+            pdf1.setAllPdf2Uploaded(false);
+        }
+        return pdf1;
     }
 
 

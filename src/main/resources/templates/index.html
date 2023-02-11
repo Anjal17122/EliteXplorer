@@ -501,17 +501,17 @@
     <div class="header">
         <img src="../images/logo.gif" class="logo" alt="logo" th:src="@{/images/logo.gif}"/>
         <div class="header-txt">
-            <div class="header-txt-title roboto">
+            <div class="header-txt-title roboto" th:text="${pdf.pdf1.title}">
                TREKKING TO ANNAPURNA POON HILL NEPAL
             </div>
-            <div class="header-txt-date roboto">
+            <div class="header-txt-date roboto" th:text="${pdf.pdf1.fullDate}">
                 Oct 10, 2022 - Oct 18, 2022
             </div>
         </div>
     </div>
-    <img src="../images/mainimage.jpg" class="pdf1-main-image" alt="logo" th:src="@{/images/mainimage.jpg}"/>
+    <img src="../images/mainimage.jpg" class="pdf1-main-image" alt="logo" th:src="@{/uploads/}+${pdf.pdf1.file}"/>
     <div class="pdf1-body">
-            <div class="pdf1-body-text lucida">
+            <div class="pdf1-body-text lucida" th:text="${pdf.pdf1.mainText}">
                 <br>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto aspernatur deserunt doloribus ducimus id ipsa nemo perferendis tempora voluptatum. Aliquid dolore earum eligendi fugit, id laborum odio sunt unde! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur deleniti dolor enim eum harum mollitia nam odit quasi voluptatem. Animi commodi doloribus labore, laborum nisi nulla omnis quam sed! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dignissimos doloribus eaque error et eum labore, odio tempora. Dignissimos dolores facere illo laudantium natus officiis tempore voluptate? Consequuntur pariatur, ut! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid animi asperiores at delectus dicta eaque eligendi enim iusto laborum laudantium minus, mollitia nulla odit possimus quae, quidem quo quod! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus atque dolorem fugiat quos voluptate! Accusantium animi consequuntur deserunt dolorum excepturi fugit illo iste minima perferendis possimus, quos repellat, sit tenetur? Anjal
             </div>
@@ -522,7 +522,7 @@
     <div class="pdf1-prepared-by-inner">
         <br>
         <div class="lucida pdf1-prepared-to-inner">Prepared To</div>
-        <div class="tahoma pdf1-prepared-to-name-inner">Kedadr Maharjan</div>
+        <div class="tahoma pdf1-prepared-to-name-inner" th:text="${pdf.pdf1.preparedTo}">Kedadr Maharjan</div>
 
     </div>
     <img src="../images/santoshimage.png" class="santosh-image" alt="logo" th:src="@{/images/santoshimage.png}"/>
@@ -541,22 +541,22 @@
 
 </div>
 
-<div class="pdf2">
+<div class="pdf2" th:each="pdf2loop:${pdf.toc}">
     <img src="../images/sideimage.gif" class="pdf2-side-image" alt="logo" th:src="@{/images/sideimage.gif}"/>
     <div class="pdf2-body">
         <div class="pdf2-header">
             <div class="pdf2-header-title arial">Trip Summary</div>
-            <div class="pdf2-header-subtitle lucida">Nepal /October/ 2022</div>
+            <div class="pdf2-header-subtitle lucida" th:text="${pdf.pdf1.tripSummaryDate}">Nepal /October/ 2022</div>
         </div>
         <div class="pdf2-body-main">
-                <div class="pdf2-toc">
+                <div class="pdf2-toc" th:each="toc:${pdf2loop}">
                     <div class="pdf2-toc-desc">
                         <div class="pdf2-toc-text">
-                            <div class="pdf2-toc-text-title tahoma">
+                            <div class="pdf2-toc-text-title tahoma" th:text="${toc.tocTitle}">
                                 <br>
                                 Arrival In Kathmandu
                             </div>
-                            <div class="pdf2-toc-text-sub-title lucida">
+                            <div class="pdf2-toc-text-sub-title lucida" th:text="${toc.tocSubTitle}">
                                 Arrive in Kathmandu - Dom Himalaya Hotel
                             </div>
                         </div>
@@ -565,156 +565,13 @@
                         <div class="pdf2-toc-day-title lucida">
                             DAY
                         </div>
-                        <div class="pdf2-toc-day-no arial">
+                        <div class="pdf2-toc-day-no arial" th:text="${toc.tocDays}">
                             01
                         </div>
 
 
                     </div>
                 </div>
-            <div class="pdf2-toc">
-                <div class="pdf2-toc-desc">
-                    <div class="pdf2-toc-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consequatur dolores eius enim eos illum iusto, nam natus nulla quasi quidem quos soluta voluptatibus! Earum facere minima molestias nisi non. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, dolorem ea eligendi eos fugit id inventore nemo neque obcaecati odit, perspiciatis reprehenderit unde vel? Aspernatur aut cumque deleniti veritatis vitae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet consectetur eaque nam necessitatibus nisi pariatur! Aliquid asperiores corporis ducimus et eveniet facilis fuga, incidunt inventore ipsam labore molestiae quam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, asperiores corporis eius excepturi minus non? A aliquam culpa illo possimus quae quam quibusdam quis quo rem repellendus rerum, ut voluptatum!
-
-                    </div>
-                </div>
-                <div class="pdf2-toc-day">
-                    <div class="pdf2-toc-day-title lucida">
-                        DAY
-                    </div>
-                    <div class="pdf2-toc-day-no arial">
-                        01
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="pdf2-toc">
-                <div class="pdf2-toc-desc">
-                    <div class="pdf2-toc-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consequatur dolores eius enim eos illum iusto, nam natus nulla quasi quidem quos soluta voluptatibus! Earum facere minima molestias nisi non. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, dolorem ea eligendi eos fugit id inventore nemo neque obcaecati odit, perspiciatis reprehenderit unde vel? Aspernatur aut cumque deleniti veritatis vitae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet consectetur eaque nam necessitatibus nisi pariatur! Aliquid asperiores corporis ducimus et eveniet facilis fuga, incidunt inventore ipsam labore molestiae quam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, asperiores corporis eius excepturi minus non? A aliquam culpa illo possimus quae quam quibusdam quis quo rem repellendus rerum, ut voluptatum!
-
-                    </div>
-                </div>
-                <div class="pdf2-toc-day">
-                    <div class="pdf2-toc-day-title lucida">
-                        DAY
-                    </div>
-                    <div class="pdf2-toc-day-no arial">
-                        01
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="pdf2-toc">
-                <div class="pdf2-toc-desc">
-                    <div class="pdf2-toc-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consequatur dolores eius enim eos illum iusto, nam natus nulla quasi quidem quos soluta voluptatibus! Earum facere minima molestias nisi non. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, dolorem ea eligendi eos fugit id inventore nemo neque obcaecati odit, perspiciatis reprehenderit unde vel? Aspernatur aut cumque deleniti veritatis vitae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet consectetur eaque nam necessitatibus nisi pariatur! Aliquid asperiores corporis ducimus et eveniet facilis fuga, incidunt inventore ipsam labore molestiae quam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, asperiores corporis eius excepturi minus non? A aliquam culpa illo possimus quae quam quibusdam quis quo rem repellendus rerum, ut voluptatum!
-
-                    </div>
-                </div>
-                <div class="pdf2-toc-day">
-                    <div class="pdf2-toc-day-title lucida">
-                        DAY
-                    </div>
-                    <div class="pdf2-toc-day-no arial">
-                        01
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="pdf2-toc">
-                <div class="pdf2-toc-desc">
-                    <div class="pdf2-toc-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consequatur dolores eius enim eos illum iusto, nam natus nulla quasi quidem quos soluta voluptatibus! Earum facere minima molestias nisi non. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, dolorem ea eligendi eos fugit id inventore nemo neque obcaecati odit, perspiciatis reprehenderit unde vel? Aspernatur aut cumque deleniti veritatis vitae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet consectetur eaque nam necessitatibus nisi pariatur! Aliquid asperiores corporis ducimus et eveniet facilis fuga, incidunt inventore ipsam labore molestiae quam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, asperiores corporis eius excepturi minus non? A aliquam culpa illo possimus quae quam quibusdam quis quo rem repellendus rerum, ut voluptatum!
-
-                    </div>
-                </div>
-                <div class="pdf2-toc-day">
-                    <div class="pdf2-toc-day-title lucida">
-                        DAY
-                    </div>
-                    <div class="pdf2-toc-day-no arial">
-                        01
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="pdf2-toc">
-                <div class="pdf2-toc-desc">
-                    <div class="pdf2-toc-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consequatur dolores eius enim eos illum iusto, nam natus nulla quasi quidem quos soluta voluptatibus! Earum facere minima molestias nisi non. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, dolorem ea eligendi eos fugit id inventore nemo neque obcaecati odit, perspiciatis reprehenderit unde vel? Aspernatur aut cumque deleniti veritatis vitae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet consectetur eaque nam necessitatibus nisi pariatur! Aliquid asperiores corporis ducimus et eveniet facilis fuga, incidunt inventore ipsam labore molestiae quam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, asperiores corporis eius excepturi minus non? A aliquam culpa illo possimus quae quam quibusdam quis quo rem repellendus rerum, ut voluptatum!
-
-                    </div>
-                </div>
-                <div class="pdf2-toc-day">
-                    <div class="pdf2-toc-day-title lucida">
-                        DAY
-                    </div>
-                    <div class="pdf2-toc-day-no arial">
-                        01
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="pdf2-toc">
-                <div class="pdf2-toc-desc">
-                    <div class="pdf2-toc-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consequatur dolores eius enim eos illum iusto, nam natus nulla quasi quidem quos soluta voluptatibus! Earum facere minima molestias nisi non. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, dolorem ea eligendi eos fugit id inventore nemo neque obcaecati odit, perspiciatis reprehenderit unde vel? Aspernatur aut cumque deleniti veritatis vitae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet consectetur eaque nam necessitatibus nisi pariatur! Aliquid asperiores corporis ducimus et eveniet facilis fuga, incidunt inventore ipsam labore molestiae quam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, asperiores corporis eius excepturi minus non? A aliquam culpa illo possimus quae quam quibusdam quis quo rem repellendus rerum, ut voluptatum!
-
-                    </div>
-                </div>
-                <div class="pdf2-toc-day">
-                    <div class="pdf2-toc-day-title lucida">
-                        DAY
-                    </div>
-                    <div class="pdf2-toc-day-no arial">
-                        01
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="pdf2-toc">
-                <div class="pdf2-toc-desc">
-                    <div class="pdf2-toc-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consequatur dolores eius enim eos illum iusto, nam natus nulla quasi quidem quos soluta voluptatibus! Earum facere minima molestias nisi non. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, dolorem ea eligendi eos fugit id inventore nemo neque obcaecati odit, perspiciatis reprehenderit unde vel? Aspernatur aut cumque deleniti veritatis vitae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet consectetur eaque nam necessitatibus nisi pariatur! Aliquid asperiores corporis ducimus et eveniet facilis fuga, incidunt inventore ipsam labore molestiae quam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, asperiores corporis eius excepturi minus non? A aliquam culpa illo possimus quae quam quibusdam quis quo rem repellendus rerum, ut voluptatum!
-
-                    </div>
-                </div>
-                <div class="pdf2-toc-day">
-                    <div class="pdf2-toc-day-title lucida">
-                        DAY
-                    </div>
-                    <div class="pdf2-toc-day-no arial">
-                        01
-                    </div>
-
-
-                </div>
-            </div> <div class="pdf2-toc">
-            <div class="pdf2-toc-desc">
-                <div class="pdf2-toc-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consequatur dolores eius enim eos illum iusto, nam natus nulla quasi quidem quos soluta voluptatibus! Earum facere minima molestias nisi non. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, dolorem ea eligendi eos fugit id inventore nemo neque obcaecati odit, perspiciatis reprehenderit unde vel? Aspernatur aut cumque deleniti veritatis vitae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet consectetur eaque nam necessitatibus nisi pariatur! Aliquid asperiores corporis ducimus et eveniet facilis fuga, incidunt inventore ipsam labore molestiae quam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, asperiores corporis eius excepturi minus non? A aliquam culpa illo possimus quae quam quibusdam quis quo rem repellendus rerum, ut voluptatum!
-
-                </div>
-            </div>
-            <div class="pdf2-toc-day">
-                <div class="pdf2-toc-day-title lucida">
-                    DAY
-                </div>
-                <div class="pdf2-toc-day-no arial">
-                    01
-                </div>
-
-
-            </div>
-        </div>
         </div>
         <div class="pdf2-footer">
             <div class="pdf2-footer-page-bg">
@@ -728,26 +585,26 @@
 
 </div>
 
-<div class="pdf3">
+<div class="pdf3" th:each="detail:${pdf.pdf2}">
 
             <div class="pdf3-border">
                 <img src="../images/img.png" class="border-image" alt="logo" th:src="@{/images/img.png}"/>
               <div class="pdf3-part1">
-                        <div class="pdf3-part1-header tahoma">
+                        <div class="pdf3-part1-header tahoma" th:text="${detail.title}">
                             October 10 - Arrival in Kathmandu
                         </div>
-                        <div class="pdf3-part1-title tahoma">
+                        <div class="pdf3-part1-title tahoma" th:text="${detail.subTitle}">
                             Arrival In Kathmandu
                         </div>
 
-                  <div class="pdf3-part1-text lucida">
+                  <div class="pdf3-part1-text lucida" th:text="${detail.text}">
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda at deserunt ea enim est fuga maiores nemo, numquam odio pariatur porro qui, quis ratione repellat reprehenderit sint soluta tempora vel! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim iure nulla perspiciatis rem? Doloremque facilis iure minima minus molestias, nisi non nostrum odio officia, praesentium quae quis ratione, sit veniam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem est fugit ipsa iusto maxime, perspiciatis quas reprehenderit! Atque consectetur dicta dignissimos, facilis id iste laboriosam nesciunt officia porro rem voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum necessitatibus qui ut voluptate voluptatum! Ad dolores eius iste officiis possimus sit sunt? Beatae corporis illo impedit odit officiis tenetur! Est? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid asperiores aspernatur atque consequatur debitis deleniti et incidunt iusto libero molestias necessitatibus pariatur quaerat, rerum sint unde, voluptatibus! Maiores, sequi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid cumque distinctio ducimus illum iusto libero minus omnis perferendis possimus, quasi quo, sint temporibus. Asperiores aut fuga fugit nobis numquam!
                   </div>
 
                   <div class="pdf3-part2-images">
-                          <img src="../images/img.png"  class="pdf3-part2-image1"  alt="logo" th:src="@{/images/mainimage.jpg}"/>
+                          <img src="../images/img.png"  class="pdf3-part2-image1"  alt="logo" th:src="@{/uploads/}+${detail.image1}"/>
 
-                          <img src="../images/img.png"  class="pdf3-part2-image2"  alt="logo" th:src="@{/images/mainimage.jpg}"/>
+                          <img src="../images/img.png"  class="pdf3-part2-image2"  alt="logo" th:src="@{/uploads/} + ${detail.image2}"/>
                   </div>
               </div>
 
@@ -756,10 +613,10 @@
 <!--                            <div class="bottom-nav-img"></div>-->
                             <img src="../images/bottomnav1.png" class="bottom-nav-image"   alt="logo" th:src="@{/images/bottomnav1.png}"/>
                             <div class="bottom-nav-text lucida">
-                                <div class="bottom-nav-text-margin">Himalayan Dom Hotel</div>
-                                <div class="bottom-nav-text-margin">WWW.facebook.com</div>
-                                <div class="bottom-nav-text-margin">WWW.facebook.com</div>
-                                <div style="margin-top:6px;">WWW.facebook.com</div>
+                                <div class="bottom-nav-text-margin" th:text="${detail.hotel}">Himalayan Dom Hotel</div>
+                                <div class="bottom-nav-text-margin" th:text="${detail.food}">WWW.facebook.com</div>
+                                <div class="bottom-nav-text-margin" th:text="${detail.room}">WWW.facebook.com</div>
+                                <div style="margin-top:6px;" th:text="${detail.website}">WWW.facebook.com</div>
                             </div>
                         </div>
                 </div>
@@ -783,8 +640,7 @@
             <div class="button tahoma">Inclusion</div>
             <div class="list">
                 <ul class="inclusion">
-                    <li class="lucida"><span style="margin-left:10px;">My name is Anjal Sapkota</span></li>
-                    <li class="lucida">My name is Anjal Sapktoa</li>
+                    <li class="lucida" th:each="t:${pdf.pdf1.inclusion}"><span style="margin-left:10px;" th:text="${t}">My name is Anjal Sapkota</span></li>
                 </ul>
             </div>
         </div>
@@ -809,7 +665,7 @@
             <div class="button tahoma">Exclusion</div>
             <div class="list">
                 <ul class="exclusion">
-                    <li class="lucida"><span style="margin-left:10px;">My name is Anjal Sapkota</span></li>
+                    <li class="lucida" th:each="t:${pdf.pdf1.exclusion}"><span style="margin-left:10px;" th:text="${t}">My name is Anjal Sapkota</span></li>
 
                 </ul>
             </div>
@@ -823,13 +679,13 @@
                 <td>Total Price</td>
             </tr>
             <tr>
-                <td class="border-right">Adult - 2</td>
-                <td class="border-right">650$</td>
-                <td rowspan="2"><b>1000$</b></td>
+                <td class="border-right" th:text="'Adult - '+${pdf.pdf1.noOfAdults}">Adult - 2</td>
+                <td class="border-right" th:text="${pdf.pdf1.amountPerAdult}+${pdf.pdf1.currency}">650$</td>
+                <td rowspan="2" th:text="${pdf.pdf1.totalAmount}+${pdf.pdf1.currency}">1000$</td>
             </tr>
             <tr>
-                <td class="border-right">Child - 1</td>
-                <td class="border-right">450$</td>
+                <td class="border-right" th:text="'Child - '+${pdf.pdf1.noOfChildren}">Child - 1</td>
+                <td class="border-right" th:text="${pdf.pdf1.amountPerChildren}+${pdf.pdf1.currency}">450$</td>
             </tr>
 
         </table>

@@ -20,4 +20,7 @@ public interface Pdf1Pdf2DetailRepository extends JpaRepository<Pdf1Pdf2Detail,I
     @Transactional
     @Query("delete from Pdf1Pdf2Detail p where p.pdf1.id=:pdf1")
     void deleteByPdf1(@Param("pdf1") int pdf);
+
+    @Query("From Pdf1Pdf2Detail p where p.pdf2=null and p.pdf1=:pdf1")
+    List<Pdf1Pdf2Detail> checkPdf2Null(Pdf1 pdf1);
 }

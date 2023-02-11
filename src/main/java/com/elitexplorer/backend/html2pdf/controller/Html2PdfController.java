@@ -1,6 +1,7 @@
 package com.elitexplorer.backend.html2pdf.controller;
 
 import com.elitexplorer.backend.html2pdf.utils.Constants;
+import com.elitexplorer.backend.html2pdf.utils.DtoConvert;
 import com.elitexplorer.backend.pdf1.model.Pdf1;
 import com.elitexplorer.backend.pdf1pdf2detail.model.Pdf1Pdf2Detail;
 import com.elitexplorer.backend.pdf1pdf2detail.repository.Pdf1Pdf2DetailRepository;
@@ -47,11 +48,10 @@ public class Html2PdfController {
         Pdf1 pdf1 = new Pdf1();
         pdf1.setId(id);
         List<Pdf1Pdf2Detail> pdf1Pdf2Details = repo.findByPdf1(pdf1);
-        context.setVariable("pdf", "order");
+        context.setVariable("pdf", DtoConvert.convert(pdf1Pdf2Details));
         String orderHtml = templateEngine.process("index", context);
         /* Setup Source and target I/O streams */
         ByteArrayOutputStream target = new ByteArrayOutputStream();
-
         /*Setup converter properties. */
         ConverterProperties converterProperties = new ConverterProperties();
         converterProperties.setBaseUri("http://localhost:5050");

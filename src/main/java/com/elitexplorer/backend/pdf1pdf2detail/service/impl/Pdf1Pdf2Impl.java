@@ -33,4 +33,9 @@ public class Pdf1Pdf2Impl implements Pdf1Pdf2Interface {
         pdf1Pdf2Detail.setPdf2(pdf2);
         return repo.save(pdf1Pdf2Detail);
     }
+
+    @Override
+    public List<Pdf1Pdf2Detail> checkPdf2Null(Pdf1 pdf1){
+        return repo.checkPdf2Null(pdf1);
+    }
 }

@@ -67,6 +67,8 @@ public class DtoConvert {
         entity.setWebsite(dto.getWebsite());
         entity.setTocTitle(dto.getTocTitle());
         entity.setTocSubTitle(dto.getTocSubTitle());
+        entity.setImage1(dto.getImage1());
+        entity.setImage2(dto.getImage2());
         return entity;
 
     }
@@ -84,6 +86,7 @@ public class DtoConvert {
         pdf1.setPreparedTo(dto.getPreparedTo());
         pdf1.setStartDate(dto.getStartDate());
         pdf1.setTitle(dto.getTitle() + " - Duplicate");
+        pdf1.setFilename(dto.getFilename());
         pdf1.setTotalDays(dto.getTotalDays());
         return pdf1;
     }
@@ -109,7 +112,7 @@ public class DtoConvert {
         Calendar cal2 = Calendar.getInstance();
         cal2.setTime(pdf1.getStartDate());
         cal2.add(Calendar.DAY_OF_MONTH , pdf1.getTotalDays()-1);
-        dto.setFullDate( shortMonth.get(cal.get(Calendar.MONTH))+cal.get(Calendar.DAY_OF_MONTH) +", " + cal.get(Calendar.YEAR) +" - "+ cal2.get(Calendar.MONTH)+cal2.get(Calendar.DAY_OF_MONTH) +", " +cal2.get(Calendar.YEAR));
+        dto.setFullDate( shortMonth.get(cal.get(Calendar.MONTH)) + " "+cal.get(Calendar.DAY_OF_MONTH) +", " + cal.get(Calendar.YEAR) +" - "+ shortMonth.get(cal2.get(Calendar.MONTH)) + " "+cal2.get(Calendar.DAY_OF_MONTH) +", " +cal2.get(Calendar.YEAR));
         dto.setTotalAmount(pdf1.getNoOfAdults()* pdf1.getAmountPerAdult() + pdf1.getNoOfChildren()* pdf1.getAmountPerChildren());
         dto.setTripSummaryDate("Nepal /"+longMonth.get(cal.get(Calendar.MONTH)) +" /" +cal.get(Calendar.YEAR));
         return dto;
@@ -126,6 +129,8 @@ public class DtoConvert {
         entity.setWebsite(dto.getWebsite());
         entity.setTocTitle(dto.getTocTitle());
         entity.setTocSubTitle(dto.getTocSubTitle());
+        entity.setImage1(dto.getImage1());
+        entity.setImage2(dto.getImage2());
         return entity;
 
     }

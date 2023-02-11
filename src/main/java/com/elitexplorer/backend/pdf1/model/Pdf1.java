@@ -46,6 +46,9 @@ public class Pdf1 {
 
     private String currency;
 
+    private boolean allPdf2Uploaded;
+
+
     @OneToMany(mappedBy = "pdf1")
     private List<Pdf1Pdf2Detail> pdf1Pdf2Details;
 }
