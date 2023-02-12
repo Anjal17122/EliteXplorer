@@ -20,20 +20,28 @@ public class Pdf1 {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+
+    @Lob
     private String title;
 
+    @Lob
     private String hint;
+
 
     private Date startDate;
 
     private int totalDays;
 
+    @Lob
     private String mainText;
 
+    @Lob
     private String preparedTo;
 
+    @Lob
     private String inclusion;
 
+    @Lob
     private String exclusion;
 
     private int noOfAdults;
@@ -44,14 +52,12 @@ public class Pdf1 {
 
     private long amountPerChildren;
 
+    @Lob
     private String filename;
 
     private String currency;
 
     private boolean allPdf2Uploaded;
-
-
-
 
     @OneToMany(mappedBy = "pdf1")
     private List<Pdf1Pdf2Detail> pdf1Pdf2Details;

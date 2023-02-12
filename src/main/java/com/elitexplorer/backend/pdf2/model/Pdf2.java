@@ -16,21 +16,41 @@ public class Pdf2 {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Lob
     private String hint;
 
+
+    @Lob
     private String title;
 
+    @Lob
     private String subTitle;
 
+    @Lob
     private String text;
 
+    @Lob
     private String image1;
+
+    @Lob
     private String image2;
+
+
     private String hotel;
+
+
     private String food;
+
+
     private String room;
+
+
     private String website;
+
+    @Lob
     private String tocTitle;
+
+    @Lob
     private String tocSubTitle;
 
     @OneToMany(mappedBy = "pdf2")

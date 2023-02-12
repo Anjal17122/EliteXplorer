@@ -37,8 +37,8 @@ public class test {
 //        System.out.println(total);
 
 
+String len= "dfjkskj,,anjal,,sapkota,,haha,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha";
 
-
-
+        System.out.println(len.length());
     }
 }

@@ -4,6 +4,7 @@ import com.elitexplorer.backend.html2pdf.utils.Constants;
 import com.elitexplorer.backend.html2pdf.utils.DtoConvert;
 import com.elitexplorer.backend.pdf1.model.Pdf1;
 import com.elitexplorer.backend.pdf1pdf2detail.model.Pdf1Pdf2Detail;
+import com.elitexplorer.backend.pdf1pdf2detail.model.dto.Pdf1Pdf2Generate;
 import com.elitexplorer.backend.pdf1pdf2detail.repository.Pdf1Pdf2DetailRepository;
 import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -42,13 +44,22 @@ public class Html2PdfController {
         this.templateEngine = templateEngine;
     }
 
-    @GetMapping(path = "/pdf/{id}")
-    public ResponseEntity<?> getPDF(@PathVariable("id") int id, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @GetMapping(path = "/pdf/{toc}/{id}")
+    public ResponseEntity<?> getPDF(@PathVariable("id") int id, @PathVariable("toc") int toc, HttpServletRequest request, HttpServletResponse response) throws IOException {
         WebContext context = new WebContext(request, response, servletContext);
         Pdf1 pdf1 = new Pdf1();
         pdf1.setId(id);
         List<Pdf1Pdf2Detail> pdf1Pdf2Details = repo.findByPdf1(pdf1);
-        context.setVariable("pdf", DtoConvert.convert(pdf1Pdf2Details));
+        Pdf1Pdf2Generate generate = DtoConvert.convert(pdf1Pdf2Details);
+        if (toc == 1){
+            generate.setPdf2(new ArrayList<>());
+            List<Integer> pageNo= generate.getPageNo();
+            pageNo.set(2,pageNo.get(1));
+            pageNo.set(3,pageNo.get(1)+1);
+            generate.setPageNo(pageNo);
+        }
+
+        context.setVariable("pdf", generate);
         String orderHtml = templateEngine.process("index", context);
         /* Setup Source and target I/O streams */
         ByteArrayOutputStream target = new ByteArrayOutputStream();
