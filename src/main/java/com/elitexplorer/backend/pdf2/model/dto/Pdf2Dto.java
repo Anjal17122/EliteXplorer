@@ -16,6 +16,8 @@ public class Pdf2Dto {
 
     private String title;
 
+    private String hint;
+
     private String subTitle;
 
     private String text;

@@ -144,7 +144,7 @@
         }
 
         .footer-page-bg{
-            margin-top:25px;
+            margin-top:17px;
             float:right;
             background: url([[@{/images/pageno.png}]])no-repeat center center fixed;
             width:44px;
@@ -153,7 +153,7 @@
         }
         .footer-page-no{
         color:white;
-        margin-top:17px;
+        margin-top:13px;
         margin-left:5px;
         }
 
@@ -260,11 +260,12 @@
             height:45px;
         }
         .pdf2-footer-page-bg{
-        float:right;
-        background: url([[@{/images/pageno.png}]])no-repeat center center fixed;
-        width:44px;
-        height:44px;
-        text-align:center;
+            margin-top:15px;
+            float:right;
+            background: url([[@{/images/pageno.png}]])no-repeat center center fixed;
+            width:44px;
+            height:44px;
+            text-align:center;
         }
         .pdf2-footer-page-no{
             color:white;
@@ -493,10 +494,30 @@
        padding-left:20px;
      }
 
+           .pdf6{
+        padding:0;
+        margin:0;
+        width:793px;
+        height:1122px;
+        overflow:hidden;
+        background-color:#E1E2D4;
+        box-sizing:border-box;
+    }
+
+         .pdf6-body{
+    height:280px;
+    width: 688px;
+    margin-left:5px;
+    margin-top:60px;
+    overflow:hidden;
+    background-color:red;
+    font-size:12;
+
+ }
+
     </style>
 </head>
 <body>
-
 <div class="pdf1">
     <div class="header">
         <img src="../images/logo.gif" class="logo" alt="logo" th:src="@{/images/logo.gif}"/>
@@ -528,7 +549,9 @@
     <img src="../images/santoshimage.png" class="santosh-image" alt="logo" th:src="@{/images/santoshimage.png}"/>
     <div class="footer">
         <div class="footer-page-bg">
-            <div class="lucida footer-page-no">1</div>
+            <div class="lucida footer-page-no">
+                    1
+            </div>
         </div>
 
         <div class="footer-page-text lucida">
@@ -575,7 +598,7 @@
         </div>
         <div class="pdf2-footer">
             <div class="pdf2-footer-page-bg">
-                <div class="pdf2-footer-page-no lucida">2</div>
+                <div class="pdf2-footer-page-no lucida pdf2-change-page-no" th:text="${pdf.pageNo[0]} + ${pdf2loopStat.index}"></div>
             </div>
         </div>
     </div>
@@ -623,7 +646,7 @@
             </div>
         <div class="pdf3-footer">
             <div class="pdf3-footer-page-bg">
-                <div class="pdf3-footer-page-no lucida">3</div>
+                <div class="pdf3-footer-page-no lucida pdf3-change-page-no" th:text="${pdf.pageNo[1]} +${detailStat.index}"></div>
             </div>
         </div>
 
@@ -649,7 +672,7 @@
 
     <div class="pdf3-footer">
         <div class="pdf3-footer-page-bg">
-            <div class="pdf3-footer-page-no lucida">4</div>
+            <div class="pdf3-footer-page-no lucida pdf4-change-page-no" th:text="${pdf.pageNo[2]}"></div>
         </div>
     </div>
 </div>
@@ -694,7 +717,57 @@
 
     <div class="pdf3-footer">
         <div class="pdf3-footer-page-bg">
-            <div class="pdf3-footer-page-no lucida">4</div>
+            <div class="pdf3-footer-page-no lucida pdf5-change-page-no" th:text="${pdf.pageNo[3]}"></div>
+        </div>
+    </div>
+</div>
+
+<div class="pdf6">
+    <div class="pdf3-border">
+        <!--        <img src="../images/img.png" class="border-image" alt="logo" th:src="@{/images/img.png}"/>-->
+        <h2 class="pdf4-border-text tahoma">
+            About Nepal
+        </h2>
+
+        <div class="pdf6-body lucida">
+            <p>
+                <b>Nepal</b> formerly the Federal Democratic Republic of Nepal is a landlocked country in
+                South Asia. It is mainly situated in the Himalayas, but also includes parts of the IndoGangetic Plain, bordering Tibet of China to the north, and India in the south, east, and
+                west, while it is narrowly separated from Bangladesh by the Siliguri Corridor, and
+                from Bhutan by the Indian state of Sikkim.
+            </p>
+
+            <p>
+                Nepal has a diverse geography, including fertile plains, subalpine forested hills, and
+                eight of the world's ten tallest mountains, including Mount Everest, the highest point
+                on Earth. Nepal is a multi-ethnic, multi-lingual, multi-religious and multi-cultural
+                state, with Nepali as the official language. Kathmandu is the nation's capital and the
+                largest city.
+            </p>
+        </div>
+
+        <div class="button tahoma button-price">Price</div>
+        <table class="lucida">
+            <tr>
+                <td class="border-right">No. of Travellers</td>
+                <td class="border-right">Price/Person</td>
+                <td>Total Price</td>
+            </tr>
+            <tr>
+                <td class="border-right" th:text="'Adult - '+${pdf.pdf1.noOfAdults}">Adult - 2</td>
+                <td class="border-right" th:text="${pdf.pdf1.amountPerAdult}+${pdf.pdf1.currency}">650$</td>
+                <td rowspan="2" th:text="${pdf.pdf1.totalAmount}+${pdf.pdf1.currency}">1000$</td>
+            </tr>
+            <tr>
+                <td class="border-right" th:text="'Child - '+${pdf.pdf1.noOfChildren}">Child - 1</td>
+                <td class="border-right" th:text="${pdf.pdf1.amountPerChildren}+${pdf.pdf1.currency}">450$</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="pdf3-footer">
+        <div class="pdf3-footer-page-bg">
+            <div class="pdf3-footer-page-no lucida pdf5-change-page-no" th:text="${pdf.pageNo[3]}"></div>
         </div>
     </div>
 </div>

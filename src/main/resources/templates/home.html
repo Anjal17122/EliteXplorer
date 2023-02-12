@@ -147,7 +147,6 @@
     <div id="content" class="p-4 p-md-5">
         <h2 class="mb-4">PDF Generation</h2>
         <div class="row">
-
             <div class="col-md-7">
                 <div class="card mb-4">
                     <form class="g-3 needs-validation pl-3 mt-3" th:action="@{/save/pdf1}" method="post" enctype="multipart/form-data">
@@ -159,6 +158,16 @@
                                         <input type="file" class="custom-file-input" id="inputGroupFile04" name="file">
                                         <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-11">
+                                <label for="hint" class="form-label">Hint</label>
+                                <input type="text" class="form-control" th:value="${pdf1.hint}" id = "hint" name = "hint" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid title.
                                 </div>
                             </div>
                         </div>
@@ -196,9 +205,7 @@
                         <div class="row mb-4">
                             <div class="col-md-11">
                                 <label for="description" class="form-label">Description</label>
-                                <input type="text" class="form-control" th:value="${pdf1.mainText}" id = "description" name="mainText" required>
-                                <textarea class="form-control" id="text" th:text="${pdf2.text}" name="text" rows="3"></textarea>                <div class="invalid-feedback">
-
+                                <textarea class="form-control" id="description" th:text="${pdf1.mainText}" name="mainText" rows="3"></textarea>
                             <div class="invalid-feedback">
                                     Please provide a valid title.
                                 </div>
@@ -218,7 +225,7 @@
                         <div class="row mb-4">
                             <div class="col-md-11">
                                 <label for="inclusion" class="form-label">Inclusion</label>
-                                <input type="text" class="form-control" th:value="${pdf1.inclusion}" id = "inclusion" name="inclusion" required>
+                                <textarea class="form-control" id="inclusion" th:text="${pdf1.inclusion}" name="inclusion" rows="3"></textarea>
                                 <div class="invalid-feedback">
                                     Please provide a valid title.
                                 </div>
@@ -228,7 +235,7 @@
                         <div class="row mb-4">
                             <div class="col-md-11">
                                 <label for="exclusion" class="form-label">Exclusion</label>
-                                <input type="text" class="form-control" th:value="${pdf1.exclusion}" id = "exclusion" name="exclusion" required>
+                                <textarea class="form-control" id="exclusion" th:text="${pdf1.exclusion}" name="exclusion" rows="3"></textarea>
                                 <div class="invalid-feedback">
                                     Please provide a valid title.
                                 </div>

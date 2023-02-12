@@ -25,11 +25,20 @@ public class test {
         int partitionSize = IntMath.divide(num.size(), 5, RoundingMode.UP);
         List<List<Integer>> partitions = Lists.partition(num, 7);
 
-        for (List<Integer> a: partitions){
-            for (Integer b: a){
-                System.out.println(b);
-            }
-            System.out.println("First List Complete");
-        }
+//        for (List<Integer> a: partitions){
+//            for (Integer b: a){
+//                System.out.println(b);
+//            }
+//            System.out.println("First List Complete");
+//        }
+
+//        int a = 2;
+//       long total = 7/3;
+//        System.out.println(total);
+
+
+
+
+
     }
 }

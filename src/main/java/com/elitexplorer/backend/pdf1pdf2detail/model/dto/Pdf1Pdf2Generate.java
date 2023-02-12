@@ -18,5 +18,7 @@ public class Pdf1Pdf2Generate {
 
     private List<List<Pdf2TocDto>> toc;
 
+    private List<Integer> pageNo;
+
     private boolean detail;
 }

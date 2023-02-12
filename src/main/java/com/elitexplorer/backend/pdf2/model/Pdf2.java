@@ -16,6 +16,8 @@ public class Pdf2 {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String hint;
+
     private String title;
 
     private String subTitle;

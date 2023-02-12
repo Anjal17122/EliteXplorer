@@ -32,6 +32,7 @@ public class DtoConvert {
         pdf1.setStartDate(new SimpleDateFormat("yyyy-MM-dd").parse(dto.getStartDate()));
         pdf1.setTitle(dto.getTitle());
         pdf1.setTotalDays(dto.getTotalDays());
+        pdf1.setHint(dto.getHint());
         return pdf1;
     }
 
@@ -46,6 +47,7 @@ public class DtoConvert {
         entity.setRoom(dto.getRoom());
         entity.setWebsite(dto.getWebsite());
         entity.setTocTitle(dto.getTocTitle());
+        entity.setHint(dto.getHint());
         entity.setTocSubTitle(dto.getTocSubTitle());
         if (dto.getTocTitle()==null)
             entity.setTocTitle(entity.getTitle());
@@ -69,6 +71,7 @@ public class DtoConvert {
         entity.setTocSubTitle(dto.getTocSubTitle());
         entity.setImage1(dto.getImage1());
         entity.setImage2(dto.getImage2());
+        entity.setHint(dto.getHint());
         return entity;
 
     }
@@ -88,6 +91,7 @@ public class DtoConvert {
         pdf1.setTitle(dto.getTitle() + " - Duplicate");
         pdf1.setFilename(dto.getFilename());
         pdf1.setTotalDays(dto.getTotalDays());
+        pdf1.setHint(dto.getHint());
         return pdf1;
     }
     public static List<String> shortMonth = new ArrayList<>(Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"));
@@ -166,6 +170,19 @@ public class DtoConvert {
         }
         pdf1Pdf2Generate.setPdf2(pdf2);
         pdf1Pdf2Generate.setToc(Lists.partition(pdf2Toc, 7));
+
+        List<Integer> pageNo= new ArrayList<>();
+        int total = (int) Math.round(pdf2Toc.size()/7);
+        if (pdf2Toc.size()%7==0){
+            total = total-1;
+        }
+        pageNo.add(2);
+        pageNo.add(3+total);
+        pageNo.add(3+total+pdf2Toc.size());
+        pageNo.add(4+total+pdf2Toc.size());
+
+        pdf1Pdf2Generate.setPageNo(pageNo);
+
         return pdf1Pdf2Generate;
     }
 }

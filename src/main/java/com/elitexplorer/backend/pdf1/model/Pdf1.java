@@ -22,6 +22,8 @@ public class Pdf1 {
 
     private String title;
 
+    private String hint;
+
     private Date startDate;
 
     private int totalDays;
@@ -47,6 +49,8 @@ public class Pdf1 {
     private String currency;
 
     private boolean allPdf2Uploaded;
+
+
 
 
     @OneToMany(mappedBy = "pdf1")

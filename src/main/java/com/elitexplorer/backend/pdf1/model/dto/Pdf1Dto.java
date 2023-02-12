@@ -35,5 +35,7 @@ public class Pdf1Dto {
 
     private String currency;
 
+    private String hint;
+
     private MultipartFile file;
 }
