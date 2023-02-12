@@ -9,6 +9,10 @@ import com.elitexplorer.backend.pdf2.model.Pdf2;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2Dto;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2GenerateDto;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2TocDto;
+import com.elitexplorer.backend.toconly.model.dto.Pdf1TocDto;
+import com.elitexplorer.backend.toconly.model.dto.TocOnlyDto;
+import com.elitexplorer.backend.toconly.model.entity.Pdf1Toc;
+import com.elitexplorer.backend.toconly.model.entity.TocOnly;
 import com.google.common.collect.Lists;
 
 import java.text.ParseException;
@@ -184,5 +188,37 @@ public class DtoConvert {
         pdf1Pdf2Generate.setPageNo(pageNo);
 
         return pdf1Pdf2Generate;
+    }
+
+    public static TocOnly convert(TocOnlyDto dto){
+        Pdf1Toc pdf1Toc = new Pdf1Toc();
+        pdf1Toc.setId(dto.getPdf1Toc());
+
+        TocOnly tocOnly = new TocOnly();
+        tocOnly.setId(dto.getId());
+        tocOnly.setPdf1Toc(pdf1Toc);
+        tocOnly.setDay(dto.getDay());
+        tocOnly.setTitle(dto.getTitle());
+        tocOnly.setSubTitle(dto.getSubTitle());
+        return tocOnly;
+    }
+
+    public static Pdf1Toc convert(Pdf1TocDto dto) throws ParseException {
+        Pdf1Toc pdf1 = new Pdf1Toc();
+        pdf1.setId(dto.getId());
+        pdf1.setExclusion(dto.getExclusion());
+        pdf1.setInclusion(dto.getInclusion());
+        pdf1.setCurrency(dto.getCurrency());
+        pdf1.setMainText(dto.getMainText());
+        pdf1.setAmountPerAdult(dto.getAmountPerAdult());
+        pdf1.setAmountPerChildren(dto.getAmountPerChildren());
+        pdf1.setNoOfAdults(dto.getNoOfAdults());
+        pdf1.setNoOfChildren(dto.getNoOfChildren());
+        pdf1.setPreparedTo(dto.getPreparedTo());
+        pdf1.setStartDate(new SimpleDateFormat("yyyy-MM-dd").parse(dto.getStartDate()));
+        pdf1.setTitle(dto.getTitle());
+        pdf1.setTotalDays(dto.getTotalDays());
+        pdf1.setHint(dto.getHint());
+        return pdf1;
     }
 }

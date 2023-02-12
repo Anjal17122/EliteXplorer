@@ -31,18 +31,18 @@
         <div class="p-4 pt-5">
             <a href="#" class="img logo rounded-circle mb-5"></a>
             <ul class="list-unstyled components mb-5">
-                <li class="active">
+                <li >
                     <a th:href="@{/}" target="_blank">Trip Detail</a>
                 </li>
+
                 <li>
-                    <a th:href="@{/manage/pdf}" >Generate PDF</a>
+                    <a th:href="@{/manage/pdf}">Generate PDF</a>
                 </li>
-                <li>
+
+                <li class="active">
                     <a th:href="@{/pdf1/toc}">Generate TOC PDF</a>
                 </li>
-
             </ul>
-
             <div class="footer">
                 <p>
                     Copyright &copy;
@@ -56,9 +56,9 @@
     </nav>
 
     <div id="content" class="p-4 p-md-5">
-        <h2 class="mb-4">Manage Trip Detail</h2>
+        <h2 class="mb-4">Manage TOC Pdf</h2>
 
-        <a th:href="@{/day/detail?id=0}" class="btn btn-primary">
+        <a th:href="@{/pdf1/toc/save/page?id=0}" class="btn btn-primary">
             Create
         </a>
         <table class="table mt-3">
@@ -66,16 +66,26 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Title</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">Prepared To</th>
                 <th scope="col">Clone</th>
                 <th scope="col">Update</th>
+                <th scope="col">Download PDF</th>
+                <th scope="col">Download TOC</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="t:${pdf2}" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" th:title="${t.hint}">
-                <th scope="row" th:text="${t.id}" >1</th>
+            <tr th:each="t:${pdf1Toc}" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" th:title="${t.hint}">
+                <th scope="row" th:text="${t.id}">1</th>
                 <td th:text="${t.title}">Mark</td>
-                <td><a th:href="@{/pdf2/clone/} + ${t.id}"><i class="fa-solid fa-copy"></i></a></td>
-                <td><a th:href="@{/day/detail?id=} + ${t.id}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                <td th:text="${t.startDate}">Mark</td>
+                <td th:text="${t.preparedTo}">Mark</td>
+                <td><a th:href="@{/pdf1/clone/} + ${t.id}"><i class="fa-solid fa-copy"></i></a></td>
+                <td><a th:href="@{/pdf1/toc/save/page?id=} + ${t.id}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                <td th:if="${t.allPdf2Uploaded}"><a   th:href="@{/pdf/0/} + ${t.id}" target="_blank"><i class="fa-solid fa-download"></i></a>
+                <td th:unless="${t.allPdf2Uploaded}"><i class="fa-solid fa-download"></i></td>
+                <td th:if="${t.allPdf2Uploaded}"><a th:href="@{/pdf/1/} + ${t.id}" target="_blank"><i class="fa-solid fa-download"></i></a>
+                <td th:unless="${t.allPdf2Uploaded}"><i class="fa-solid fa-download"></i></td>
             </tr>
             </tbody>
         </table>
@@ -85,9 +95,9 @@
 </div>
 
 
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<!--<script src="js/jquery.min.js"></script>-->
+<!--<script src="js/popper.js"></script>-->
+<!--<script src="js/bootstrap.min.js"></script>-->
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
 <!-- JavaScript Bundle with Popper -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
