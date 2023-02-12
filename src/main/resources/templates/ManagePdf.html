@@ -70,7 +70,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="t:${pdf1}">
+            <tr th:each="t:${pdf1}" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" th:title="${t.hint}">
                 <th scope="row" th:text="${t.id}">1</th>
                 <td th:text="${t.title}">Mark</td>
                 <td th:text="${t.startDate}">Mark</td>
@@ -88,9 +88,9 @@
 </div>
 
 
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<!--<script src="js/jquery.min.js"></script>-->
+<!--<script src="js/popper.js"></script>-->
+<!--<script src="js/bootstrap.min.js"></script>-->
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
 <!-- JavaScript Bundle with Popper -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

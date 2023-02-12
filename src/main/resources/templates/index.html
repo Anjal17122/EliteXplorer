@@ -299,8 +299,6 @@
     margin-left:150px;
     }
 
-
-
     .pdf3-part1{
     width: 688px;
     height: 627px;
@@ -313,25 +311,31 @@
     text-align:center;
     font-size:24pt;
     font-weight:900;
-    overflow:hidden;
+
     }
 
     .pdf3-part1-title{
     font-size:12;
     font-weight:bold;
     margin-top:40px;
-    overflow:hidden;
+
 
     }
     .pdf3-part1-text{
         margin-top:25px;
         width:100%;
-        height:345px;
+        height:auto;
         font-size:12pt;
 
-        overflow:hidden;
         font-style:normal;
     }
+
+      .pdf3-part1-text-initial{
+      width:100%;
+      height:500px;
+
+      overflow:hidden;
+  }
 
     .pdf3-part2-image1{
         width:483px;
@@ -510,10 +514,17 @@
     margin-left:5px;
     margin-top:60px;
     overflow:hidden;
-    background-color:red;
     font-size:12;
 
  }
+ .about-nepal-bg{
+    background: url([[@{/images/about-nepal.png}]])no-repeat center center fixed;
+    width:793px;
+    height:652px;
+    margin-left:-47px;
+    margin-top:57px;
+  }
+
 
     </style>
 </head>
@@ -613,17 +624,17 @@
             <div class="pdf3-border">
                 <img src="../images/img.png" class="border-image" alt="logo" th:src="@{/images/img.png}"/>
               <div class="pdf3-part1">
+                  <div class="pdf3-part1-text-initial">
                         <div class="pdf3-part1-header tahoma" th:text="${detail.title}">
                             October 10 - Arrival in Kathmandu
                         </div>
                         <div class="pdf3-part1-title tahoma" th:text="${detail.subTitle}">
                             Arrival In Kathmandu
                         </div>
-
                   <div class="pdf3-part1-text lucida" th:text="${detail.text}">
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda at deserunt ea enim est fuga maiores nemo, numquam odio pariatur porro qui, quis ratione repellat reprehenderit sint soluta tempora vel! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim iure nulla perspiciatis rem? Doloremque facilis iure minima minus molestias, nisi non nostrum odio officia, praesentium quae quis ratione, sit veniam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem est fugit ipsa iusto maxime, perspiciatis quas reprehenderit! Atque consectetur dicta dignissimos, facilis id iste laboriosam nesciunt officia porro rem voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum necessitatibus qui ut voluptate voluptatum! Ad dolores eius iste officiis possimus sit sunt? Beatae corporis illo impedit odit officiis tenetur! Est? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid asperiores aspernatur atque consequatur debitis deleniti et incidunt iusto libero molestias necessitatibus pariatur quaerat, rerum sint unde, voluptatibus! Maiores, sequi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid cumque distinctio ducimus illum iusto libero minus omnis perferendis possimus, quasi quo, sint temporibus. Asperiores aut fuga fugit nobis numquam!
                   </div>
-
+                  </div>
                   <div class="pdf3-part2-images">
                           <img src="../images/img.png"  class="pdf3-part2-image1"  alt="logo" th:src="@{/uploads/}+${detail.image1}"/>
 
@@ -723,6 +734,7 @@
 </div>
 
 <div class="pdf6">
+
     <div class="pdf3-border">
         <!--        <img src="../images/img.png" class="border-image" alt="logo" th:src="@{/images/img.png}"/>-->
         <h2 class="pdf4-border-text tahoma">
@@ -746,28 +758,12 @@
             </p>
         </div>
 
-        <div class="button tahoma button-price">Price</div>
-        <table class="lucida">
-            <tr>
-                <td class="border-right">No. of Travellers</td>
-                <td class="border-right">Price/Person</td>
-                <td>Total Price</td>
-            </tr>
-            <tr>
-                <td class="border-right" th:text="'Adult - '+${pdf.pdf1.noOfAdults}">Adult - 2</td>
-                <td class="border-right" th:text="${pdf.pdf1.amountPerAdult}+${pdf.pdf1.currency}">650$</td>
-                <td rowspan="2" th:text="${pdf.pdf1.totalAmount}+${pdf.pdf1.currency}">1000$</td>
-            </tr>
-            <tr>
-                <td class="border-right" th:text="'Child - '+${pdf.pdf1.noOfChildren}">Child - 1</td>
-                <td class="border-right" th:text="${pdf.pdf1.amountPerChildren}+${pdf.pdf1.currency}">450$</td>
-            </tr>
-        </table>
+        <div class="about-nepal-bg"></div>
     </div>
 
     <div class="pdf3-footer">
         <div class="pdf3-footer-page-bg">
-            <div class="pdf3-footer-page-no lucida pdf5-change-page-no" th:text="${pdf.pageNo[3]}"></div>
+            <div class="pdf3-footer-page-no lucida pdf5-change-page-no" th:text="${pdf.pageNo[3]} + ${1}"></div>
         </div>
     </div>
 </div>

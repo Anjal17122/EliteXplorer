@@ -68,8 +68,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="t:${pdf2}">
-                <th scope="row" th:text="${t.id}">1</th>
+            <tr th:each="t:${pdf2}" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" th:title="${t.hint}">
+                <th scope="row" th:text="${t.id}" >1</th>
                 <td th:text="${t.title}">Mark</td>
                 <td><a th:href="@{/pdf2/clone/} + ${t.id}"><i class="fa-solid fa-copy"></i></a></td>
                 <td><a th:href="@{/day/detail?id=} + ${t.id}"><i class="fa-solid fa-pen-to-square"></i></a></td>
