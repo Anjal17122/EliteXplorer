@@ -44,7 +44,7 @@ public class Pdf1TocImpl implements Pdf1TocInterface {
     public Pdf1Toc clone(int id){
         Pdf1Toc pdf1Toc = repo.findById(id).orElse(null);
         Pdf1Toc saved = repo.save(DtoConvert.convert(pdf1Toc));
-        List<TocOnly> getAll= tocRepo.findByPdf1TocOrderByDayDesc(pdf1Toc);
+        List<TocOnly> getAll= tocRepo.findByPdf1TocOrderByDayAsc(pdf1Toc);
         for (TocOnly tocOnly:getAll){
             TocOnly tocOnly1 = new TocOnly();
             tocOnly1.setPdf1Toc(saved);

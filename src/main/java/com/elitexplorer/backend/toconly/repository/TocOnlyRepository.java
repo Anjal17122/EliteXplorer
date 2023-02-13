@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface TocOnlyRepository extends JpaRepository<TocOnly,Integer> {
 
-    List<TocOnly> findByPdf1TocOrderByDayDesc(Pdf1Toc pdf1);
+    List<TocOnly> findByPdf1TocOrderByDayAsc(Pdf1Toc pdf1);
 
     @Modifying
     @Transactional

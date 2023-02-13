@@ -53,10 +53,10 @@ public class DtoConvert {
         entity.setTocTitle(dto.getTocTitle());
         entity.setHint(dto.getHint());
         entity.setTocSubTitle(dto.getTocSubTitle());
-        if (dto.getTocTitle()==null)
-            entity.setTocTitle(entity.getTitle());
-        if (dto.getTocSubTitle()==null)
-            entity.setTocSubTitle(entity.getSubTitle());
+        if (dto.getTocTitle()==null || dto.getTocTitle().isEmpty())
+            entity.setTocTitle(dto.getTitle());
+        if (dto.getTocSubTitle()==null || dto.getTocSubTitle().isEmpty())
+            entity.setTocSubTitle(dto.getSubTitle());
         return entity;
 
     }
@@ -259,4 +259,58 @@ public class DtoConvert {
         pdf1.setFilename(dto.getFilename());
         return pdf1;
     }
+
+    public static Pdf1Pdf2Generate generateToc(Pdf1Toc pdf1Toc){
+        Date date = pdf1Toc.getStartDate();
+        Pdf1Pdf2Generate pdf1Pdf2Generate = new Pdf1Pdf2Generate();
+        pdf1Pdf2Generate.setPdf1(convertPdf1(convertTransfer(pdf1Toc)));
+        List<Pdf2GenerateDto> pdf2 = new ArrayList<>();
+        List<Pdf2TocDto> pdf2Toc = new ArrayList<>();
+        for (TocOnly detail: pdf1Toc.getTocOnly()){
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(date);
+
+            String dateMonth = longMonth.get(cal2.get(Calendar.MONTH)) +" - " +cal2.get(Calendar.DAY_OF_MONTH);
+
+            Pdf2TocDto pdfToc = new Pdf2TocDto();
+            pdfToc.setTocTitle(dateMonth +" "+ detail.getTitle());
+            pdfToc.setTocSubTitle(detail.getSubTitle());
+            String days = String.valueOf(detail.getDay());
+            if (Integer.parseInt(days)<10){
+                days = "0"+days;
+            }
+            pdfToc.setTocDays(days);
+            pdf2Toc.add(pdfToc);
+
+
+            cal2.add(Calendar.DAY_OF_MONTH , 1);
+            date = cal2.getTime();
+        }
+        pdf1Pdf2Generate.setPdf2(pdf2);
+        pdf1Pdf2Generate.setToc(Lists.partition(pdf2Toc, 7));
+
+        List<Integer> pageNo= new ArrayList<>();
+        int total = (int) Math.round(pdf2Toc.size()/7);
+        if (pdf2Toc.size()%7==0){
+            total = total-1;
+        }
+
+        if (pdf1Toc.getTocOnly().isEmpty()){
+            pageNo.add(2);
+            pageNo.add(3);
+            pageNo.add(2);
+            pageNo.add(3);
+        }else{
+            pageNo.add(2);
+            pageNo.add(3+total);
+            pageNo.add(3+total);
+            pageNo.add(4+total);
+        }
+
+
+        pdf1Pdf2Generate.setPageNo(pageNo);
+
+        return pdf1Pdf2Generate;
+    }
+
 }

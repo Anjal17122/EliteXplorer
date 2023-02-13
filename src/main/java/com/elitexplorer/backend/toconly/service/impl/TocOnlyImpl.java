@@ -10,6 +10,7 @@ import com.elitexplorer.backend.toconly.service.Interface.TocOnlyInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,9 +22,12 @@ public class TocOnlyImpl implements TocOnlyInterface {
 
     @Override
     public List<TocOnly> findByPdf1Toc(int id){
-        Pdf1Toc pdf1Toc = new Pdf1Toc();
-        pdf1Toc.setId(id);
-        return repo.findByPdf1TocOrderByDayDesc(pdf1Toc);
+        if (id!=0) {
+            Pdf1Toc pdf1Toc = new Pdf1Toc();
+            pdf1Toc.setId(id);
+            return repo.findByPdf1TocOrderByDayAsc(pdf1Toc);
+        }
+        return new ArrayList<>();
     }
 
     @Override

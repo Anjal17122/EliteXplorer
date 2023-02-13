@@ -67,7 +67,7 @@ public class Pdf1TocController {
         return "redirect:/pdf1/toc";
     }
 
-    @GetMapping("/transfer")
+    @GetMapping("/transfer/{id}")
     public String transferPdf1Toc(@PathVariable("id") int id){
         service.transfer(id);
         return "redirect:/pdf1/toc";

@@ -23,7 +23,7 @@ public class TocOnlyController {
     @PostMapping("/save")
     public String saveTocOnly(@ModelAttribute TocOnlyDto tocOnlyDto){
         TocOnly pdf1Toc = service.save(tocOnlyDto);
-        return "redirect:/pdf1/toc/save/page?id="+pdf1Toc.getPdf1Toc().getId();
+        return "redirect:/pdf1/toc/save/page?id="+tocOnlyDto.getPdf1Toc();
     }
 
 

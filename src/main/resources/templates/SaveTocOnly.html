@@ -35,7 +35,7 @@
             <a href="#" class="img logo rounded-circle mb-5"></a>
             <ul class="list-unstyled components mb-5">
                 <li>
-                    <a th:href="@{/}" target="_blank">Trip Detail</a>
+                    <a th:href="@{/}" >Trip Detail</a>
                 </li>
 
                 <li>
@@ -59,14 +59,14 @@
     </nav>
 
     <div id="content" class="p-4 p-md-5">
-        <h2 class="mb-4">PDF Generation</h2>
+        <h2 class="mb-4">TOC PDF Generation</h2>
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-12">
                 <div class="card mb-4">
                     <form class="g-3 needs-validation pl-3 mt-3" th:action="@{/pdf1/toc/save}" method="post" enctype="multipart/form-data">
                         <input type="number" hidden="hidden" th:value="${pdf1.id}" name="id">
                         <div class="row mb-4">
-                            <div class="col-md-11">
+                            <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputGroupFile04" name="file">
@@ -77,27 +77,15 @@
                         </div>
 
                         <div class="row mb-4">
-                            <div class="col-md-11">
-                                <label for="hint" class="form-label">Hint</label>
-                                <input type="text" class="form-control" th:value="${pdf1.hint}" id = "hint" name = "hint" required>
-                                <div class="invalid-feedback">
-                                    Please provide a valid title.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-4">
-                            <div class="col-md-11">
+                            <div class="col-md-6">
                                 <label for="title" class="form-label">Title</label>
                                 <input type="text" class="form-control" th:value="${pdf1.title}" id = "title" name = "title" required>
                                 <div class="invalid-feedback">
                                     Please provide a valid title.
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row mb-4">
-                            <div class="col-md-11">
+                            <div class="col-md-6">
                                 <label for="start-date" class="form-label">Trip Start Date</label>
                                 <input type="date" class="form-control" id ="start-date" th:value="${pdf1.startDate}" name="startDate" required>
                                 <div class="invalid-feedback">
@@ -106,18 +94,16 @@
                             </div>
                         </div>
 
+
                         <div class="row mb-4">
-                            <div class="col-md-11">
+                            <div class="col-md-6">
                                 <label for="total-days" class="form-label">Trip Total Days</label>
                                 <input type="number" class="form-control" id = "total-days" th:value="${pdf1.totalDays}" name="totalDays" required>
                                 <div class="invalid-feedback">
                                     Please provide a valid title.
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row mb-4">
-                            <div class="col-md-11">
+                            <div class="col-md-6">
                                 <label for="description" class="form-label">Description</label>
                                 <textarea class="form-control" id="description" th:text="${pdf1.mainText}" name="mainText" rows="3"></textarea>
                                 <div class="invalid-feedback">
@@ -126,38 +112,47 @@
                             </div>
                         </div>
 
+
                         <div class="row mb-4">
-                            <div class="col-md-11">
+                            <div class="col-md-6">
                                 <label for="prepared-to" class="form-label">Prepared To</label>
                                 <input type="text" class="form-control" th:value="${pdf1.preparedTo}" id = "prepared-to" name = "preparedTo" required>
                                 <div class="invalid-feedback">
                                     Please provide a valid title.
                                 </div>
                             </div>
+
+                            <div class="col-md-6">
+                                <label for="hint" class="form-label">Hint</label>
+                                <input type="text" class="form-control" th:value="${pdf1.hint}" id = "hint" name = "hint" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid title.
+                                </div>
+                            </div>
                         </div>
 
+
+
                         <div class="row mb-4">
-                            <div class="col-md-11">
+                            <div class="col-md-6">
                                 <label for="inclusion" class="form-label">Inclusion</label>
                                 <textarea class="form-control" id="inclusion" th:text="${pdf1.inclusion}" name="inclusion" rows="3"></textarea>
                                 <div class="invalid-feedback">
                                     Please provide a valid title.
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row mb-4">
-                            <div class="col-md-11">
+                            <div class="col-md-6">
                                 <label for="exclusion" class="form-label">Exclusion</label>
                                 <textarea class="form-control" id="exclusion" th:text="${pdf1.exclusion}" name="exclusion" rows="3"></textarea>
                                 <div class="invalid-feedback">
                                     Please provide a valid title.
                                 </div>
                             </div>
+
                         </div>
 
-                        <div class="row mb-4">
-                            <div class="col-md-4">
+                        <div class="row mb-3">
+                            <div class="col-md-2">
                                 <label for="adultsNo" class="form-label">No of Adults</label>
                                 <input type="number" class="form-control" th:value="${pdf1.noOfAdults}" id = "adultsNo" name="noOfAdults" required>
                                 <div class="invalid-feedback">
@@ -165,17 +160,15 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="adultAmount" class="form-label">Amount Per Adult</label>
                                 <input type="number" class="form-control" th:value="${pdf1.amountPerAdult}" id = "adultAmount" name="amountPerAdult" required>
                                 <div class="invalid-feedback">
                                     Please provide a valid title.
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row mb-4">
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <label for="childNo" class="form-label">No of Children</label>
                                 <input type="number" class="form-control" id="childNo" th:value="${pdf1.noOfChildren}" name="noOfChildren" required>
                                 <div class="invalid-feedback">
@@ -183,17 +176,14 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="childAmount" class="form-label">Amount Per Child</label>
                                 <input type="number" class="form-control" id = "childAmount" th:value="${pdf1.amountPerChildren}" name="amountPerChildren" required>
                                 <div class="invalid-feedback">
                                     Please provide a valid title.
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row mb-4">
-                            <div class="col-md-11">
+                            <div class="col-md-2">
                                 <label for="currency" class="form-label">Currency</label>
                                 <input type="text" class="form-control" th:value="${pdf1.currency}" id = "currency" name="currency" required>
                                 <div class="invalid-feedback">
@@ -201,81 +191,147 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
-                            <div class="col-md-6 mb-4">
+                            <div class="col-md-3 mb-4">
                                 <button class="btn btn-dark" type="submit">Save Detail</button>
                             </div>
-                            <div class="col-md-6">
-                                <a th:if="${pdf1.allPdf2Uploaded}" th:href="@{/pdf/0/} + ${pdf1.id}" target="_blank" class="btn btn-success">Download <i class="fa-solid fa-download"></i></a>
-                                <button  th:unless="${pdf1.allPdf2Uploaded}" disabled class="btn btn-success">Download <i class="fa-solid fa-download"></i></button>
 
+                        </div>
+                    </form>
+                    <div class="col-md-6">
+<!--                        th:if="${not #lists.isEmpty(toc)}"-->
+                        <a th:if="${pdf1.id}!=0" th:href="@{/pdf/2/} + ${pdf1.id}" target="_blank" class="btn btn-success">Download <i class="fa-solid fa-download"></i></a>
+<!--                        <button th:if="${#lists.isEmpty(toc)}" disabled class="btn btn-success">Download <i class="fa-solid fa-download"></i></button>-->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <form class="g-3 needs-validation pl-3 mt-3" th:action="@{/toc/only/save}" method="post" enctype="multipart/form-data">
+                        <input type="number" hidden="hidden" th:value="${pdf1.id}" name="pdf1Toc">
+
+                        <div class="row mb-4">
+                            <div class="col-md-5">
+                                <label for="Toctitle" class="form-label">Toc Title</label>
+                                <input type="text" class="form-control" id = "Toctitle" name = "title" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid title.
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <label for="TocSubTitle" class="form-label">Toc Sub Title</label>
+                                <input type="text" class="form-control" id = "TocSubTitle" name = "subTitle" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid title.
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <label for="days" class="form-label">Day</label>
+                                <input type="number" class="form-control" id = "days" name="day" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid title.
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 mb-4">
+                                <button class="btn btn-dark" type="submit">Save</button>
                             </div>
                         </div>
                     </form>
                 </div>
 
             </div>
-            <div class="col-md-5 ">
-                <div class="container-list">
-                    <div class="items">
-                        <div class="items-head">
-                            <p>Days</p>
-                            <hr>
-                        </div>
-                        <div class="items-body">
-                            <div th:each="d:${days}">
-                                <div class="items-body-content" >
-                                    <button th:if="${d.pdf2}" type="button" data-toggle="modal" th:text="'Day '+ ${d.days} + ': '+ ${d.pdf2.title}" th:data-target="'#daysmodal'+${d.id}">
-                                        Launch demo modal
-                                    </button>
+        </div>
 
-                                    <button type="button" th:unless="${d.pdf2}" data-toggle="modal" th:text="'Day '+ ${d.days} + ' '" th:data-target="'#daysmodal'+${d.id}">
-                                        Launch demo modal
+        <div class="row">
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Sub Title</th>
+                    <th scope="col">Day</th>
+                    <th scope="col">Update</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="t:${toc}">
+                    <th scope="row" th:text="${t.id}">1</th>
+                    <td th:text="${t.title}">Mark</td>
+                    <td th:text="${t.subTitle}">Mark</td>
+                    <td th:text="${t.day}">Mark</td>
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" th:data-target="'#exampleModalCenter'+${t.id}">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button></td>
+
+                    <div class="modal fade" th:id="'exampleModalCenter'+${t.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
                                     </button>
-                                    <i class="fa fa-angle-right"></i>
                                 </div>
-                                <div class="modal fade bd-example-modal-lg" th:id="'daysmodal'+${d.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalCenterTitle">Choose trip detail</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
+                                <div class="modal-body">
+                                    <form class="g-3 needs-validation pl-3 mt-3" th:action="@{/toc/only/save}" method="post" enctype="multipart/form-data">
+                                        <input type="number" hidden="hidden" th:value="${pdf1.id}" name="pdf1Toc">
+                                        <input type="number" hidden="hidden" th:value="${t.id}" name="id">
+
+                                        <div class="row mb-4">
+                                            <div class="col-md-5">
+                                                <label for="Toctitleupdate" class="form-label">Toc Title</label>
+                                                <input type="text" class="form-control" id = "Toctitleupdate" th:value="${t.title}" name = "title" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide a valid title.
+                                                </div>
                                             </div>
-                                            <div class="modal-body">
-                                                <table class="table modal-table">
-                                                    <thead class="thead-light">
-                                                    <tr>
-                                                        <th scope="col">ID</th>
-                                                        <th scope="col">Title</th>
-                                                        <th scope="col">Sub Title</th>
-                                                        <th scope="col">Select</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr th:each="t:${pdf2}">
-                                                        <th scope="row" th:text="${t.id}"></th>
-                                                        <td th:text="${t.title}"></td>
-                                                        <td th:text="${t.subTitle}"></td>
-                                                        <td><a th:href="@{/pdf1/pdf2/day/detail/}+${d.id} +'/' +${t.id}" class="btn btn-primary">Select</a></td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
+
+                                            <div class="col-md-5">
+                                                <label for="TocSubTitleupdate" class="form-label">Toc Sub Title</label>
+                                                <input type="text" class="form-control" th:value="${t.subTitle}"  id = "TocSubTitleupdate" name = "subTitle" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide a valid title.
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <label for="daysupdate" class="form-label">Day</label>
+                                                <input type="number" class="form-control" th:value="${t.day}" id = "daysupdate" name="day" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide a valid title.
+                                                </div>
                                             </div>
 
                                         </div>
-                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-3 mb-4">
+                                                <button class="btn btn-dark" type="submit">Save</button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                </div>
-
-
-
-            </div>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
