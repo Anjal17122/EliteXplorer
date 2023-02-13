@@ -221,4 +221,42 @@ public class DtoConvert {
         pdf1.setHint(dto.getHint());
         return pdf1;
     }
+
+    public static Pdf1Toc convert(Pdf1Toc dto){
+        Pdf1Toc pdf1 = new Pdf1Toc();
+        pdf1.setExclusion(dto.getExclusion());
+        pdf1.setInclusion(dto.getInclusion());
+        pdf1.setCurrency(dto.getCurrency());
+        pdf1.setMainText(dto.getMainText());
+        pdf1.setAmountPerAdult(dto.getAmountPerAdult());
+        pdf1.setAmountPerChildren(dto.getAmountPerChildren());
+        pdf1.setNoOfAdults(dto.getNoOfAdults());
+        pdf1.setNoOfChildren(dto.getNoOfChildren());
+        pdf1.setPreparedTo(dto.getPreparedTo());
+        pdf1.setStartDate(dto.getStartDate());
+        pdf1.setTitle(dto.getTitle()+ " -Duplicate");
+        pdf1.setTotalDays(dto.getTotalDays());
+        pdf1.setHint(dto.getHint());
+        pdf1.setFilename(dto.getFilename());
+        return pdf1;
+    }
+
+    public static Pdf1 convertTransfer(Pdf1Toc dto){
+        Pdf1 pdf1 = new Pdf1();
+        pdf1.setExclusion(dto.getExclusion());
+        pdf1.setInclusion(dto.getInclusion());
+        pdf1.setCurrency(dto.getCurrency());
+        pdf1.setMainText(dto.getMainText());
+        pdf1.setAmountPerAdult(dto.getAmountPerAdult());
+        pdf1.setAmountPerChildren(dto.getAmountPerChildren());
+        pdf1.setNoOfAdults(dto.getNoOfAdults());
+        pdf1.setNoOfChildren(dto.getNoOfChildren());
+        pdf1.setPreparedTo(dto.getPreparedTo());
+        pdf1.setStartDate(dto.getStartDate());
+        pdf1.setTitle(dto.getTitle());
+        pdf1.setTotalDays(dto.getTotalDays());
+        pdf1.setHint(dto.getHint());
+        pdf1.setFilename(dto.getFilename());
+        return pdf1;
+    }
 }

@@ -10,4 +10,10 @@ public interface Pdf1TocInterface {
 
      public Pdf1Toc findById(int id);
     public Pdf1Toc save(Pdf1Toc toc);
+
+    public Pdf1Toc clone(int id);
+
+    void transfer(int id);
+
+
 }
