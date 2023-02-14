@@ -8555,6 +8555,10 @@ a[data-toggle="collapse"] {
     top: 12px;
     left: 14px;
   }
+
+  table{
+  overflow-x:auto;
+  }
   
   .entry.blue:after { background: rgba(156, 202, 235, 1); }
   .entry.orange:after { background: rgba(247, 167, 0, 1); }

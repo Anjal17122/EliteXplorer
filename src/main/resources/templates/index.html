@@ -533,7 +533,7 @@
     <div class="header">
         <img src="../images/logo.gif" class="logo" alt="logo" th:src="@{/images/logo.gif}"/>
         <div class="header-txt">
-            <div class="header-txt-title roboto" th:text="${pdf.pdf1.title}">
+            <div class="header-txt-title roboto" th:utext="${pdf.pdf1.title}">
                TREKKING TO ANNAPURNA POON HILL NEPAL
             </div>
             <div class="header-txt-date roboto" th:text="${pdf.pdf1.fullDate}">
@@ -543,7 +543,7 @@
     </div>
     <img src="../images/mainimage.jpg" class="pdf1-main-image" alt="logo" th:src="@{/uploads/}+${pdf.pdf1.file}"/>
     <div class="pdf1-body">
-            <div class="pdf1-body-text lucida" th:text="${pdf.pdf1.mainText}">
+            <div class="pdf1-body-text lucida" th:utext="${pdf.pdf1.mainText}">
                 <br>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto aspernatur deserunt doloribus ducimus id ipsa nemo perferendis tempora voluptatum. Aliquid dolore earum eligendi fugit, id laborum odio sunt unde! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur deleniti dolor enim eum harum mollitia nam odit quasi voluptatem. Animi commodi doloribus labore, laborum nisi nulla omnis quam sed! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dignissimos doloribus eaque error et eum labore, odio tempora. Dignissimos dolores facere illo laudantium natus officiis tempore voluptate? Consequuntur pariatur, ut! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid animi asperiores at delectus dicta eaque eligendi enim iusto laborum laudantium minus, mollitia nulla odit possimus quae, quidem quo quod! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus atque dolorem fugiat quos voluptate! Accusantium animi consequuntur deserunt dolorum excepturi fugit illo iste minima perferendis possimus, quos repellat, sit tenetur? Anjal
             </div>
@@ -554,7 +554,7 @@
     <div class="pdf1-prepared-by-inner">
         <br>
         <div class="lucida pdf1-prepared-to-inner">Prepared To</div>
-        <div class="tahoma pdf1-prepared-to-name-inner" th:text="${pdf.pdf1.preparedTo}">Kedadr Maharjan</div>
+        <div class="tahoma pdf1-prepared-to-name-inner" th:utext="${pdf.pdf1.preparedTo}">Kedadr Maharjan</div>
 
     </div>
     <img src="../images/santoshimage.png" class="santosh-image" alt="logo" th:src="@{/images/santoshimage.png}"/>
@@ -586,11 +586,11 @@
                 <div class="pdf2-toc" th:each="toc:${pdf2loop}">
                     <div class="pdf2-toc-desc">
                         <div class="pdf2-toc-text">
-                            <div class="pdf2-toc-text-title tahoma" th:text="${toc.tocTitle}">
-                                <br>
+                            <div class="pdf2-toc-text-title tahoma" th:utext="${toc.tocTitle}">
+
                                 Arrival In Kathmandu
                             </div>
-                            <div class="pdf2-toc-text-sub-title lucida" th:text="${toc.tocSubTitle}">
+                            <div class="pdf2-toc-text-sub-title lucida" th:utext="${toc.tocSubTitle}">
                                 Arrive in Kathmandu - Dom Himalaya Hotel
                             </div>
                         </div>
@@ -625,20 +625,20 @@
                 <img src="../images/img.png" class="border-image" alt="logo" th:src="@{/images/img.png}"/>
               <div class="pdf3-part1">
                   <div class="pdf3-part1-text-initial">
-                        <div class="pdf3-part1-header tahoma" th:text="${detail.title}">
+                        <div class="pdf3-part1-header tahoma" th:utext="${detail.title}">
                             October 10 - Arrival in Kathmandu
                         </div>
-                        <div class="pdf3-part1-title tahoma" th:text="${detail.subTitle}">
+                        <div class="pdf3-part1-title tahoma" th:utext="${detail.subTitle}">
                             Arrival In Kathmandu
                         </div>
-                  <div class="pdf3-part1-text lucida" th:text="${detail.text}">
+                  <div class="pdf3-part1-text lucida" th:utext="${detail.text}">
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda at deserunt ea enim est fuga maiores nemo, numquam odio pariatur porro qui, quis ratione repellat reprehenderit sint soluta tempora vel! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim iure nulla perspiciatis rem? Doloremque facilis iure minima minus molestias, nisi non nostrum odio officia, praesentium quae quis ratione, sit veniam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem est fugit ipsa iusto maxime, perspiciatis quas reprehenderit! Atque consectetur dicta dignissimos, facilis id iste laboriosam nesciunt officia porro rem voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum necessitatibus qui ut voluptate voluptatum! Ad dolores eius iste officiis possimus sit sunt? Beatae corporis illo impedit odit officiis tenetur! Est? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid asperiores aspernatur atque consequatur debitis deleniti et incidunt iusto libero molestias necessitatibus pariatur quaerat, rerum sint unde, voluptatibus! Maiores, sequi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid cumque distinctio ducimus illum iusto libero minus omnis perferendis possimus, quasi quo, sint temporibus. Asperiores aut fuga fugit nobis numquam!
                   </div>
                   </div>
                   <div class="pdf3-part2-images">
-                          <img src="../images/img.png"  class="pdf3-part2-image1"  alt="logo" th:src="@{/uploads/}+${detail.image1}"/>
+                          <img class="pdf3-part2-image1"  alt="logo" th:src="@{/uploads/}+${detail.image1}"/>
 
-                          <img src="../images/img.png"  class="pdf3-part2-image2"  alt="logo" th:src="@{/uploads/} + ${detail.image2}"/>
+                          <img class="pdf3-part2-image2"  alt="logo" th:src="@{/uploads/}+${detail.image2}"/>
                   </div>
               </div>
 
@@ -674,7 +674,7 @@
             <div class="button tahoma">Inclusion</div>
             <div class="list">
                 <ul class="inclusion">
-                    <li class="lucida" th:each="t:${pdf.pdf1.inclusion}"><span style="margin-left:10px;" th:text="${t}">My name is Anjal Sapkota</span></li>
+                    <li class="lucida" th:each="t:${pdf.pdf1.inclusion}"><span style="margin-left:10px;" th:utext="${t}">My name is Anjal Sapkota</span></li>
                 </ul>
             </div>
         </div>
@@ -699,7 +699,7 @@
             <div class="button tahoma">Exclusion</div>
             <div class="list">
                 <ul class="exclusion">
-                    <li class="lucida" th:each="t:${pdf.pdf1.exclusion}"><span style="margin-left:10px;" th:text="${t}">My name is Anjal Sapkota</span></li>
+                    <li class="lucida" th:each="t:${pdf.pdf1.exclusion}"><span style="margin-left:10px;" th:utext="${t}">My name is Anjal Sapkota</span></li>
 
                 </ul>
             </div>

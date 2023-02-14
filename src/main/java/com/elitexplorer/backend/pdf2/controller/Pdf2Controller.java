@@ -61,6 +61,11 @@ public class Pdf2Controller {
     private String saveUploadedFile(MultipartFile file) throws IOException {
         if (!file.isEmpty()) {
             byte[] bytes = file.getBytes();
+            File dir = new File(Constants.imagePath);
+            if (!dir.exists()) {
+//                System.out.println("realPath => " + uploadTempPath);
+                dir.mkdirs();
+            }
             Path path = Paths.get(Constants.imagePath + File.separator+ file.getOriginalFilename());
             Files.write(path, bytes);
             return file.getOriginalFilename();
