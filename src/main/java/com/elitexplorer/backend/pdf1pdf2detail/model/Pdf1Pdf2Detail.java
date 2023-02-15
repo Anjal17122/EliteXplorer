@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 public class Pdf1Pdf2Detail {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne

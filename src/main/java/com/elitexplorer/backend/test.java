@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.math.IntMath;
 
 import java.math.RoundingMode;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +38,9 @@ public class test {
 //        System.out.println(total);
 
 
-String len= "dfjkskj,,anjal,,sapkota,,haha,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha,,dfjkskj,,anjal,,sapkota,,haha";
-
-        System.out.println(len.length());
+        String userDirectory = Paths.get("")
+                .toAbsolutePath()
+                .toString();
+        System.out.println(userDirectory);
     }
 }

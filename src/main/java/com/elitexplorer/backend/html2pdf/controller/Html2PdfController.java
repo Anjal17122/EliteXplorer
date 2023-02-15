@@ -13,6 +13,7 @@ import com.itextpdf.html2pdf.HtmlConverter;
 import com.itextpdf.html2pdf.resolver.font.DefaultFontProvider;
 import com.itextpdf.layout.font.FontProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -70,7 +71,8 @@ public class Html2PdfController {
                 generate.setPageNo(pageNo);
             }
         }
-
+//+ "(" + generate.getPdf1().getFullDate()+  ")"
+        String filename = generate.getPdf1().getPreparedTo() +".pdf";
         context.setVariable("pdf", generate);
         String orderHtml = templateEngine.process("index", context);
         /* Setup Source and target I/O streams */
@@ -95,7 +97,9 @@ public class Html2PdfController {
 
         /* Send the response as downloadable PDF */
 
+
         return ResponseEntity.ok()
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename="+filename)
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(bytes);
 
