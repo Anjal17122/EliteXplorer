@@ -16,6 +16,5 @@ public class LandingPage {
     public String openLandingPage(Model model){
         model.addAttribute("pdf2",service.findAll());
         return "LandingPage";
-
     }
 }

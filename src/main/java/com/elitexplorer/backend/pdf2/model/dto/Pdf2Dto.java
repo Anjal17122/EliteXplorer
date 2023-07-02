@@ -1,5 +1,6 @@
 package com.elitexplorer.backend.pdf2.model.dto;
 
+import com.elitexplorer.backend.pdf2.model.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,4 +31,8 @@ public class Pdf2Dto {
     private String website;
     private String tocTitle;
     private String tocSubTitle;
+
+    private Status status;
+
+    private String subCategory;
 }

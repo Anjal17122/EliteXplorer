@@ -1,5 +1,6 @@
 package com.elitexplorer.backend.pdf2.model;
 
+import com.elitexplorer.backend.category.model.SubCategory;
 import com.elitexplorer.backend.pdf1pdf2detail.model.Pdf1Pdf2Detail;
 import lombok.Getter;
 import lombok.Setter;
@@ -53,6 +54,13 @@ public class Pdf2 {
     @Lob
     private String tocSubTitle;
 
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    private SubCategory subCategory;
+
     @OneToMany(mappedBy = "pdf2")
     private List<Pdf1Pdf2Detail> pdf1Pdf2Details;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 }

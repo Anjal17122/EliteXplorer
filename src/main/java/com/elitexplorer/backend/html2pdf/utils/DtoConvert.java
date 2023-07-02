@@ -1,5 +1,9 @@
 package com.elitexplorer.backend.html2pdf.utils;
 
+import com.elitexplorer.backend.category.model.Category;
+import com.elitexplorer.backend.category.model.SubCategory;
+import com.elitexplorer.backend.category.model.dto.CategoryDto;
+import com.elitexplorer.backend.category.model.dto.SubCategoryDto;
 import com.elitexplorer.backend.pdf1.model.Pdf1;
 import com.elitexplorer.backend.pdf1.model.dto.Pdf1Dto;
 import com.elitexplorer.backend.pdf1.model.dto.Pdf1GenerateDto;
@@ -18,6 +22,7 @@ import com.google.common.collect.Lists;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class DtoConvert {
 
@@ -58,6 +63,15 @@ public class DtoConvert {
         if (dto.getTocSubTitle()==null || dto.getTocSubTitle().isEmpty())
             entity.setTocSubTitle(dto.getSubTitle());
         return entity;
+
+    }
+
+    public static Pdf2Dto convertSend(Pdf2 entity){
+        Pdf2Dto dto = new Pdf2Dto();
+        dto.setId(entity.getId());
+        dto.setTitle(entity.getTitle());
+        dto.setSubCategory(entity.getSubCategory().getSubCategory());
+        return dto;
 
     }
 
@@ -307,10 +321,23 @@ public class DtoConvert {
             pageNo.add(4+total);
         }
 
-
         pdf1Pdf2Generate.setPageNo(pageNo);
 
         return pdf1Pdf2Generate;
     }
 
+    public static CategoryDto convert(Category category){
+        CategoryDto dto = new CategoryDto();
+        dto.setId(category.getId());
+        dto.setCategory(category.getCategory());
+        dto.setSubCategory(category.getSubCategories().stream().map(DtoConvert::convert).collect(Collectors.toList()));
+        return dto;
+    }
+
+    public static SubCategoryDto convert(SubCategory entity){
+        SubCategoryDto dto = new SubCategoryDto();
+        dto.setId(entity.getId());
+        dto.setSubCategory(entity.getSubCategory());
+        return dto;
+    }
 }

@@ -4,15 +4,16 @@ package com.elitexplorer.backend.pdf2.controller;
 import com.elitexplorer.backend.html2pdf.utils.Constants;
 import com.elitexplorer.backend.html2pdf.utils.DtoConvert;
 
+import com.elitexplorer.backend.html2pdf.utils.ResponseMessage;
 import com.elitexplorer.backend.pdf2.model.Pdf2;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2Dto;
 import com.elitexplorer.backend.pdf2.service.Interface.Pdf2Interface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -23,6 +24,9 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 
 
+@RestController
+@RequestMapping("/pdf2")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
 public class Pdf2Controller {
 
@@ -56,6 +60,31 @@ public class Pdf2Controller {
     public String clonePdf2(@PathVariable("id") int id){
             pdf2Interface.clonePdf2(id);
             return "redirect:/";
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity getAll(@RequestParam("page") int page,@RequestParam("size") int size){
+        return ResponseMessage.success(pdf2Interface.findAll(page, size).map((a)->DtoConvert.convertSend(a)));
+    }
+
+    @GetMapping("/sub/category")
+    public ResponseEntity getBySubCategory(@RequestParam("id") int id, @RequestParam("page") int page,  @RequestParam("size") int size){
+        return ResponseMessage.success(pdf2Interface.getBySubCategory(id,page,size).map((a)->DtoConvert.convertSend(a)));
+    }
+
+    @GetMapping("/category")
+    public ResponseEntity getByCategory(@RequestParam("id") int id, @RequestParam("page") int page, @RequestParam("size") int size){
+        return ResponseMessage.success(pdf2Interface.getByCategoryId(id,page,size).map((a)->DtoConvert.convertSend(a)));
+    }
+
+    @GetMapping("sub/category/title")
+    public ResponseEntity getPdf2ByTitle(@RequestParam("id") int id, @RequestParam("title") String title, @RequestParam("page") int page, @RequestParam("size") int size){
+        return ResponseMessage.success(pdf2Interface.getByTitle(id,title,page,size).map((a)->DtoConvert.convertSend(a)));
+    }
+
+    @GetMapping("sub/category/by/id")
+    public ResponseEntity getPdf2Id(@RequestParam("subCategoryId") int subCategoryId,@RequestParam("id") int id, @RequestParam("page") int page, @RequestParam("size") int size){
+        return ResponseMessage.success(pdf2Interface.getById(subCategoryId,id,page,size).map((a)->DtoConvert.convertSend(a)));
     }
 
     private String saveUploadedFile(MultipartFile file) throws IOException {
