@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface Pdf2Interface {
     public Pdf2 getById(int id);
-    public void savePdf1(Pdf2 pdf2);
+    public Pdf2 savePdf1(Pdf2 pdf2);
 
     List<Pdf2> findAll();
 

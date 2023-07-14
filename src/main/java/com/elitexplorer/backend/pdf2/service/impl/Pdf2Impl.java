@@ -29,8 +29,8 @@ public class Pdf2Impl implements Pdf2Interface {
     SubCategoryRepository subCategoryRepo;
 
     @Override
-    public void savePdf1(Pdf2 pdf2){
-      repo.save(pdf2);
+    public Pdf2 savePdf1(Pdf2 pdf2){
+      return repo.save(pdf2);
     }
 
     @Override

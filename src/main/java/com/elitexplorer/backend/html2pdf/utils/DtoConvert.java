@@ -62,18 +62,17 @@ public class DtoConvert {
             entity.setTocTitle(dto.getTitle());
         if (dto.getTocSubTitle()==null || dto.getTocSubTitle().isEmpty())
             entity.setTocSubTitle(dto.getSubTitle());
+        SubCategory subCategory = new SubCategory();
+        subCategory.setId(dto.getSubCategoryId());
+        entity.setSubCategory(subCategory);
+        entity.setStatus(dto.getStatus());
+        entity.setImage1(dto.getImage1());
+        entity.setImage2(dto.getImage2());
         return entity;
 
     }
 
-    public static Pdf2Dto convertSend(Pdf2 entity){
-        Pdf2Dto dto = new Pdf2Dto();
-        dto.setId(entity.getId());
-        dto.setTitle(entity.getTitle());
-        dto.setSubCategory(entity.getSubCategory().getSubCategory());
-        return dto;
 
-    }
 
     public static Pdf2 convert(Pdf2 dto){
         Pdf2 entity = new Pdf2();
@@ -154,7 +153,6 @@ public class DtoConvert {
         entity.setImage1(dto.getImage1());
         entity.setImage2(dto.getImage2());
         return entity;
-
     }
 
     public static Pdf1Pdf2Generate convert(List<Pdf1Pdf2Detail> details){
@@ -338,6 +336,34 @@ public class DtoConvert {
         SubCategoryDto dto = new SubCategoryDto();
         dto.setId(entity.getId());
         dto.setSubCategory(entity.getSubCategory());
+        return dto;
+    }
+
+//    public static Pdf2Dto convertSend(Pdf2 entity){
+//        Pdf2Dto dto = new Pdf2Dto();
+//        dto.setId(entity.getId());
+//        dto.setTitle(entity.getTitle());
+//        dto.setSubCategory(entity.getSubCategory().getSubCategory());
+//        return dto;
+//
+//    }
+    public static Pdf2Dto convertSend(Pdf2 pdf2){
+        Pdf2Dto dto = new Pdf2Dto();
+        dto.setId(pdf2.getId());
+        dto.setTitle(pdf2.getTitle());
+        dto.setSubTitle(pdf2.getSubTitle());
+        dto.setText(pdf2.getText());
+        dto.setHotel(pdf2.getHotel());
+        dto.setFood(pdf2.getFood());
+        dto.setRoom(pdf2.getRoom());
+        dto.setWebsite(pdf2.getWebsite());
+        dto.setTocTitle(pdf2.getTocTitle());
+        dto.setTocSubTitle(pdf2.getTocSubTitle());
+        dto.setImage1(pdf2.getImage1());
+        dto.setImage2(pdf2.getImage2());
+        dto.setHint(pdf2.getHint());
+        dto.setSubCategory(pdf2.getSubCategory().getSubCategory());
+        dto.setSubCategoryId(pdf2.getSubCategory().getId());
         return dto;
     }
 }

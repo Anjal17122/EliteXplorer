@@ -23,8 +23,8 @@ public class Pdf2Dto {
 
     private String text;
 
-    private MultipartFile image1;
-    private MultipartFile image2;
+    private String image1;
+    private String image2;
     private String hotel;
     private String food;
     private String room;
@@ -35,4 +35,6 @@ public class Pdf2Dto {
     private Status status;
 
     private String subCategory;
+
+    private int subCategoryId;
 }
