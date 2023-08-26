@@ -4,6 +4,7 @@ import com.elitexplorer.backend.category.model.Category;
 import com.elitexplorer.backend.category.model.SubCategory;
 import com.elitexplorer.backend.category.repository.SubCategoryRepository;
 import com.elitexplorer.backend.html2pdf.utils.DtoConvert;
+import com.elitexplorer.backend.html2pdf.utils.exception.SendErrorMessageCustom;
 import com.elitexplorer.backend.pdf1.model.Pdf1;
 import com.elitexplorer.backend.pdf1pdf2detail.model.Pdf1Pdf2Detail;
 import com.elitexplorer.backend.pdf1pdf2detail.repository.Pdf1Pdf2DetailRepository;
@@ -35,8 +36,7 @@ public class Pdf2Impl implements Pdf2Interface {
 
     @Override
     public Pdf2 getById(int id) {
-        Pdf2 pdf2 = new Pdf2();
-        return repo.findById(id).orElse(pdf2);
+        return repo.findById(id).orElseThrow(()-> new SendErrorMessageCustom("Not a valid url"));
     }
 
     @Override
