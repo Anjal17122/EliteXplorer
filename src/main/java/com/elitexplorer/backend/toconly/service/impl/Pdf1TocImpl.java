@@ -9,6 +9,7 @@ import com.elitexplorer.backend.toconly.repository.Pdf1TocRepository;
 import com.elitexplorer.backend.toconly.repository.TocOnlyRepository;
 import com.elitexplorer.backend.toconly.service.Interface.Pdf1TocInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,6 +41,8 @@ public class Pdf1TocImpl implements Pdf1TocInterface {
         return repo.save(toc);
     }
 
+//    architectural drawing
+    //structural drawing
     @Override
     public Pdf1Toc clone(int id){
         Pdf1Toc pdf1Toc = repo.findById(id).orElse(null);

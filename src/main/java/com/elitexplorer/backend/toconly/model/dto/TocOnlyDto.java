@@ -20,4 +20,5 @@ public class TocOnlyDto {
     private int day;
 
     private int pdf1Toc;
+
 }

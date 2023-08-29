@@ -205,6 +205,7 @@ public class DtoConvert {
     public static TocOnly convert(TocOnlyDto dto){
         Pdf1Toc pdf1Toc = new Pdf1Toc();
         pdf1Toc.setId(dto.getPdf1Toc());
+        System.out.println(dto.getPdf1Toc());
 
         TocOnly tocOnly = new TocOnly();
         tocOnly.setId(dto.getId());
@@ -215,7 +216,18 @@ public class DtoConvert {
         return tocOnly;
     }
 
-    public static Pdf1Toc convert(Pdf1TocDto dto) throws ParseException {
+    public static TocOnlyDto convert(TocOnly entity){
+
+        TocOnlyDto tocDto = new TocOnlyDto();
+        tocDto.setId(entity.getId());
+        tocDto.setPdf1Toc(entity.getPdf1Toc().getId());
+        tocDto.setDay(entity.getDay());
+        tocDto.setTitle(entity.getTitle());
+        tocDto.setSubTitle(entity.getSubTitle());
+        return tocDto;
+    }
+
+    public static Pdf1Toc convert(Pdf1TocDto dto) {
         Pdf1Toc pdf1 = new Pdf1Toc();
         pdf1.setId(dto.getId());
         pdf1.setExclusion(dto.getExclusion());
@@ -227,11 +239,32 @@ public class DtoConvert {
         pdf1.setNoOfAdults(dto.getNoOfAdults());
         pdf1.setNoOfChildren(dto.getNoOfChildren());
         pdf1.setPreparedTo(dto.getPreparedTo());
-        pdf1.setStartDate(new SimpleDateFormat("yyyy-MM-dd").parse(dto.getStartDate()));
+        pdf1.setStartDate(dto.getStartDate());
         pdf1.setTitle(dto.getTitle());
         pdf1.setTotalDays(dto.getTotalDays());
         pdf1.setHint(dto.getHint());
+        pdf1.setFilename(dto.getFile());
         return pdf1;
+    }
+
+    public static Pdf1TocDto convertToDto(Pdf1Toc pdf1) {
+        Pdf1TocDto dto = new Pdf1TocDto();
+        dto.setId(pdf1.getId());
+        dto.setExclusion(pdf1.getExclusion());
+        dto.setInclusion(pdf1.getInclusion());
+        dto.setCurrency(pdf1.getCurrency());
+        dto.setMainText(pdf1.getMainText());
+        dto.setAmountPerAdult(pdf1.getAmountPerAdult());
+        dto.setAmountPerChildren(pdf1.getAmountPerChildren());
+        dto.setNoOfAdults(pdf1.getNoOfAdults());
+        dto.setNoOfChildren(pdf1.getNoOfChildren());
+        dto.setPreparedTo(pdf1.getPreparedTo());
+        dto.setStartDate(pdf1.getStartDate());
+        dto.setTitle(pdf1.getTitle());
+        dto.setTotalDays(pdf1.getTotalDays());
+        dto.setHint(pdf1.getHint());
+        dto.setFile(pdf1.getFilename());
+        return dto;
     }
 
     public static Pdf1Toc convert(Pdf1Toc dto){

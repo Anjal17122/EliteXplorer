@@ -541,7 +541,7 @@
             </div>
         </div>
     </div>
-    <img src="../images/mainimage.jpg" class="pdf1-main-image" alt="logo" th:src="@{/uploads/}+${pdf.pdf1.file}"/>
+    <img src="../images/mainimage.jpg" class="pdf1-main-image" alt="logo" th:src="@{/images/}+${pdf.pdf1.file}"/>
     <div class="pdf1-body">
             <div class="pdf1-body-text lucida" th:utext="${pdf.pdf1.mainText}">
                 <br>
@@ -636,9 +636,8 @@
                   </div>
                   </div>
                   <div class="pdf3-part2-images">
-                          <img class="pdf3-part2-image1"  alt="logo" th:src="@{/uploads/}+${detail.image1}"/>
-
-                          <img class="pdf3-part2-image2"  alt="logo" th:src="@{/uploads/}+${detail.image2}"/>
+                          <img class="pdf3-part2-image1"  alt="logo" th:src="@{/images/}+${detail.image1}"/>
+                          <img class="pdf3-part2-image2"  alt="logo" th:src="@{/images/}+${detail.image2}"/>
                   </div>
               </div>
 
