@@ -10,6 +10,8 @@ public interface Pdf1Interface {
 
     Pdf1 getById(int id);
 
+    List<Pdf1> findBySubCategory(int id);
+
     Pdf1 clonePdf(int id);
 
     List<Pdf1> getALl();

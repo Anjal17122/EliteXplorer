@@ -9,6 +9,8 @@ import com.elitexplorer.backend.toconly.repository.Pdf1TocRepository;
 import com.elitexplorer.backend.toconly.repository.TocOnlyRepository;
 import com.elitexplorer.backend.toconly.service.Interface.Pdf1TocInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +29,8 @@ public class Pdf1TocImpl implements Pdf1TocInterface {
     Pdf1Interface pdf1;
 
     @Override
-    public List<Pdf1Toc> findAll(){
-        return repo.findAllByOrderByIdDesc();
+    public Page<Pdf1Toc> findAll(int page, int size){
+        return repo.findAllByOrderByIdDesc(PageRequest.of(page,size));
     }
 
     @Override

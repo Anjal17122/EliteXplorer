@@ -1,5 +1,6 @@
 package com.elitexplorer.backend.toconly.model.entity;
 
+import com.elitexplorer.backend.category.model.SubCategory;
 import com.elitexplorer.backend.pdf1pdf2detail.model.Pdf1Pdf2Detail;
 import lombok.Getter;
 import lombok.Setter;
@@ -56,6 +57,10 @@ public class Pdf1Toc {
     private String currency;
 
     private boolean allPdf2Uploaded;
+
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    private SubCategory subCategory;
 
     @OneToMany(mappedBy = "pdf1Toc")
     private List<TocOnly> tocOnly;

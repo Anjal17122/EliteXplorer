@@ -13,7 +13,7 @@ public class Pdf1Dto {
 
     private String title;
 
-    private String startDate;
+    private Date startDate;
 
     private int totalDays;
 
@@ -37,5 +37,9 @@ public class Pdf1Dto {
 
     private String hint;
 
-    private MultipartFile file;
+    private String subCategory;
+
+    private int subCategoryId;
+
+    private String file;
 }

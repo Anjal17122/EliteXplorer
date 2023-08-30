@@ -1,5 +1,6 @@
 package com.elitexplorer.backend.pdf1.model;
 
+import com.elitexplorer.backend.category.model.SubCategory;
 import com.elitexplorer.backend.pdf1pdf2detail.model.Pdf1Pdf2Detail;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -58,6 +59,10 @@ public class Pdf1 {
     private String currency;
 
     private boolean allPdf2Uploaded;
+
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    private SubCategory subCategory;
 
     @OneToMany(mappedBy = "pdf1")
     private List<Pdf1Pdf2Detail> pdf1Pdf2Details;

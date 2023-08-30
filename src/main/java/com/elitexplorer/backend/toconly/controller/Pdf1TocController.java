@@ -43,6 +43,11 @@ public class Pdf1TocController {
         return "SaveTocOnly";
     }
 
+    @GetMapping("/all/{page}/{size}")
+    public ResponseEntity getAll(@PathVariable("page") int page, @PathVariable("size") int size){
+        return ResponseMessage.success(service.findAll(page,size).map(DtoConvert::convertToDto));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity getById(@PathVariable("id") int id){
         return ResponseMessage.success(DtoConvert.convertToDto(service.findById(id)));

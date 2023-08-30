@@ -1,5 +1,6 @@
 package com.elitexplorer.backend.pdf1.service.impl;
 
+import com.elitexplorer.backend.category.model.SubCategory;
 import com.elitexplorer.backend.html2pdf.utils.DtoConvert;
 import com.elitexplorer.backend.pdf1.model.Pdf1;
 import com.elitexplorer.backend.pdf1.repository.Pdf1Repository;
@@ -20,6 +21,13 @@ public class Pdf1Impl implements Pdf1Interface {
     @Autowired
     Pdf1Pdf2DetailRepository detailRepository;
 
+
+    @Override
+    public List<Pdf1> findBySubCategory(int id){
+        SubCategory subCategory = new SubCategory();
+        subCategory.setId(id);
+        return repo.findBySubCategory(subCategory);
+    }
 
     public Pdf1 savePdf1(Pdf1 pdf1){
         Pdf1 pdf11 = repo.save(pdf1);

@@ -34,7 +34,7 @@ public class HomeController {
         List<Pdf2> pdf2 = pdf2Interface.findAll();
         List<Pdf1Pdf2Detail> pdf1Pdf2Details = new ArrayList<>();
         if (pdf1.getId()!=0) {
-            pdf1Pdf2Details = pdf1Pdf2Interface.findAll(pdf1);
+//            pdf1Pdf2Details = pdf1Pdf2Interface.findAll(pdf1);
             pdf1 = addPdf2Uploaded(pdf1);
         }
 

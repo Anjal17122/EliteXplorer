@@ -36,7 +36,7 @@ public class Pdf2Impl implements Pdf2Interface {
 
     @Override
     public Pdf2 getById(int id) {
-        return repo.findById(id).orElseThrow(()-> new SendErrorMessageCustom("Not a valid url"));
+        return repo.findById(id).orElse(new Pdf2());
     }
 
     @Override

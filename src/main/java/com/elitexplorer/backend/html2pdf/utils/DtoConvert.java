@@ -8,6 +8,7 @@ import com.elitexplorer.backend.pdf1.model.Pdf1;
 import com.elitexplorer.backend.pdf1.model.dto.Pdf1Dto;
 import com.elitexplorer.backend.pdf1.model.dto.Pdf1GenerateDto;
 import com.elitexplorer.backend.pdf1pdf2detail.model.Pdf1Pdf2Detail;
+import com.elitexplorer.backend.pdf1pdf2detail.model.dto.Pdf1Pdf2Dto;
 import com.elitexplorer.backend.pdf1pdf2detail.model.dto.Pdf1Pdf2Generate;
 import com.elitexplorer.backend.pdf2.model.Pdf2;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2Dto;
@@ -26,8 +27,10 @@ import java.util.stream.Collectors;
 
 public class DtoConvert {
 
-    public static Pdf1 convert(Pdf1Dto dto) throws ParseException {
+    public static Pdf1 convert(Pdf1Dto dto){
         Pdf1 pdf1 = new Pdf1();
+        SubCategory subCategory = new SubCategory();
+        subCategory.setId(dto.getSubCategoryId());
         pdf1.setId(dto.getId());
         pdf1.setExclusion(dto.getExclusion());
         pdf1.setInclusion(dto.getInclusion());
@@ -38,9 +41,11 @@ public class DtoConvert {
         pdf1.setNoOfAdults(dto.getNoOfAdults());
         pdf1.setNoOfChildren(dto.getNoOfChildren());
         pdf1.setPreparedTo(dto.getPreparedTo());
-        pdf1.setStartDate(new SimpleDateFormat("yyyy-MM-dd").parse(dto.getStartDate()));
+        pdf1.setStartDate(dto.getStartDate());
         pdf1.setTitle(dto.getTitle());
         pdf1.setTotalDays(dto.getTotalDays());
+        pdf1.setFilename(dto.getFile());
+        pdf1.setSubCategory(subCategory);
         pdf1.setHint(dto.getHint());
         return pdf1;
     }
@@ -230,6 +235,10 @@ public class DtoConvert {
     public static Pdf1Toc convert(Pdf1TocDto dto) {
         Pdf1Toc pdf1 = new Pdf1Toc();
         pdf1.setId(dto.getId());
+
+        SubCategory subCategory = new SubCategory();
+        subCategory.setId(dto.getSubCategoryId());
+        pdf1.setSubCategory(subCategory);
         pdf1.setExclusion(dto.getExclusion());
         pdf1.setInclusion(dto.getInclusion());
         pdf1.setCurrency(dto.getCurrency());
@@ -264,6 +273,30 @@ public class DtoConvert {
         dto.setTotalDays(pdf1.getTotalDays());
         dto.setHint(pdf1.getHint());
         dto.setFile(pdf1.getFilename());
+        dto.setSubCategoryId(pdf1.getSubCategory().getId());
+        dto.setSubCategory(pdf1.getSubCategory().getSubCategory());
+        return dto;
+    }
+
+    public static Pdf1Dto convertToDto(Pdf1 pdf1) {
+        Pdf1Dto dto = new Pdf1Dto();
+        dto.setId(pdf1.getId());
+        dto.setExclusion(pdf1.getExclusion());
+        dto.setInclusion(pdf1.getInclusion());
+        dto.setCurrency(pdf1.getCurrency());
+        dto.setMainText(pdf1.getMainText());
+        dto.setAmountPerAdult(pdf1.getAmountPerAdult());
+        dto.setAmountPerChildren(pdf1.getAmountPerChildren());
+        dto.setNoOfAdults(pdf1.getNoOfAdults());
+        dto.setNoOfChildren(pdf1.getNoOfChildren());
+        dto.setPreparedTo(pdf1.getPreparedTo());
+        dto.setStartDate(pdf1.getStartDate());
+        dto.setTitle(pdf1.getTitle());
+        dto.setTotalDays(pdf1.getTotalDays());
+        dto.setHint(pdf1.getHint());
+        dto.setFile(pdf1.getFilename());
+        dto.setSubCategory(pdf1.getSubCategory().getSubCategory());
+        dto.setSubCategoryId(pdf1.getSubCategory().getId());
         return dto;
     }
 
@@ -395,8 +428,21 @@ public class DtoConvert {
         dto.setImage1(pdf2.getImage1());
         dto.setImage2(pdf2.getImage2());
         dto.setHint(pdf2.getHint());
-        dto.setSubCategory(pdf2.getSubCategory().getSubCategory());
-        dto.setSubCategoryId(pdf2.getSubCategory().getId());
+        if (pdf2.getSubCategory()!=null) {
+            dto.setSubCategory(pdf2.getSubCategory().getSubCategory());
+            dto.setSubCategoryId(pdf2.getSubCategory().getId());
+        }
+        return dto;
+    }
+
+    public static Pdf1Pdf2Dto convert(Pdf1Pdf2Detail detail){
+        Pdf1Pdf2Dto dto = new Pdf1Pdf2Dto();
+        dto.setDay(detail.getDays());
+        dto.setId(detail.getId());
+        dto.setPdf1Id(detail.getPdf1().getId());
+        if (detail.getPdf2()!=null) {
+            dto.setPdf2Id(detail.getPdf2().getId());
+        }
         return dto;
     }
 }

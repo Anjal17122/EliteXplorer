@@ -2,16 +2,16 @@ package com.elitexplorer.backend.pdf1.controller;
 
 import com.elitexplorer.backend.html2pdf.utils.Constants;
 import com.elitexplorer.backend.html2pdf.utils.DtoConvert;
+import com.elitexplorer.backend.html2pdf.utils.ResponseMessage;
 import com.elitexplorer.backend.pdf1.model.Pdf1;
 import com.elitexplorer.backend.pdf1.model.dto.Pdf1Dto;
 import com.elitexplorer.backend.pdf1.service.Interface.Pdf1Interface;
 import com.elitexplorer.backend.pdf2.service.Interface.Pdf2Interface;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -20,8 +20,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
+import java.util.stream.Collectors;
 
-@Controller
+@RestController
+@RequestMapping("/main/pdf1")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class Pdf1Controller {
 
     @Autowired
@@ -30,20 +33,25 @@ public class Pdf1Controller {
 
 
     @PostMapping("/save/pdf1")
-    public String savePdf1(@ModelAttribute Pdf1Dto pdf1Dto) throws IOException, ParseException {
+    public ResponseEntity savePdf1(@RequestBody Pdf1Dto pdf1Dto){
         Pdf1 pdf1 = DtoConvert.convert(pdf1Dto);
-        if (pdf1Dto.getId()!=0){
-            Pdf1 oldPdf = pdf1Interface.getById(pdf1Dto.getId());
-            if (pdf1Dto.getFile().isEmpty()){
-                pdf1.setFilename(oldPdf.getFilename());
-            }else{
-                pdf1.setFilename(saveUploadedFile(pdf1Dto.getFile()));
-            }
-        }else {
-            pdf1.setFilename(saveUploadedFile(pdf1Dto.getFile()));
-        }
-       Pdf1 savedPdf1= pdf1Interface.savePdf1(pdf1);
-        return "redirect:/home?id="+savedPdf1.getId();
+        Pdf1 savedPdf1= pdf1Interface.savePdf1(pdf1);
+        return ResponseMessage.success(DtoConvert.convertToDto(savedPdf1));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getById(@PathVariable("id") int id){
+        return ResponseMessage.success(DtoConvert.convertToDto(pdf1Interface.getById(id)));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity getAll(){
+        return ResponseMessage.success(pdf1Interface.getALl().stream().map(DtoConvert::convertToDto).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/subcategory")
+    public ResponseEntity getBySubCategory(@RequestParam("category") int id){
+        return ResponseMessage.success(pdf1Interface.findBySubCategory(id).stream().map(DtoConvert::convertToDto).collect(Collectors.toList()));
     }
 
     @GetMapping("/pdf1/clone/{id}")
@@ -52,22 +60,5 @@ public class Pdf1Controller {
         return "redirect:/manage/pdf";
     }
 
-    private String saveUploadedFile(MultipartFile file) throws IOException {
-        if (!file.isEmpty()) {
-            byte[] bytes = file.getBytes();
-            File dir = new File(Constants.imagePath);
-            if (!dir.exists()) {
-//                System.out.println("realPath => " + uploadTempPath);
-                dir.mkdirs();
-            }
-            Path path = Paths.get(Constants.imagePath + File.separator+ file.getOriginalFilename());
-            Files.write(path, bytes);
-            return file.getOriginalFilename();
-        }
-        else {
-            System.out.println("File is empty");
-            return "filenotuploaded.jpg";
-        }
-    }
 
 }

@@ -39,4 +39,8 @@ public class Pdf1TocDto {
     private String hint;
 
     private String file;
+
+    private String subCategory;
+
+    private int subCategoryId;
 }
