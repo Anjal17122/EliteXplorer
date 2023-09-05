@@ -1,5 +1,6 @@
 package com.elitexplorer.backend.pdf1pdf2detail.service.impl;
 
+import com.elitexplorer.backend.html2pdf.utils.exception.SendErrorMessageCustom;
 import com.elitexplorer.backend.pdf1.model.Pdf1;
 import com.elitexplorer.backend.pdf1pdf2detail.model.Pdf1Pdf2Detail;
 import com.elitexplorer.backend.pdf1pdf2detail.repository.Pdf1Pdf2DetailRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class Pdf1Pdf2Impl implements Pdf1Pdf2Interface {
@@ -38,5 +40,21 @@ public class Pdf1Pdf2Impl implements Pdf1Pdf2Interface {
     @Override
     public List<Pdf1Pdf2Detail> checkPdf2Null(Pdf1 pdf1){
         return repo.checkPdf2Null(pdf1);
+    }
+
+    @Override
+    public boolean downloadAvailable(int id){
+        Pdf1 pdf1 = new Pdf1();
+        pdf1.setId(id);
+         List<Integer> daysList = repo.checkPdf2Null(pdf1).stream()
+                .map(Pdf1Pdf2Detail::getDays)
+                .collect(Collectors.toList());
+        if (!daysList.isEmpty()){
+            String daysNotFilled = String.join(", ", daysList.stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.toList()));
+            throw new SendErrorMessageCustom("Day "+daysNotFilled+" are not filled" );
+        }
+        return true;
     }
 }

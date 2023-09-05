@@ -12,4 +12,6 @@ public interface Pdf1Pdf2Interface {
     Pdf1Pdf2Detail updateDayDetail(int id, int pdf2Id);
 
     List<Pdf1Pdf2Detail> checkPdf2Null(Pdf1 pdf1);
+
+    boolean downloadAvailable(int id);
 }

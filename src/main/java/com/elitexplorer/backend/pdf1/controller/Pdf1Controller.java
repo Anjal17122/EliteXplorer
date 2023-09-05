@@ -54,11 +54,33 @@ public class Pdf1Controller {
         return ResponseMessage.success(pdf1Interface.findBySubCategory(id).stream().map(DtoConvert::convertToDto).collect(Collectors.toList()));
     }
 
-    @GetMapping("/pdf1/clone/{id}")
-    public String clonePdf2(@PathVariable("id") int id){
-        pdf1Interface.clonePdf(id);
-        return "redirect:/manage/pdf";
+    @GetMapping("/search/by/name")
+    public ResponseEntity searchByName(@RequestParam("name") String name){
+        return ResponseMessage.success(pdf1Interface.searchByName(name).stream().map(DtoConvert::convertToDto).collect(Collectors.toList()));
     }
+
+    @GetMapping("/search/by/title")
+    public ResponseEntity searchByTitle(@RequestParam("title") String title){
+        return ResponseMessage.success(pdf1Interface.searchByTitle(title).stream().map(DtoConvert::convertToDto).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/search/by/id")
+    public ResponseEntity searchById(@RequestParam("id") int id){
+        return ResponseMessage.success(pdf1Interface.searchById(id).stream().map(DtoConvert::convertToDto).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/clone/{id}")
+    public ResponseEntity clonePdf2(@PathVariable("id") int id){
+        Pdf1 pdf1 = pdf1Interface.clonePdf(id);
+        return ResponseMessage.success(DtoConvert.convertToDto(pdf1));
+    }
+
+    @GetMapping("/delete/{id}")
+    public ResponseEntity deleteById(@PathVariable("id") int id){
+        pdf1Interface.deleteById(id);
+        return ResponseMessage.success(true);
+    }
+
 
 
 }

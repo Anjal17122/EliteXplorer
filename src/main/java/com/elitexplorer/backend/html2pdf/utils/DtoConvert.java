@@ -45,7 +45,11 @@ public class DtoConvert {
         pdf1.setTitle(dto.getTitle());
         pdf1.setTotalDays(dto.getTotalDays());
         pdf1.setFilename(dto.getFile());
-        pdf1.setSubCategory(subCategory);
+        if (dto.getSubCategoryId()!=0) {
+            pdf1.setSubCategory(subCategory);
+        }else {
+            pdf1.setSubCategory(null);
+        }
         pdf1.setHint(dto.getHint());
         return pdf1;
     }
@@ -238,7 +242,11 @@ public class DtoConvert {
 
         SubCategory subCategory = new SubCategory();
         subCategory.setId(dto.getSubCategoryId());
-        pdf1.setSubCategory(subCategory);
+        if(dto.getSubCategoryId()==0){
+            pdf1.setSubCategory(null);
+        }else {
+            pdf1.setSubCategory(subCategory);
+        }
         pdf1.setExclusion(dto.getExclusion());
         pdf1.setInclusion(dto.getInclusion());
         pdf1.setCurrency(dto.getCurrency());
@@ -273,8 +281,10 @@ public class DtoConvert {
         dto.setTotalDays(pdf1.getTotalDays());
         dto.setHint(pdf1.getHint());
         dto.setFile(pdf1.getFilename());
-        dto.setSubCategoryId(pdf1.getSubCategory().getId());
-        dto.setSubCategory(pdf1.getSubCategory().getSubCategory());
+        if (pdf1.getSubCategory()!=null) {
+            dto.setSubCategoryId(pdf1.getSubCategory().getId());
+            dto.setSubCategory(pdf1.getSubCategory().getSubCategory());
+        }
         return dto;
     }
 
@@ -295,8 +305,10 @@ public class DtoConvert {
         dto.setTotalDays(pdf1.getTotalDays());
         dto.setHint(pdf1.getHint());
         dto.setFile(pdf1.getFilename());
-        dto.setSubCategory(pdf1.getSubCategory().getSubCategory());
-        dto.setSubCategoryId(pdf1.getSubCategory().getId());
+        if (pdf1.getSubCategory()!=null) {
+            dto.setSubCategory(pdf1.getSubCategory().getSubCategory());
+            dto.setSubCategoryId(pdf1.getSubCategory().getId());
+        }
         return dto;
     }
 
@@ -364,6 +376,18 @@ public class DtoConvert {
             cal2.add(Calendar.DAY_OF_MONTH , 1);
             date = cal2.getTime();
         }
+        Comparator<Pdf2TocDto> comparator = new Comparator<Pdf2TocDto>() {
+            @Override
+            public int compare(Pdf2TocDto dto1, Pdf2TocDto dto2) {
+                // Parse tocDays as integers and compare them
+                int days1 = Integer.parseInt(dto1.getTocDays());
+                int days2 = Integer.parseInt(dto2.getTocDays());
+                return Integer.compare(days1, days2);
+            }
+        };
+
+        // Sort the list using the custom comparator
+        Collections.sort(pdf2Toc, comparator);
         pdf1Pdf2Generate.setPdf2(pdf2);
         pdf1Pdf2Generate.setToc(Lists.partition(pdf2Toc, 7));
 

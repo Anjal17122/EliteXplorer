@@ -25,6 +25,11 @@ public class Pdf1Pdf2DetailController {
        return  ResponseMessage.success("Successful");
     }
 
+    @GetMapping("/check/downloadable")
+    public ResponseEntity checkDownloadable(@RequestParam("id") int id){
+        return ResponseMessage.success(pdf1Pdf2Interface.downloadAvailable(id));
+    }
+
     @GetMapping("/by/pdf1/{id}")
     public ResponseEntity getByPdf1Id(@PathVariable("id") int id){
         return ResponseMessage.success(pdf1Pdf2Interface.findByPdf1Id(id).stream().map(DtoConvert::convert).collect(Collectors.toList()));

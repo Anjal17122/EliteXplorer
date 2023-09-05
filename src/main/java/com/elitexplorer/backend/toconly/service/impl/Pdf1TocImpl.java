@@ -1,6 +1,8 @@
 package com.elitexplorer.backend.toconly.service.impl;
 
 import com.elitexplorer.backend.html2pdf.utils.DtoConvert;
+import com.elitexplorer.backend.html2pdf.utils.exception.SendErrorMessageCustom;
+import com.elitexplorer.backend.pdf1.model.Pdf1;
 import com.elitexplorer.backend.pdf1.service.Interface.Pdf1Interface;
 import com.elitexplorer.backend.toconly.model.dto.Pdf1TocDto;
 import com.elitexplorer.backend.toconly.model.entity.Pdf1Toc;
@@ -14,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,8 +32,8 @@ public class Pdf1TocImpl implements Pdf1TocInterface {
     Pdf1Interface pdf1;
 
     @Override
-    public Page<Pdf1Toc> findAll(int page, int size){
-        return repo.findAllByOrderByIdDesc(PageRequest.of(page,size));
+    public List<Pdf1Toc> findAll(){
+        return repo.findAllByOrderByIdDesc();
     }
 
     @Override
@@ -67,6 +70,25 @@ public class Pdf1TocImpl implements Pdf1TocInterface {
         pdf1.savePdf1(DtoConvert.convertTransfer(toc));
         tocRepo.deleteByPdf1Toc(toc);
         repo.delete(toc);
+    }
+
+    @Override
+    public List<Pdf1Toc> searchByName(String name) {
+        return repo.findByName(name);
+    }
+
+    @Override
+    public List<Pdf1Toc> searchById(int id) {
+        List<Pdf1Toc> searchById = new ArrayList<>();
+        searchById.add(repo.findById(id).orElseThrow(()->new SendErrorMessageCustom("ID Not Found")));
+        return searchById;
+    }
+
+
+
+    @Override
+    public List<Pdf1Toc> searchByTitle(String title) {
+        return repo.findByTitle(title);
     }
 
 }

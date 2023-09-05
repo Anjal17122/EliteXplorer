@@ -2,6 +2,7 @@ package com.elitexplorer.backend.pdf1.service.impl;
 
 import com.elitexplorer.backend.category.model.SubCategory;
 import com.elitexplorer.backend.html2pdf.utils.DtoConvert;
+import com.elitexplorer.backend.html2pdf.utils.exception.SendErrorMessageCustom;
 import com.elitexplorer.backend.pdf1.model.Pdf1;
 import com.elitexplorer.backend.pdf1.repository.Pdf1Repository;
 import com.elitexplorer.backend.pdf1.service.Interface.Pdf1Interface;
@@ -10,6 +11,7 @@ import com.elitexplorer.backend.pdf1pdf2detail.repository.Pdf1Pdf2DetailReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,6 +29,25 @@ public class Pdf1Impl implements Pdf1Interface {
         SubCategory subCategory = new SubCategory();
         subCategory.setId(id);
         return repo.findBySubCategory(subCategory);
+    }
+
+    @Override
+    public List<Pdf1> searchByName(String name) {
+        return repo.findByName(name);
+    }
+
+    @Override
+    public List<Pdf1> searchById(int id) {
+        List<Pdf1> searchById = new ArrayList<>();
+        searchById.add(repo.findById(id).orElseThrow(()->new SendErrorMessageCustom("ID Not Found")));
+        return searchById;
+    }
+
+
+
+    @Override
+    public List<Pdf1> searchByTitle(String title) {
+        return repo.findByTitle(title);
     }
 
     public Pdf1 savePdf1(Pdf1 pdf1){
@@ -85,5 +106,13 @@ public class Pdf1Impl implements Pdf1Interface {
     @Override
     public List<Pdf1> getALl(){
         return repo.findAllByOrderByIdDesc();
+    }
+
+    @Override
+    public void deleteById(int id){
+        Pdf1 pdf = new Pdf1();
+        pdf.setId(id);
+       detailRepository.deleteAll(detailRepository.findByPdf1(pdf));
+       repo.delete(pdf);
     }
 }

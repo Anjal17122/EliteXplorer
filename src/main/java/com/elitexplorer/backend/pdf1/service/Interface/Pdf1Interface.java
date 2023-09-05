@@ -12,7 +12,15 @@ public interface Pdf1Interface {
 
     List<Pdf1> findBySubCategory(int id);
 
+    List<Pdf1> searchByName(String name);
+
+    List<Pdf1> searchByTitle(String title);
+
+    List<Pdf1> searchById(int id);
+
     Pdf1 clonePdf(int id);
+
+    void deleteById(int id);
 
     List<Pdf1> getALl();
 }

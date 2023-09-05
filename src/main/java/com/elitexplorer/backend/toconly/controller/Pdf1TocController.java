@@ -22,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/pdf1/toc")
@@ -31,26 +32,29 @@ public class Pdf1TocController {
     @Autowired
     Pdf1TocInterface service;
 
-    @Autowired
-    TocOnlyInterface tocOnly;
-
-
-
-    @GetMapping("/save/page")
-    public String showSavePage(Model model, @RequestParam("id") int id){
-        model.addAttribute("pdf1",service.findById(id));
-        model.addAttribute("toc",tocOnly.findByPdf1Toc(id));
-        return "SaveTocOnly";
-    }
-
-    @GetMapping("/all/{page}/{size}")
-    public ResponseEntity getAll(@PathVariable("page") int page, @PathVariable("size") int size){
-        return ResponseMessage.success(service.findAll(page,size).map(DtoConvert::convertToDto));
+    @GetMapping("/all")
+    public ResponseEntity getAll(){
+        return ResponseMessage.success(service.findAll().stream().map(DtoConvert::convertToDto).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity getById(@PathVariable("id") int id){
         return ResponseMessage.success(DtoConvert.convertToDto(service.findById(id)));
+    }
+
+    @GetMapping("/search/by/name")
+    public ResponseEntity searchByName(@RequestParam("name") String name){
+        return ResponseMessage.success(service.searchByName(name).stream().map(DtoConvert::convertToDto).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/search/by/title")
+    public ResponseEntity searchByTitle(@RequestParam("title") String title){
+        return ResponseMessage.success(service.searchByTitle(title).stream().map(DtoConvert::convertToDto).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/search/by/id")
+    public ResponseEntity searchById(@RequestParam("id") int id){
+        return ResponseMessage.success(service.searchById(id).stream().map(DtoConvert::convertToDto).collect(Collectors.toList()));
     }
 
 
@@ -62,15 +66,15 @@ public class Pdf1TocController {
     }
 
     @GetMapping("/clone/{id}")
-    public String clonePdf1Toc(@PathVariable("id") int id){
-        service.clone(id);
-        return "redirect:/pdf1/toc";
+    public ResponseEntity clonePdf1Toc(@PathVariable("id") int id){
+        Pdf1Toc pdf1Toc = service.clone(id);
+        return ResponseMessage.success(DtoConvert.convertToDto(pdf1Toc));
     }
 
     @GetMapping("/transfer/{id}")
-    public String transferPdf1Toc(@PathVariable("id") int id){
+    public ResponseEntity transferPdf1Toc(@PathVariable("id") int id){
         service.transfer(id);
-        return "redirect:/pdf1/toc";
+       return ResponseMessage.success(true);
     }
 
 
