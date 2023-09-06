@@ -14,7 +14,6 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
 
 @Service
 public class EmailImpl implements EmailInterface {
@@ -38,14 +37,11 @@ public class EmailImpl implements EmailInterface {
     public void sendEmailWithAttachment(byte[] pdfBytes, EmailDto dto) throws MessagingException, IOException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
         helper.setTo(dto.getEmailTo());
         helper.setSubject(dto.getSubject());
         helper.setText(dto.getMessage());
-
         // Attach the PDF
         helper.addAttachment("document.pdf", new ByteArrayResource(pdfBytes));
-
         mailSender.send(message);
     }
 }
