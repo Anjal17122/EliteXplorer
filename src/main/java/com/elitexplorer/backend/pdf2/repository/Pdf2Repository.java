@@ -31,4 +31,10 @@ public interface Pdf2Repository extends JpaRepository<Pdf2,Integer> {
 
     @Query("From Pdf2 p where p.id=:id and p.subCategory=:subCategory and status=:status")
     Page<Pdf2> findById(@Param("id") int id, @Param("subCategory") SubCategory subCategory, @Param("status") Status status, Pageable pageable);
+
+    @Query("From Pdf2 p where p.title like :name% and status=:status order by p.id desc")
+    List<Pdf2> searchByName(@Param("name") String name, @Param("status") Status status);
+
+    @Query("From Pdf2 p where status=:status order by p.id desc")
+    List<Pdf2> searchByAll(@Param("status") Status status);
 }

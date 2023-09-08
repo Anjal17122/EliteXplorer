@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -67,6 +68,23 @@ public class Pdf2Impl implements Pdf2Interface {
         SubCategory subCategory = new SubCategory();
         subCategory.setId(subCategoryId);
         return repo.findByName(title,subCategory,Status.active,PageRequest.of(page,offset));
+    }
+
+    @Override
+    public List<Pdf2> searchAll(){
+        return repo.searchByAll(Status.active);
+    }
+
+    @Override
+    public List<Pdf2> searchByName(String name){
+        return repo.searchByName(name, Status.active);
+    }
+
+    @Override
+    public List<Pdf2> searchById(int id){
+        List<Pdf2> pdf2s = new ArrayList<>();
+        pdf2s.add(repo.findById(id).orElseThrow(()->{throw new SendErrorMessageCustom("ID not found");}));
+        return pdf2s;
     }
 
     @Override

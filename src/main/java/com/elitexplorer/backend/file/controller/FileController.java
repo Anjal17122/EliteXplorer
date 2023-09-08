@@ -81,8 +81,6 @@ public class FileController {
 
 
     public String uploadImage(MultipartFile multipartFile) throws IOException {
-
-        String realPath = Constants.imagePath;
         // String realPath = context.getRealPath("/");
         // System.out.println("-------------------------Initial Path : " + initialPath);
 

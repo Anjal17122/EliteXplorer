@@ -49,8 +49,7 @@
 
         .logo{
             float:right;
-            height:114px;
-            width:135px;
+
             margin-top:22px;
             margin-right:24px;
         }
@@ -531,8 +530,10 @@
 <body>
 <div class="pdf1">
     <div class="header">
-        <img src="../images/logo.gif"  class="logo" alt="logo" th:src="@{/images/mainlogo.png}"/>
-        <div class="header-txt">
+
+        <img src="../images/logo.gif" class="logo" style="width:114; height:114;" alt="logo" th:src="@{/images/mainlogo1.png}"/>
+
+            <div class="header-txt">
             <div class="header-txt-title roboto" th:utext="${pdf.pdf1.title}">
                TREKKING TO ANNAPURNA POON HILL NEPAL
             </div>
@@ -716,7 +717,8 @@
                 <td class="border-right" th:text="${pdf.pdf1.amountPerAdult}+${pdf.pdf1.currency}">650$</td>
                 <td rowspan="2" th:text="${pdf.pdf1.totalAmount}+${pdf.pdf1.currency}">1000$</td>
             </tr>
-            <tr>
+
+            <tr th:if="${pdf.pdf1.noOfChildren}!=0">
                 <td class="border-right" th:text="'Child - '+${pdf.pdf1.noOfChildren}">Child - 1</td>
                 <td class="border-right" th:text="${pdf.pdf1.amountPerChildren}+${pdf.pdf1.currency}">450$</td>
             </tr>

@@ -22,4 +22,10 @@ public interface Pdf2Interface {
     Page<Pdf2> getById(int subCategoryId, int id, int page, int offset);
 
     Pdf2 clonePdf2(int id);
+
+    List<Pdf2> searchById(int id);
+
+    List<Pdf2> searchByName(String name);
+
+    List<Pdf2> searchAll();
 }

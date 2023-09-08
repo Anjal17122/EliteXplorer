@@ -71,9 +71,13 @@ public class DtoConvert {
             entity.setTocTitle(dto.getTitle());
         if (dto.getTocSubTitle()==null || dto.getTocSubTitle().isEmpty())
             entity.setTocSubTitle(dto.getSubTitle());
-        SubCategory subCategory = new SubCategory();
-        subCategory.setId(dto.getSubCategoryId());
-        entity.setSubCategory(subCategory);
+        if (dto.getSubCategoryId()!=0) {
+            SubCategory subCategory = new SubCategory();
+            subCategory.setId(dto.getSubCategoryId());
+            entity.setSubCategory(subCategory);
+        }else{
+            entity.setSubCategory(null);
+        }
         entity.setStatus(dto.getStatus());
         entity.setImage1(dto.getImage1());
         entity.setImage2(dto.getImage2());

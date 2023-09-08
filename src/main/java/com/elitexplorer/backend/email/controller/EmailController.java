@@ -25,6 +25,6 @@ public class EmailController {
     @PostMapping
     public ResponseEntity sendEmail(@RequestBody EmailDto dto, HttpServletRequest request, HttpServletResponse response) throws IOException, MessagingException {
         service.sendEmail(dto,request,response);
-        return ResponseMessage.success();
+        return ResponseMessage.success(true, "Email Sent Successfully");
     }
 }

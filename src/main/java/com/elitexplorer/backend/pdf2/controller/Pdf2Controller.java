@@ -3,26 +3,16 @@ package com.elitexplorer.backend.pdf2.controller;
 
 import com.elitexplorer.backend.html2pdf.utils.Constants;
 import com.elitexplorer.backend.html2pdf.utils.DtoConvert;
-
 import com.elitexplorer.backend.html2pdf.utils.ResponseMessage;
 import com.elitexplorer.backend.pdf2.model.Pdf2;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2Dto;
 import com.elitexplorer.backend.pdf2.service.Interface.Pdf2Interface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.websocket.server.PathParam;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.ParseException;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -97,21 +87,22 @@ public class Pdf2Controller {
         return ResponseMessage.success(pdf2Interface.getById(subCategoryId,id,page,size).map((a)->DtoConvert.convertSend(a)));
     }
 
-    private String saveUploadedFile(MultipartFile file) throws IOException {
-        if (!file.isEmpty()) {
-            byte[] bytes = file.getBytes();
-            File dir = new File(Constants.imagePath);
-            if (!dir.exists()) {
-//                System.out.println("realPath => " + uploadTempPath);
-                dir.mkdirs();
-            }
-            Path path = Paths.get(Constants.imagePath + File.separator+ file.getOriginalFilename());
-            Files.write(path, bytes);
-            return file.getOriginalFilename();
-        }
-        else {
-            System.out.println("File is empty");
-            return "File Not Uploaded";
-        }
+    @GetMapping("/search/all")
+    public ResponseEntity getAll(){
+        return ResponseMessage.success(pdf2Interface.searchAll().stream().map(DtoConvert::convertSend).collect(Collectors.toList()));
     }
+
+    @GetMapping("/search/by/title")
+    public ResponseEntity getByTitle(@RequestParam("title") String title){
+        return ResponseMessage.success(pdf2Interface.searchByName(title).stream().map(DtoConvert::convertSend).collect(Collectors.toList()));
+
+    }
+
+    @GetMapping("/search/by/id")
+    public ResponseEntity searchById(@RequestParam("id") int id){
+        return ResponseMessage.success(pdf2Interface.searchById(id).stream().map(DtoConvert::convertSend).collect(Collectors.toList()));
+
+    }
+
+
 }
