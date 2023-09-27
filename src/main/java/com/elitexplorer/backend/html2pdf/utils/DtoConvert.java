@@ -14,6 +14,8 @@ import com.elitexplorer.backend.pdf2.model.Pdf2;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2Dto;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2GenerateDto;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2TocDto;
+import com.elitexplorer.backend.pricingtemplate.model.PricingTemplate;
+import com.elitexplorer.backend.pricingtemplate.model.dto.PricingTemplateDto;
 import com.elitexplorer.backend.toconly.model.dto.Pdf1TocDto;
 import com.elitexplorer.backend.toconly.model.dto.TocOnlyDto;
 import com.elitexplorer.backend.toconly.model.entity.Pdf1Toc;
@@ -472,5 +474,65 @@ public class DtoConvert {
             dto.setPdf2Id(detail.getPdf2().getId());
         }
         return dto;
+    }
+
+
+    public PricingTemplateDto toDto(PricingTemplate entity) {
+        PricingTemplateDto dto = new PricingTemplateDto();
+        dto.setId(entity.getId());
+        dto.setHotelName(entity.getHotelName());
+        dto.setHotelPrice(entity.getHotelPrice());
+        dto.setFlightName(entity.getFlightName());
+        dto.setFlightPrice(entity.getFlightPrice());
+        dto.setGuideName(entity.getGuideName());
+        dto.setGuidePrice(entity.getGuidePrice());
+        dto.setTransportName(entity.getTransportName());
+        dto.setTransportPrice(entity.getTransportPrice());
+        dto.setEntranceName(entity.getEntranceName());
+        dto.setEntrancePrice(entity.getEntrancePrice());
+        dto.setPermitName(entity.getPermitName());
+        dto.setPermitPrice(entity.getPermitPrice());
+        dto.setMealName(entity.getMealName());
+        dto.setMealPrice(entity.getMealPrice());
+        dto.setExtraName(entity.getExtraName());
+        dto.setExtraPrice(entity.getExtraPrice());
+        dto.setPdf1Id(entity.getPdf1() != null ? entity.getPdf1().getId() : 0);
+        dto.setPdf2Id(entity.getPdf2() != null ? entity.getPdf2().getId() : 0);
+        dto.calculateTotal();
+        return dto;
+    }
+
+    // Convert PricingTemplateDto to PricingTemplate
+    public static PricingTemplate fromDto(PricingTemplateDto dto) {
+        PricingTemplate entity = new PricingTemplate();
+
+        Pdf1 pdf1 = new Pdf1();
+        pdf1.setId(dto.getPdf1Id());
+
+        Pdf2 pdf2 = new Pdf2();
+        pdf2.setId(dto.getPdf2Id());
+
+        entity.setId(dto.getId());
+        entity.setHotelName(dto.getHotelName());
+        entity.setHotelPrice(dto.getHotelPrice());
+        entity.setFlightName(dto.getFlightName());
+        entity.setFlightPrice(dto.getFlightPrice());
+        entity.setGuideName(dto.getGuideName());
+        entity.setGuidePrice(dto.getGuidePrice());
+        entity.setTransportName(dto.getTransportName());
+        entity.setTransportPrice(dto.getTransportPrice());
+        entity.setEntranceName(dto.getEntranceName());
+        entity.setEntrancePrice(dto.getEntrancePrice());
+        entity.setPermitName(dto.getPermitName());
+        entity.setPermitPrice(dto.getPermitPrice());
+        entity.setMealName(dto.getMealName());
+        entity.setMealPrice(dto.getMealPrice());
+        entity.setExtraName(dto.getExtraName());
+        entity.setExtraPrice(dto.getExtraPrice());
+        entity.setPdf1(pdf1);
+        entity.setPdf2(pdf2);
+
+        // You might need to set pdf1 and pdf2 here based on the ids in dto
+        return entity;
     }
 }

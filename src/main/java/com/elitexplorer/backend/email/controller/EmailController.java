@@ -3,6 +3,7 @@ package com.elitexplorer.backend.email.controller;
 import com.elitexplorer.backend.email.model.EmailDto;
 import com.elitexplorer.backend.email.service.EmailInterface;
 import com.elitexplorer.backend.html2pdf.utils.ResponseMessage;
+import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class EmailController {
 
 
     @PostMapping
-    public ResponseEntity sendEmail(@RequestBody EmailDto dto, HttpServletRequest request, HttpServletResponse response) throws IOException, MessagingException {
+    public ResponseEntity sendEmail(@RequestBody EmailDto dto, HttpServletRequest request, HttpServletResponse response) throws IOException, MessagingException, DocumentException {
         service.sendEmail(dto,request,response);
         return ResponseMessage.success(true, "Email Sent Successfully");
     }
