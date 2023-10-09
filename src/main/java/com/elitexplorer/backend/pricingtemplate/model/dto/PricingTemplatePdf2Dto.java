@@ -1,16 +1,11 @@
 package com.elitexplorer.backend.pricingtemplate.model.dto;
 
-import com.elitexplorer.backend.pdf1.model.Pdf1;
-import com.elitexplorer.backend.pdf2.model.Pdf2;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 @Getter
 @Setter
-public class PricingTemplateDto {
+public class PricingTemplatePdf2Dto {
 
     private int id;
 
@@ -51,9 +46,11 @@ public class PricingTemplateDto {
 
     private int pdf2Id;
 
-   private int  pdf1Pdf2Id;
+    private int  pdf1Pdf2Id;
 
     private float total;
+
+    private int day;
 
     public void calculateTotal() {
         this.total = hotelPrice + flightPrice + guidePrice + transportPrice +

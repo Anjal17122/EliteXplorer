@@ -81,6 +81,11 @@ public class Pdf1Controller {
         return ResponseMessage.success(true);
     }
 
+    @PostMapping("/price/update")
+    public ResponseEntity updateGrossPrice(@RequestBody Pdf1Dto dto){
+        return ResponseMessage.success(DtoConvert.convertToDto(pdf1Interface.updatePrices(dto)));
+    }
+
 
 
 }

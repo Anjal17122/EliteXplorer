@@ -16,6 +16,11 @@ public interface Pdf1Pdf2DetailRepository extends JpaRepository<Pdf1Pdf2Detail,I
 
     List<Pdf1Pdf2Detail> findByPdf1(Pdf1 pdf1);
 
+    List<Pdf1Pdf2Detail> findByPdf1OrderByDaysDesc(Pdf1 pdf1);
+
+    @Query("From Pdf1Pdf2Detail p where p.days>:days")
+    List<Pdf1Pdf2Detail> findByAfterDays(@Param("days") int days);
+
     @Modifying
     @Transactional
     @Query("delete from Pdf1Pdf2Detail p where p.pdf1.id=:pdf1")

@@ -16,6 +16,7 @@ import com.elitexplorer.backend.pdf2.model.dto.Pdf2GenerateDto;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2TocDto;
 import com.elitexplorer.backend.pricingtemplate.model.PricingTemplate;
 import com.elitexplorer.backend.pricingtemplate.model.dto.PricingTemplateDto;
+import com.elitexplorer.backend.pricingtemplate.model.dto.PricingTemplatePdf2Dto;
 import com.elitexplorer.backend.toconly.model.dto.Pdf1TocDto;
 import com.elitexplorer.backend.toconly.model.dto.TocOnlyDto;
 import com.elitexplorer.backend.toconly.model.entity.Pdf1Toc;
@@ -38,8 +39,8 @@ public class DtoConvert {
         pdf1.setInclusion(dto.getInclusion());
         pdf1.setCurrency(dto.getCurrency());
         pdf1.setMainText(dto.getMainText());
-        pdf1.setAmountPerAdult(dto.getAmountPerAdult());
-        pdf1.setAmountPerChildren(dto.getAmountPerChildren());
+        pdf1.setAmountPerAdult(0);
+        pdf1.setAmountPerChildren(0);
         pdf1.setNoOfAdults(dto.getNoOfAdults());
         pdf1.setNoOfChildren(dto.getNoOfChildren());
         pdf1.setPreparedTo(dto.getPreparedTo());
@@ -63,6 +64,7 @@ public class DtoConvert {
         entity.setSubTitle(dto.getSubTitle());
         entity.setText(dto.getText());
         entity.setHotel(dto.getHotel());
+
         entity.setFood(dto.getFood());
         entity.setRoom(dto.getRoom());
         entity.setWebsite(dto.getWebsite());
@@ -124,6 +126,12 @@ public class DtoConvert {
         pdf1.setFilename(dto.getFilename());
         pdf1.setTotalDays(dto.getTotalDays());
         pdf1.setHint(dto.getHint());
+        pdf1.setTotal(dto.getTotal());
+        pdf1.setTotalWithoutExtra(dto.getTotalWithoutExtra());
+        pdf1.setTotalAmountPrecisionError(dto.getTotalAmountPrecisionError());
+        pdf1.setTax(dto.getTax());
+        pdf1.setBuffer(dto.getBuffer());
+        pdf1.setMargin(dto.getMargin());
         return pdf1;
     }
     public static List<String> shortMonth = new ArrayList<>(Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"));
@@ -311,6 +319,12 @@ public class DtoConvert {
         dto.setTotalDays(pdf1.getTotalDays());
         dto.setHint(pdf1.getHint());
         dto.setFile(pdf1.getFilename());
+        dto.setTotal(pdf1.getTotal());
+        dto.setTax(pdf1.getTax());
+        dto.setMargin(pdf1.getMargin());
+        dto.setBuffer(pdf1.getBuffer());
+        dto.setTotalWithoutExtra(pdf1.getTotalWithoutExtra());
+        dto.setTotalAmountPrecisionError(pdf1.getTotalAmountPrecisionError());
         if (pdf1.getSubCategory()!=null) {
             dto.setSubCategory(pdf1.getSubCategory().getSubCategory());
             dto.setSubCategoryId(pdf1.getSubCategory().getId());
@@ -477,7 +491,7 @@ public class DtoConvert {
     }
 
 
-    public PricingTemplateDto toDto(PricingTemplate entity) {
+    public static PricingTemplateDto convert(PricingTemplate entity) {
         PricingTemplateDto dto = new PricingTemplateDto();
         dto.setId(entity.getId());
         dto.setHotelName(entity.getHotelName());
@@ -499,18 +513,23 @@ public class DtoConvert {
         dto.setPdf1Id(entity.getPdf1() != null ? entity.getPdf1().getId() : 0);
         dto.setPdf2Id(entity.getPdf2() != null ? entity.getPdf2().getId() : 0);
         dto.calculateTotal();
+
         return dto;
     }
 
     // Convert PricingTemplateDto to PricingTemplate
-    public static PricingTemplate fromDto(PricingTemplateDto dto) {
+    public static PricingTemplate convert(PricingTemplateDto dto) {
         PricingTemplate entity = new PricingTemplate();
 
         Pdf1 pdf1 = new Pdf1();
+
         pdf1.setId(dto.getPdf1Id());
 
         Pdf2 pdf2 = new Pdf2();
         pdf2.setId(dto.getPdf2Id());
+
+        Pdf1Pdf2Detail detail = new Pdf1Pdf2Detail();
+        detail.setId(dto.getPdf1Pdf2Id());
 
         entity.setId(dto.getId());
         entity.setHotelName(dto.getHotelName());
@@ -529,10 +548,88 @@ public class DtoConvert {
         entity.setMealPrice(dto.getMealPrice());
         entity.setExtraName(dto.getExtraName());
         entity.setExtraPrice(dto.getExtraPrice());
-        entity.setPdf1(pdf1);
-        entity.setPdf2(pdf2);
+        entity.setDetail(detail);
+
+        if (dto.getPdf1Id()!=0) {
+            entity.setPdf1(pdf1);
+        }else{
+            entity.setPdf1(null);
+        }
+        if (dto.getPdf2Id()!=0) {
+            entity.setPdf2(pdf2);
+        }else{
+            entity.setPdf2(null);
+        }
 
         // You might need to set pdf1 and pdf2 here based on the ids in dto
         return entity;
     }
-}
+
+    public static PricingTemplatePdf2Dto convert(Pdf1Pdf2Detail pdf1Pdf2Detail, PricingTemplate pricingTemplate){
+        PricingTemplatePdf2Dto dto = new PricingTemplatePdf2Dto();
+        dto.setId(pricingTemplate.getId());
+        dto.setHotelName(pricingTemplate.getHotelName());
+        dto.setHotelPrice(pricingTemplate.getHotelPrice());
+        dto.setFlightName(pricingTemplate.getFlightName());
+        dto.setFlightPrice(pricingTemplate.getFlightPrice());
+        dto.setGuideName(pricingTemplate.getGuideName());
+        dto.setGuidePrice(pricingTemplate.getGuidePrice());
+        dto.setTransportName(pricingTemplate.getTransportName());
+        dto.setTransportPrice(pricingTemplate.getTransportPrice());
+        dto.setEntranceName(pricingTemplate.getEntranceName());
+        dto.setEntrancePrice(pricingTemplate.getEntrancePrice());
+        dto.setPermitName(pricingTemplate.getPermitName());
+        dto.setPermitPrice(pricingTemplate.getPermitPrice());
+        dto.setMealName(pricingTemplate.getMealName());
+        dto.setMealPrice(pricingTemplate.getMealPrice());
+        dto.setExtraName(pricingTemplate.getExtraName());
+        dto.setExtraPrice(pricingTemplate.getExtraPrice());
+        dto.setPdf1Id(pricingTemplate.getPdf1() != null ? pricingTemplate.getPdf1().getId() : 0);
+        dto.setPdf2Id(pricingTemplate.getPdf2() != null ? pricingTemplate.getPdf2().getId() : 0);
+        dto.calculateTotal();
+        dto.setDay(pdf1Pdf2Detail.getDays());
+        return dto;
+    }
+
+    public static PricingTemplate convertPricing(PricingTemplate template){
+        PricingTemplate entity = new PricingTemplate();
+        entity.setId(0);
+        entity.setHotelName(template.getHotelName());
+        entity.setHotelPrice(template.getHotelPrice());
+        entity.setFlightName(template.getFlightName());
+        entity.setFlightPrice(template.getFlightPrice());
+        entity.setGuideName(template.getGuideName());
+        entity.setGuidePrice(template.getGuidePrice());
+        entity.setTransportName(template.getTransportName());
+        entity.setTransportPrice(template.getTransportPrice());
+        entity.setEntranceName(template.getEntranceName());
+        entity.setEntrancePrice(template.getEntrancePrice());
+        entity.setPermitName(template.getPermitName());
+        entity.setPermitPrice(template.getPermitPrice());
+        entity.setMealName(template.getMealName());
+        entity.setMealPrice(template.getMealPrice());
+        entity.setExtraName(template.getExtraName());
+        entity.setExtraPrice(template.getExtraPrice());
+       return entity;
+    }
+
+    public static Pdf2 convertToUpdate(Pdf2 dto) {
+        Pdf2 entity = new Pdf2();
+        entity.setId(0);
+        entity.setTitle(dto.getTitle());
+        entity.setSubTitle(dto.getSubTitle());
+        entity.setText(dto.getText());
+        entity.setHotel(dto.getHotel());
+        entity.setFood(dto.getFood());
+        entity.setRoom(dto.getRoom());
+        entity.setWebsite(dto.getWebsite());
+        entity.setTocTitle(dto.getTocTitle());
+        entity.setTocSubTitle(dto.getTocSubTitle());
+        entity.setImage1(dto.getImage1());
+        entity.setImage2(dto.getImage2());
+        entity.setHint(dto.getHint());
+        entity.setStatus(dto.getStatus());
+        return entity;
+    }
+
+    }

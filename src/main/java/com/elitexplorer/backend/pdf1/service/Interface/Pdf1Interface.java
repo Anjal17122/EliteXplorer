@@ -1,6 +1,7 @@
 package com.elitexplorer.backend.pdf1.service.Interface;
 
 import com.elitexplorer.backend.pdf1.model.Pdf1;
+import com.elitexplorer.backend.pdf1.model.dto.Pdf1Dto;
 
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface Pdf1Interface {
     void deleteById(int id);
 
     List<Pdf1> getALl();
+
+    Pdf1 updatePrices(Pdf1Dto pdf1Dto);
 }

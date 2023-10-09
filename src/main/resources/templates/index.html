@@ -392,6 +392,7 @@
             height:45px;
         }
       .pdf3-footer-page-bg{
+      margin-top:5px;
         float:right;
         background: url([[@{/images/pageno.png}]])no-repeat center center fixed;
         width:44px;
@@ -498,7 +499,7 @@
        padding-left:20px;
      }
 
-           .pdf6{
+      .pdf6{
         padding:0;
         margin:0;
         width:793px;
@@ -532,8 +533,7 @@
 <div class="pdf1">
     <div class="header">
 
-        <img src="../images/logo.gif" class="logo" style="width:150; height:150;" alt="logo" th:src="@{/images/mainlogo1.png}"/>
-
+        <img class="logo" style="width:150; height:150;" alt="logo" th:src="@{/images/mainlogo1.png}"/>
             <div class="header-txt">
             <div class="header-txt-title roboto" th:utext="${pdf.pdf1.title}">
                TREKKING TO ANNAPURNA POON HILL NEPAL
@@ -543,7 +543,7 @@
             </div>
         </div>
     </div>
-    <img src="../images/mainimage.jpg" class="pdf1-main-image" alt="logo" th:src="@{/images/}+${pdf.pdf1.file}"/>
+    <img  class="pdf1-main-image" alt="logo" th:src="@{/images/}+${pdf.pdf1.file}"/>
     <div class="pdf1-body">
             <div class="pdf1-body-text lucida" th:utext="${pdf.pdf1.mainText}">
                 <br>

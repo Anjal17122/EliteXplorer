@@ -1,6 +1,7 @@
 package com.elitexplorer.backend.pricingtemplate.model;
 
 import com.elitexplorer.backend.pdf1.model.Pdf1;
+import com.elitexplorer.backend.pdf1pdf2detail.model.Pdf1Pdf2Detail;
 import com.elitexplorer.backend.pdf2.model.Pdf2;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -53,6 +54,7 @@ public class PricingTemplate {
     private float extraPrice;
 
 
+
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private Pdf1 pdf1;
@@ -60,5 +62,9 @@ public class PricingTemplate {
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private Pdf2 pdf2;
+
+    @OneToOne
+    @JoinColumn(referencedColumnName = "id")
+    private Pdf1Pdf2Detail detail;
 
 }

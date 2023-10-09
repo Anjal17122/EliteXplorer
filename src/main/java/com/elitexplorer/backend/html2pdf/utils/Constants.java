@@ -12,7 +12,8 @@ public class Constants {
 
 
 //findUsername = whoami
-//   public static final String imagePath =  "/Users/your-username/Desktop/Final_EliteExplorer";
-//   public static final String fontPath =  "/Users/your-username/Desktop/Final_EliteExplorer/fonts";
+//   public static final String imagePath =  "files";
+//   public static final String imagePath =  "/Users/gapnepal/Desktop/website/backend";
+//   public static final String fontPath =  "files/fonts";
 
 }

@@ -42,4 +42,16 @@ public class Pdf1Dto {
     private int subCategoryId;
 
     private String file;
+
+    private int total;
+
+    private float totalWithoutExtra;
+
+    private float tax;
+
+    private float buffer;
+
+    private float margin;
+
+    private int totalAmountPrecisionError;
 }

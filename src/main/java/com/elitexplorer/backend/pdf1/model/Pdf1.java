@@ -60,6 +60,17 @@ public class Pdf1 {
 
     private boolean allPdf2Uploaded;
 
+    private int total;
+
+    private int totalAmountPrecisionError;
+
+    private float totalWithoutExtra;
+    private float tax;
+
+    private float buffer;
+
+    private float margin;
+
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private SubCategory subCategory;
