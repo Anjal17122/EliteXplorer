@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Elite Explorer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -528,8 +528,11 @@
 
 
     </style>
+
+
 </head>
 <body>
+
 <div class="pdf1">
     <div class="header">
 
@@ -661,10 +664,9 @@
                 <div class="pdf3-footer-page-no lucida pdf3-change-page-no" th:text="${pdf.pageNo[1]} +${detailStat.index}"></div>
             </div>
         </div>
-
     </div>
 
-<div class="pdf4">
+<div class="pdf4" th:each="inclusionPage, pageIndex:${pdf.pdf1.pageInclusion}">
     <div class="pdf3-border">
 <!--        <img src="../images/img.png" class="border-image" alt="logo" th:src="@{/images/img.png}"/>-->
         <h2 class="pdf4-border-text tahoma">
@@ -675,7 +677,7 @@
             <div class="button tahoma">Inclusion</div>
             <div class="list">
                 <ul class="inclusion">
-                    <li class="lucida" th:each="t:${pdf.pdf1.inclusion}"><span style="margin-left:10px;" th:utext="${t}">My name is Anjal Sapkota</span></li>
+                    <li class="lucida" th:each="t:${inclusionPage}"><span style="margin-left:10px;" th:utext="${t}">My name is Anjal Sapkota</span></li>
                 </ul>
             </div>
         </div>
@@ -684,7 +686,7 @@
 
     <div class="pdf3-footer">
         <div class="pdf3-footer-page-bg">
-            <div class="pdf3-footer-page-no lucida pdf4-change-page-no" th:text="${pdf.pageNo[2]}"></div>
+            <div class="pdf3-footer-page-no lucida pdf4-change-page-no" th:text="${pdf.pageNo[2]} +${pageIndex.index}"></div>
         </div>
     </div>
 </div>
@@ -751,13 +753,14 @@
                 from Bhutan by the Indian state of Sikkim.
             </p>
 
-            <p>
-                Nepal has a diverse geography, including fertile plains, subalpine forested hills, and
-                eight of the world's ten tallest mountains, including Mount Everest, the highest point
-                on Earth. Nepal is a multi-ethnic, multi-lingual, multi-religious and multi-cultural
-                state, with Nepali as the official language. Kathmandu is the nation's capital and the
-                largest city.
-            </p>
+<!--            <p>-->
+<!--                Nepal has a diverse geography, including fertile plains, subalpine forested hills, and-->
+<!--                eight of the world's ten tallest mountains, including Mount Everest, the highest point-->
+<!--                on Earth. Nepal is a multi-ethnic, multi-lingual, multi-religious and multi-cultural-->
+<!--                state, with Nepali as the official language. Kathmandu is the nation's capital and the-->
+<!--                largest city.-->
+<!--            </p>-->
+            <p id="myElement">This is some text.</p>
         </div>
 
         <div class="about-nepal-bg"></div>
@@ -769,5 +772,9 @@
         </div>
     </div>
 </div>
+    <script th:inline="javascript">
+        var element = document.getElementById('myElement');
+        element.innerHTML = 'New text content with <strong>HTML</strong> tags';
+    </script>
 </body>
 </html>

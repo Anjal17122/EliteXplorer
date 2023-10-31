@@ -6,6 +6,9 @@ import com.elitexplorer.backend.pdf1.model.Pdf1;
 import com.elitexplorer.backend.pdf1pdf2detail.model.Pdf1Pdf2Detail;
 import com.elitexplorer.backend.pdf1pdf2detail.model.dto.Pdf1Pdf2Generate;
 import com.elitexplorer.backend.pdf1pdf2detail.repository.Pdf1Pdf2DetailRepository;
+import com.elitexplorer.backend.pdfsetting.model.entity.PdfSetting;
+import com.elitexplorer.backend.pdfsetting.model.entity.SettingType;
+import com.elitexplorer.backend.pdfsetting.repository.PdfSettingRepository;
 import com.elitexplorer.backend.toconly.model.entity.Pdf1Toc;
 import com.elitexplorer.backend.toconly.repository.Pdf1TocRepository;
 import com.itextpdf.html2pdf.ConverterProperties;
@@ -42,6 +45,9 @@ public class Html2PdfController {
     Pdf1TocRepository tocRepo;
 
     @Autowired
+    PdfSettingRepository pdfSettingRepository;
+
+    @Autowired
     ServletContext servletContext;
 
     private final TemplateEngine templateEngine;
@@ -52,6 +58,7 @@ public class Html2PdfController {
 
     @GetMapping(path = "/pdf/{toc}/{id}")
     public ResponseEntity<?> getPDF(@PathVariable("id") int id, @PathVariable("toc") int toc, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PdfSetting setting = pdfSettingRepository.findFirstBySetting(SettingType.InclusionWordCount);
         WebContext context = new WebContext(request, response, servletContext);
         Pdf1Pdf2Generate generate;
         if (toc==2){
@@ -67,10 +74,35 @@ public class Html2PdfController {
                 generate.setPdf2(new ArrayList<>());
                 List<Integer> pageNo = generate.getPageNo();
                 pageNo.set(2, pageNo.get(1));
-                pageNo.set(3, pageNo.get(1) + 1);
+                pageNo.set(3, pageNo.get(1));
                 generate.setPageNo(pageNo);
             }
         }
+        List<List<String>> inclusion = new ArrayList<>();
+        int inclusionLength = 0;
+        int totalPageCharacter = 640;
+        if (setting!=null){
+            totalPageCharacter = Integer.parseInt(setting.getValue());
+        }
+        List<String> pageInclusion = new ArrayList<>();
+        for (String a : generate.getPdf1().getInclusion()) {
+            int stringLength = a.length();
+            inclusionLength += stringLength;
+            if (inclusionLength < totalPageCharacter) {
+                pageInclusion.add(a);
+            } else {
+                inclusion.add(pageInclusion);
+                inclusionLength = stringLength;
+                pageInclusion = new ArrayList<>();
+                pageInclusion.add(a);
+            }
+        }
+
+        if (!pageInclusion.isEmpty()) {
+            inclusion.add(pageInclusion);
+        }
+        generate.getPdf1().setPageInclusion(inclusion);
+        generate.getPageNo().set(3,generate.getPageNo().get(3)+ generate.getPdf1().getPageInclusion().size());
 //+ "(" + generate.getPdf1().getFullDate()+  ")"
         String filename = generate.getPdf1().getPreparedTo() +".pdf";
         context.setVariable("pdf", generate);

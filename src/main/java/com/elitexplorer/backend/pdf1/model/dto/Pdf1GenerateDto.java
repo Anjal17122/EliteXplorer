@@ -18,6 +18,8 @@ public class Pdf1GenerateDto {
     private String preparedTo;
     private List<String> inclusion;
     private List<String> exclusion;
+
+    private List<List<String>> pageInclusion;
     private int noOfAdults;
     private long amountPerAdult;
     private int noOfChildren;

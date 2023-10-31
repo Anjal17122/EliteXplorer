@@ -14,6 +14,8 @@ import com.elitexplorer.backend.pdf2.model.Pdf2;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2Dto;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2GenerateDto;
 import com.elitexplorer.backend.pdf2.model.dto.Pdf2TocDto;
+import com.elitexplorer.backend.pdfsetting.model.dto.PdfSettingDto;
+import com.elitexplorer.backend.pdfsetting.model.entity.PdfSetting;
 import com.elitexplorer.backend.pricingtemplate.model.PricingTemplate;
 import com.elitexplorer.backend.pricingtemplate.model.dto.PricingTemplateDto;
 import com.elitexplorer.backend.pricingtemplate.model.dto.PricingTemplatePdf2Dto;
@@ -140,8 +142,10 @@ public class DtoConvert {
         Calendar cal = Calendar.getInstance();
         cal.setTime(pdf1.getStartDate());
         Pdf1GenerateDto dto = new Pdf1GenerateDto();
+
         dto.setExclusion(Arrays.asList(pdf1.getExclusion().split(",,")));
         dto.setInclusion(Arrays.asList(pdf1.getInclusion().split(",,")));
+//        inclusion 640 character.. 630 character
         dto.setCurrency(pdf1.getCurrency());
         dto.setMainText(pdf1.getMainText());
         dto.setAmountPerAdult(pdf1.getAmountPerAdult());
@@ -218,7 +222,7 @@ public class DtoConvert {
         pageNo.add(2);
         pageNo.add(3+total);
         pageNo.add(3+total+pdf2Toc.size());
-        pageNo.add(4+total+pdf2Toc.size());
+        pageNo.add(4+total+pdf2Toc.size()-1);
 
         pdf1Pdf2Generate.setPageNo(pageNo);
 
@@ -421,16 +425,15 @@ public class DtoConvert {
             pageNo.add(2);
             pageNo.add(3);
             pageNo.add(2);
-            pageNo.add(3);
+            pageNo.add(2);
         }else{
             pageNo.add(2);
             pageNo.add(3+total);
             pageNo.add(3+total);
-            pageNo.add(4+total);
+            pageNo.add(4+total-1);
         }
 
         pdf1Pdf2Generate.setPageNo(pageNo);
-
         return pdf1Pdf2Generate;
     }
 
@@ -630,6 +633,22 @@ public class DtoConvert {
         entity.setHint(dto.getHint());
         entity.setStatus(dto.getStatus());
         return entity;
+    }
+
+    public static PdfSettingDto convert(PdfSetting entity){
+        PdfSettingDto dto = new PdfSettingDto();
+        dto.setId(entity.getId());
+        dto.setValue(entity.getValue());
+        dto.setSetting(entity.getSetting());
+        return dto;
+    }
+
+    public static PdfSetting convert(PdfSettingDto entity){
+        PdfSetting dto = new PdfSetting();
+        dto.setId(entity.getId());
+        dto.setValue(entity.getValue());
+        dto.setSetting(entity.getSetting());
+        return dto;
     }
 
     }

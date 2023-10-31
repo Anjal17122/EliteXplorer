@@ -141,6 +141,7 @@ public class PricingTemplateImpl implements PricingTemplateInterface {
             amountPerChildren = Math.round(total/(children + 2*adult));
             amountPerAdult = Math.round((total/(children + 2*adult))*2);
         }
+
         int finalPrice = children*amountPerChildren + adult* amountPerAdult;
         int precisionError =  finalPrice - Math.round(total);
 

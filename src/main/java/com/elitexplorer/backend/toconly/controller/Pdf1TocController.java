@@ -57,7 +57,6 @@ public class Pdf1TocController {
         return ResponseMessage.success(service.searchById(id).stream().map(DtoConvert::convertToDto).collect(Collectors.toList()));
     }
 
-
     @PostMapping("/save")
     public ResponseEntity savePdf1Toc(@RequestBody Pdf1TocDto pdf1Dto) {
         Pdf1Toc pdf1 = DtoConvert.convert(pdf1Dto);
