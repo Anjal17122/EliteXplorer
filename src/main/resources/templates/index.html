@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Elite Explorer</title>
@@ -127,13 +127,33 @@
         }
 
         .pdf1-prepared-to-name-inner{
-        font-size:17pt;
-        font-weight:bold;
+            font-size:17pt;
+            font-weight:bold;
 
         }
         .santosh-image{
             float:right;
             margin-top:-105px;
+            width:263px;
+            max-height:104px;
+            overflow:hidden;
+        }
+        .prepared_by_text{
+            margin-top:10px;
+            float:left;
+            text-align:right;
+            width:175px;
+            max-height:104px;
+            overflow:hidden;
+            line-height:16px;
+            font-size:10pt;
+        }
+        .prepared_by_image{
+            width:86px;
+            float:right;
+            height:86px;
+            overflow:hidden;
+            border-radius:100%;
         }
 
         .footer{
@@ -161,7 +181,6 @@
             float:left;
             width:514px;
             margin-top:20px;
-
             height:20px;
             font-size:12pt;
             margin-left:180px;
@@ -562,7 +581,16 @@
         <div class="tahoma pdf1-prepared-to-name-inner" th:utext="${pdf.pdf1.preparedTo}">Kedadr Maharjan</div>
 
     </div>
-    <img src="../images/santoshimage.png" class="santosh-image" alt="logo" th:src="@{/images/santoshimage.png}"/>
+    <div class="santosh-image">
+            <div class="prepared_by_text lucida">
+                Prepared by<br>
+                <span class="tahoma"><b><span style="color:red;">Santosh Dhakal</span></b></span><br>
+                Travel Specialist,<br>
+                Elite Explorer Pvt. Ltd.<br>
+            </div>
+            <img src="../images/santoshimage.png" class="prepared_by_image" alt="logo" th:src="@{/images/about-nepal.png}"/>
+    </div>
+<!--    <img src="../images/santoshimage.png" class="santosh-image" alt="logo" th:src="@{/images/santoshimage.png}"/>-->
     <div class="footer">
         <div class="footer-page-bg">
             <div class="lucida footer-page-no">

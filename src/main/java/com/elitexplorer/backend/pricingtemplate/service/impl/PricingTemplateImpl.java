@@ -42,67 +42,70 @@ public class PricingTemplateImpl implements PricingTemplateInterface {
         if (pricingTemplate!=null){
             if (dto.getHotelName() != null) {
                 pricingTemplate.setHotelName(dto.getHotelName());
-            }
-
-            if (dto.getHotelPrice() != 0f) {
                 pricingTemplate.setHotelPrice(dto.getHotelPrice());
             }
 
+//            if (dto.getHotelPrice() != 0f) {
+//
+//            }
+
             if (dto.getFlightName() != null) {
                 pricingTemplate.setFlightName(dto.getFlightName());
+                pricingTemplate.setFlightPrice(dto.getFlightPrice());
+
             }
 
-            if (dto.getFlightPrice() != 0f) {
-                pricingTemplate.setFlightPrice(dto.getFlightPrice());
-            }
+//            if (dto.getFlightPrice() != 0f) {
+//            }
 
             if (dto.getGuideName() != null) {
                 pricingTemplate.setGuideName(dto.getGuideName());
-            }
-
-            if (dto.getGuidePrice() != 0f) {
                 pricingTemplate.setGuidePrice(dto.getGuidePrice());
             }
 
+//            if (dto.getGuidePrice() != 0f) {
+//
+//            }
+
             if (dto.getTransportName() != null) {
                 pricingTemplate.setTransportName(dto.getTransportName());
-            }
-
-            if (dto.getTransportPrice() != 0f) {
                 pricingTemplate.setTransportPrice(dto.getTransportPrice());
             }
 
+//            if (dto.getTransportPrice() != 0f) {
+//            }
+
             if (dto.getEntranceName() != null) {
                 pricingTemplate.setEntranceName(dto.getEntranceName());
-            }
-
-            if (dto.getEntrancePrice() != 0f) {
                 pricingTemplate.setEntrancePrice(dto.getEntrancePrice());
             }
 
+//            if (dto.getEntrancePrice() != 0f) {
+//            }
+
             if (dto.getPermitName() != null) {
                 pricingTemplate.setPermitName(dto.getPermitName());
-            }
-
-            if (dto.getPermitPrice() != 0f) {
                 pricingTemplate.setPermitPrice(dto.getPermitPrice());
             }
+//
+//            if (dto.getPermitPrice() != 0f) {
+//            }
 
             if (dto.getMealName() != null) {
                 pricingTemplate.setMealName(dto.getMealName());
-            }
-
-            if (dto.getMealPrice() != 0f) {
                 pricingTemplate.setMealPrice(dto.getMealPrice());
             }
 
+//            if (dto.getMealPrice() != 0f) {
+//            }
+
             if (dto.getExtraName() != null) {
                 pricingTemplate.setExtraName(dto.getExtraName());
-            }
-
-            if (dto.getExtraPrice() != 0f) {
                 pricingTemplate.setExtraPrice(dto.getExtraPrice());
             }
+
+//            if (dto.getExtraPrice() != 0f) {
+//            }
             PricingTemplate savedTemplate =  repository.save(pricingTemplate);
             updatePdf1(savedTemplate);
             return savedTemplate;
