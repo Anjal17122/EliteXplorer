@@ -19,10 +19,14 @@ import com.elitexplorer.backend.pdfsetting.model.entity.PdfSetting;
 import com.elitexplorer.backend.pricingtemplate.model.PricingTemplate;
 import com.elitexplorer.backend.pricingtemplate.model.dto.PricingTemplateDto;
 import com.elitexplorer.backend.pricingtemplate.model.dto.PricingTemplatePdf2Dto;
+import com.elitexplorer.backend.role.dto.PersonRoleDto;
+import com.elitexplorer.backend.role.entity.PersonRole;
 import com.elitexplorer.backend.toconly.model.dto.Pdf1TocDto;
 import com.elitexplorer.backend.toconly.model.dto.TocOnlyDto;
 import com.elitexplorer.backend.toconly.model.entity.Pdf1Toc;
 import com.elitexplorer.backend.toconly.model.entity.TocOnly;
+import com.elitexplorer.backend.userdetail.model.dto.UserDetailDto;
+import com.elitexplorer.backend.userdetail.model.entity.UserDetail;
 import com.google.common.collect.Lists;
 
 import java.text.ParseException;
@@ -651,4 +655,59 @@ public class DtoConvert {
         return dto;
     }
 
+    public static PersonRoleDto convert(PersonRole entity) {
+        PersonRoleDto dto = new PersonRoleDto();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setActive(entity.getIsActive());
+        return dto;
     }
+
+    public static UserDetailDto convert(UserDetail userDetail) {
+        if (userDetail == null) {
+            return null;
+        }
+
+        UserDetailDto userDetailDto = new UserDetailDto();
+        userDetailDto.setId(userDetail.getId());
+        userDetailDto.setFullName(userDetail.getFullName());
+        userDetailDto.setEmail(userDetail.getEmail());
+        userDetailDto.setPhoneNo(userDetail.getPhoneNo());
+        userDetailDto.setSpecialization(userDetail.getSpecialization());
+        userDetailDto.setUsername(userDetail.getUsername());
+        userDetailDto.setPassword(userDetail.getPassword());
+        userDetailDto.setUserStatus(userDetail.getUserStatus());
+
+        if (userDetail.getPersonRole() != null) {
+            userDetailDto.setPersonRoleId(userDetail.getPersonRole().getId());
+            userDetailDto.setPersonRole(userDetail.getPersonRole().getName());
+        }
+
+        return userDetailDto;
+    }
+
+    public static UserDetail convert(UserDetailDto userDetailDto) {
+        if (userDetailDto == null) {
+            return null;
+        }
+
+        UserDetail userDetail = new UserDetail();
+        userDetail.setId(userDetailDto.getId());
+        userDetail.setFullName(userDetailDto.getFullName());
+        userDetail.setEmail(userDetailDto.getEmail());
+        userDetail.setPhoneNo(userDetailDto.getPhoneNo());
+        userDetail.setSpecialization(userDetailDto.getSpecialization());
+        userDetail.setUsername(userDetailDto.getUsername());
+        userDetail.setPassword(userDetailDto.getPassword());
+        userDetail.setUserStatus(userDetailDto.getUserStatus());
+
+        if (userDetailDto.getPersonRoleId() != 0) {
+            PersonRole personRole = new PersonRole();
+            personRole.setId(userDetailDto.getPersonRoleId());
+            userDetail.setPersonRole(personRole);
+        }
+
+        return userDetail;
+    }
+
+}

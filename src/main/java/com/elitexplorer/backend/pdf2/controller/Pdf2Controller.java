@@ -18,29 +18,6 @@ public class Pdf2Controller {
 
     @Autowired
     Pdf2Interface pdf2Interface;
-//    @PostMapping("/save/pdf2")
-//    public String savePdf1(@ModelAttribute Pdf2Dto pdf2Dto) throws IOException, ParseException {
-//
-//        Pdf2 pdf2 = DtoConvert.convert(pdf2Dto);
-//        if (pdf2Dto.getId()!=0){
-//            Pdf2 pdfOld = pdf2Interface.getById(pdf2Dto.getId());
-//            if (pdf2Dto.getImage1().isEmpty()){
-//                pdf2.setImage1(pdfOld.getImage1());
-//            }else{
-//                pdf2.setImage1(saveUploadedFile(pdf2Dto.getImage1()));
-//            }
-//            if (pdf2Dto.getImage2().isEmpty()){
-//                pdf2.setImage2(pdfOld.getImage2());
-//            }else{
-//                pdf2.setImage2(saveUploadedFile(pdf2Dto.getImage2()));
-//            }
-//        }else {
-//            pdf2.setImage1(saveUploadedFile(pdf2Dto.getImage1()));
-//            pdf2.setImage2(saveUploadedFile(pdf2Dto.getImage2()));
-//        }
-//        pdf2Interface.savePdf1(pdf2);
-//        return "redirect:/";
-//    }
 
     @PostMapping("/save/pdf2")
     public ResponseEntity savePdf2(@RequestBody Pdf2Dto pdf2Dto) {
@@ -52,11 +29,7 @@ public class Pdf2Controller {
     public ResponseEntity getById(@PathVariable("id") int id){
         return ResponseMessage.success(DtoConvert.convertSend(pdf2Interface.getById(id)));
     }
-    @GetMapping("/pdf2/clone/{id}")
-    public String clonePdf2(@PathVariable("id") int id){
-            pdf2Interface.clonePdf2(id);
-            return "redirect:/";
-    }
+
 
     @GetMapping("/all")
     public ResponseEntity getAll(@RequestParam("page") int page,@RequestParam("size") int size){
