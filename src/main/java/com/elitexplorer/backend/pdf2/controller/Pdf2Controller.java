@@ -1,7 +1,5 @@
 package com.elitexplorer.backend.pdf2.controller;
 
-
-import com.elitexplorer.backend.html2pdf.utils.Constants;
 import com.elitexplorer.backend.html2pdf.utils.DtoConvert;
 import com.elitexplorer.backend.html2pdf.utils.ResponseMessage;
 import com.elitexplorer.backend.pdf2.model.Pdf2;
@@ -10,8 +8,6 @@ import com.elitexplorer.backend.pdf2.service.Interface.Pdf2Interface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.stream.Collectors;
 
 
@@ -47,7 +43,7 @@ public class Pdf2Controller {
 //    }
 
     @PostMapping("/save/pdf2")
-    public ResponseEntity savePdf2(@RequestBody Pdf2Dto pdf2Dto) throws IOException, ParseException {
+    public ResponseEntity savePdf2(@RequestBody Pdf2Dto pdf2Dto) {
         Pdf2 pdf2 = DtoConvert.convert(pdf2Dto);
         return ResponseMessage.success(DtoConvert.convertSend(pdf2Interface.savePdf1(pdf2)));
     }
@@ -95,13 +91,11 @@ public class Pdf2Controller {
     @GetMapping("/search/by/title")
     public ResponseEntity getByTitle(@RequestParam("title") String title){
         return ResponseMessage.success(pdf2Interface.searchByName(title).stream().map(DtoConvert::convertSend).collect(Collectors.toList()));
-
     }
 
     @GetMapping("/search/by/id")
     public ResponseEntity searchById(@RequestParam("id") int id){
         return ResponseMessage.success(pdf2Interface.searchById(id).stream().map(DtoConvert::convertSend).collect(Collectors.toList()));
-
     }
 
 

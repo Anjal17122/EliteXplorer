@@ -98,7 +98,6 @@ public class FileController {
         if (fileExtension.equals("png")) {
             InputStream in = new ByteArrayInputStream(multipartFile.getBytes());
             BufferedImage bufferedImage = ImageIO.read(in);
-
             // create a blank, RGB, same width and height, and a white background
             BufferedImage newBufferedImage = new BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(),
                     BufferedImage.TYPE_INT_RGB);
