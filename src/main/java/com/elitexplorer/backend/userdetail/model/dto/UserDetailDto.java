@@ -31,4 +31,6 @@ public class UserDetailDto {
     private int personRoleId;
 
     private String personRole;
+
+    private String filename;
 }

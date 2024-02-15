@@ -9,6 +9,6 @@ public interface PersonRoleService {
 	List<PersonRole> getAll();
 
 
-	PersonRole updateStatus(long id);
+	PersonRole updateStatus(int id);
 
 }

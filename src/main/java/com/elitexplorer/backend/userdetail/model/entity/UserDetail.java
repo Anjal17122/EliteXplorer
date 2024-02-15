@@ -28,9 +28,12 @@ public class UserDetail {
     private String username;
 
     private String password;
+    private String filename;
 
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
+
+
 
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")

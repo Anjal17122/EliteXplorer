@@ -1,7 +1,8 @@
 package com.elitexplorer.backend.security1.service.impl;
 
-import com.elitexplorer.backend.security.constants.SecurityConstants;
+
 import com.elitexplorer.backend.security1.model.AuthToken;
+import com.elitexplorer.backend.security1.securityutils.SecurityConstants;
 import com.elitexplorer.backend.security1.service.TokenService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

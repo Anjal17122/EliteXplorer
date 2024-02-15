@@ -2,6 +2,7 @@ package com.elitexplorer.backend.security1.service;
 
 
 import com.elitexplorer.backend.security1.model.MyUserDetails;
+import com.elitexplorer.backend.security1.securityutils.UserStatus;
 import com.elitexplorer.backend.userdetail.model.dto.UserDetailDto;
 import com.elitexplorer.backend.userdetail.model.entity.UserDetail;
 import com.elitexplorer.backend.userdetail.repository.UserDetailRepository;
@@ -41,8 +42,7 @@ public class MyUserDetailsService implements UserDetailsService {
 		boolean active = true;
 		
 		roles = rolePrefix+user.getPersonRole().getName();
-		if ()
-		secUser.setActive(active);
+		secUser.setUserStatus(user.getUserStatus());
 		secUser.setPersonRole(roles);
 
 		MyUserDetails myUserDetails = new MyUserDetails(secUser);

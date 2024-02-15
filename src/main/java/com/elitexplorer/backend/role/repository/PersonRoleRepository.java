@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PersonRoleRepository extends JpaRepository<PersonRole, Long> {
+public interface PersonRoleRepository extends JpaRepository<PersonRole, Integer> {
 
 
 }

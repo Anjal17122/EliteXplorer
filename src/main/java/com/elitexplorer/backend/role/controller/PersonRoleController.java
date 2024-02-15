@@ -28,7 +28,7 @@ public class PersonRoleController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity updateStatus(@PathVariable("id") long id){
+	public ResponseEntity updateStatus(@PathVariable("id") int id){
 		return ResponseMessage.success(DtoConvert.convert(personRoleService.updateStatus(id)));
 	}
 

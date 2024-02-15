@@ -20,7 +20,7 @@ public class PersonRoleServiceImpl implements PersonRoleService{
 	}
 
 	@Override
-	public PersonRole updateStatus(long id) {
+	public PersonRole updateStatus(int id) {
 		PersonRole personRole = personRoleRepository.findById(id).orElse(null);
 		if (personRole.getIsActive()){
 			personRole.setActive(Boolean.FALSE);

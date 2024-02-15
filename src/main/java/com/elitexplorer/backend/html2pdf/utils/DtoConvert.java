@@ -677,6 +677,7 @@ public class DtoConvert {
         userDetailDto.setUsername(userDetail.getUsername());
         userDetailDto.setPassword(userDetail.getPassword());
         userDetailDto.setUserStatus(userDetail.getUserStatus());
+        userDetailDto.setFilename(userDetail.getFilename());
 
         if (userDetail.getPersonRole() != null) {
             userDetailDto.setPersonRoleId(userDetail.getPersonRole().getId());
@@ -700,7 +701,7 @@ public class DtoConvert {
         userDetail.setUsername(userDetailDto.getUsername());
         userDetail.setPassword(userDetailDto.getPassword());
         userDetail.setUserStatus(userDetailDto.getUserStatus());
-
+        userDetail.setFilename(userDetailDto.getFilename());
         if (userDetailDto.getPersonRoleId() != 0) {
             PersonRole personRole = new PersonRole();
             personRole.setId(userDetailDto.getPersonRoleId());

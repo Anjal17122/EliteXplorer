@@ -2,14 +2,15 @@ package com.elitexplorer.backend.security1.method;
 
 
 
-import com.elitexplorer.backend.security.repository.SecUserCredentialRepository;
+
 import com.elitexplorer.backend.security1.model.MyUserDetails;
-import com.elitexplorer.backend.security1.model.SecUser;
 import com.elitexplorer.backend.security1.model.dto.LoginFailedResponse;
 import com.elitexplorer.backend.security1.model.dto.LoginSuccessResponse;
 import com.elitexplorer.backend.security1.securityutils.JwtUtils;
 import com.elitexplorer.backend.security1.securityutils.UserStatus;
 import com.elitexplorer.backend.security1.service.TokenService;
+import com.elitexplorer.backend.userdetail.model.dto.UserDetailDto;
+import com.elitexplorer.backend.userdetail.repository.UserDetailRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     JwtUtils jwtUtils;
 
     @Resource
-    private SecUserCredentialRepository secUserCredentialRepository;
+    private UserDetailRepository userDetailRepository;
 
     public JWTAuthenticationFilter( AuthenticationManager authenticationManager, TokenService tokenService) {
         this.authenticationManager = authenticationManager;
@@ -52,9 +53,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             throws AuthenticationException {
 
         try {
-            SecUser creds = new ObjectMapper().readValue(req.getInputStream(), SecUser.class);
-            usernamess = creds.getUserName();
-            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(creds.getUserName(),
+            UserDetailDto creds = new ObjectMapper().readValue(req.getInputStream(), UserDetailDto.class);
+            usernamess = creds.getUsername();
+            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(creds.getUsername(),
                     creds.getPassword(), new ArrayList<>()));
 
         } catch (IOException e) {
@@ -73,7 +74,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             res.setCharacterEncoding("UTF-8");
             res.getWriter().write(json);
             logger.info("json: " + json);
-        } else if (((MyUserDetails) auth.getPrincipal()).getSecUser().getUserStatus() == UserStatus.locked) {
+        } else if (((MyUserDetails) auth.getPrincipal()).getSecUser().getUserStatus() == UserStatus.unapproved) {
             String json = new Gson().toJson(new LoginFailedResponse(false, "Account is locked"));
             res.setContentType("application/json");
             res.setCharacterEncoding("UTF-8");
@@ -89,13 +90,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             secUserCredentialRepository.save(user);*/
 
             String token = tokenService.setNewTokenByUsername(auth);
-            String wardId = "";
-            if (((MyUserDetails) auth.getPrincipal()).getSecUser().getWardId()!= null){
-                wardId = ((MyUserDetails) auth.getPrincipal()).getSecUser().getWardId();
-            }
             String json = new Gson()
                     .toJson(new LoginSuccessResponse(true, ((MyUserDetails) auth.getPrincipal()).getUsername(), token,
-                            ((MyUserDetails) auth.getPrincipal()).getRoles(), wardId));
+                            ((MyUserDetails) auth.getPrincipal()).getRoles()));
 
             res.setContentType("application/json");
             res.setCharacterEncoding("UTF-8");

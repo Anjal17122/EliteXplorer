@@ -9,21 +9,20 @@ public class LoginSuccessResponse {
     private String token;
     private String roles;
 
-	private String wardId;
   
   
     public LoginSuccessResponse() {
     }
 
 
-	public LoginSuccessResponse(boolean success, String username, String token, String roles, String wardId
+	public LoginSuccessResponse(boolean success, String username, String token, String roles
 			) {
 		super();
 		this.success = success;
 		this.username = username;
 		this.token = token;
 		this.roles = roles;
-		this.wardId = wardId;
+
 	}
 
 
@@ -67,11 +66,5 @@ public class LoginSuccessResponse {
 		this.roles = roles;
 	}
 
-	public String getWardId() {
-		return wardId;
-	}
 
-	public void setWardId(String wardId) {
-		this.wardId = wardId;
-	}
 }
