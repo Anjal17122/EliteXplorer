@@ -28,10 +28,11 @@ public class MyUserDetails implements UserDetails{
 	public MyUserDetails(UserDetailDto user) {
 		this.userName = user.getUsername();
 		this.password = user.getPassword();
-		if (user.getUserStatus()== UserStatus.approved)
-			this.active = true;
-		else
-			this.active = false;
+//		if (user.getUserStatus()== UserStatus.approved)
+//			this.active = true;
+//		else
+//			this.active = false;
+		this.active=true;
 		this.authorities = Arrays.stream(user.getPersonRole().split(","))
 						.map(SimpleGrantedAuthority::new)
 						.collect(Collectors.toList());

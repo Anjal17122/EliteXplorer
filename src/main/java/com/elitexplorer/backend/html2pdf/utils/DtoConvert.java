@@ -678,7 +678,7 @@ public class DtoConvert {
         userDetailDto.setPassword(userDetail.getPassword());
         userDetailDto.setUserStatus(userDetail.getUserStatus());
         userDetailDto.setFilename(userDetail.getFilename());
-
+        userDetailDto.setRegisterDate(userDetail.getRegisterDate());
         if (userDetail.getPersonRole() != null) {
             userDetailDto.setPersonRoleId(userDetail.getPersonRole().getId());
             userDetailDto.setPersonRole(userDetail.getPersonRole().getName());

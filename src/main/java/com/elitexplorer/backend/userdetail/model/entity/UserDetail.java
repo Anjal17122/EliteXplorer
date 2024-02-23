@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -33,9 +34,19 @@ public class UserDetail {
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
 
+    private Date registerDate;
+
+    private Date modifiedDate;
+
 
 
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private PersonRole personRole;
+
+    @PrePersist
+    public void initialModifiedDate(){
+        this.modifiedDate = new Date();
+    }
 }
+

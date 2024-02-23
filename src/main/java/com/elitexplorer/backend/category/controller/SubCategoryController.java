@@ -27,4 +27,5 @@ public class SubCategoryController {
     public ResponseEntity getByCategory(@PathVariable("id") int id){
         return ResponseMessage.success(service.getByCategory(id).stream().map(DtoConvert::convert));
     }
+
 }

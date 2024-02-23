@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.stream.Collectors;
 
-
 @RestController
 @RequestMapping("/pdf2")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -46,7 +45,7 @@ public class Pdf2Controller {
         return ResponseMessage.success(pdf2Interface.getByCategoryId(id,page,size).map((a)->DtoConvert.convertSend(a)));
     }
 
-    @GetMapping("sub/category/title")
+     @GetMapping("sub/category/title")
     public ResponseEntity getPdf2ByTitle(@RequestParam("id") int id, @RequestParam("title") String title, @RequestParam("page") int page, @RequestParam("size") int size){
         return ResponseMessage.success(pdf2Interface.getByTitle(id,title,page,size).map((a)->DtoConvert.convertSend(a)));
     }

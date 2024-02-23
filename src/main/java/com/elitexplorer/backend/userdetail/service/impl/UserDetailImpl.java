@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.List;
+
 @Service
 public class UserDetailImpl implements UserDetailInterface {
 
@@ -27,8 +30,20 @@ public class UserDetailImpl implements UserDetailInterface {
         userDetail.setPassword(bcryptPassword);
         userDetail.setUserStatus(UserStatus.unapproved);
         userDetail.setPersonRole(personRoleRepository.findById(1).orElse(null));
+        userDetail.setRegisterDate(new Date());
         return repository.save(userDetail);
+    }
 
+    @Override
+    public UserDetail changeStatus(int id, UserStatus status){
+        UserDetail userDetail = repository.findById(id).orElse(null);
+        userDetail.setUserStatus(status);
+        return repository.save(userDetail);
+    }
+
+    @Override
+    public List<UserDetail> getAll(){
+        return repository.findAll();
     }
 
 }
